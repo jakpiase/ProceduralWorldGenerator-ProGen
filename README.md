@@ -1,1 +1,2 @@
-# ProceduralWorldGenerator-ProGen
+# ProGen
+## Implementation of procedural world content generator.

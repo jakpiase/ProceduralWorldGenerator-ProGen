@@ -1,6 +1,6 @@
 #pragma once
 
-enum class tile{
+enum class BoardTile{
     empty = 0,
     rock
 };

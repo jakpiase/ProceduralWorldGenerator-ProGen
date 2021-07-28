@@ -1,0 +1,27 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ master, dev ]
+  pull_request:
+    branches: [ master, dev ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: cmake-configure
+      run: cmake -S $GITHUB_WORKSPACE -B ${{runner.workspace}}/build
+
+    - name: build
+      working-directory: ${{runner.workspace}}/build
+      run: cmake --build .
+
+    - name: test
+      working-directory: ${{runner.workspace}}/build/tests
+      run: ctest --verbose
+      env:
+        GTEST_COLOR: 1

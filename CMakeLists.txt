@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.16)
 project(ProGen)
 set(CMAKE_CXX_STANDARD 20)
-
 include(FetchContent)
+
 FetchContent_Declare(
         googletest
         URL https://github.com/google/googletest/archive/609281088cfefc76f9d0ce82e1ff6c30cc3591e5.zip
@@ -11,10 +11,19 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
+FetchContent_Declare(
+        EnTT
+        GIT_REPOSITORY https://github.com/skypjack/entt.git
+        GIT_TAG v3.8.1
+)
+set(ENTT_BUILD_TESTING ON)
+FetchContent_MakeAvailable(EnTT)
+
 
 set(SOURCE_DIR src)
 set(TEST_DIR tests)
 
+include_directories(EnTT)
 include_directories(${SOURCE_DIR})
 
 add_subdirectory(${SOURCE_DIR})

@@ -1,5 +1,5 @@
 #include "Scene.h"
-#include "ecs/Entity.h"
+#include "Entity.h"
 
 entt::registry& Scene::get_registry() {
     return registry;

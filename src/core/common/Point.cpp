@@ -1,7 +1,7 @@
 #include "Point.h"
 
-std::ostream& Point::operator<<(std::ostream& stream) const {
-    return stream << "(" << x << ", " << y << ")";
+std::ostream& operator<<(std::ostream &stream, const Point& point) {
+    return stream << "(" << point.x << ", " << point.y << ")";
 }
 
 Point Point::move(float offset_x, float offset_y) const {

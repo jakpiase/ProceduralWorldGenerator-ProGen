@@ -1,10 +1,19 @@
-
 #pragma once
 
+#include <entt/entity/registry.hpp>
+#include "EntitySystem.h"
 
+class DescribingSystem : public EntitySystem {
 
-class DescribingSystem {
+private:
+    entt::registry &registry;
 
+public:
+
+    explicit DescribingSystem(entt::registry &registry)
+            : registry(registry) {}
+
+    void update();
 };
 
 

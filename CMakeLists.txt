@@ -16,7 +16,7 @@ FetchContent_Declare(
         GIT_REPOSITORY https://github.com/skypjack/entt.git
         GIT_TAG v3.8.1
 )
-set(ENTT_BUILD_TESTING ON)
+set(ENTT_BUILD_TESTING OFF)
 FetchContent_MakeAvailable(EnTT)
 
 

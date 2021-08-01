@@ -7,10 +7,10 @@ struct Point {
     float y;
 
     Point(float x, float y)
-        : x(x),
-          y(y) {}
+            : x(x),
+              y(y) {}
 
     [[nodiscard]] Point move(float offset_x, float offset_y) const;
 
-    std::ostream& operator<<(std::ostream& stream) const;
+    friend std::ostream &operator<<(std::ostream &stream, const Point& point);
 };

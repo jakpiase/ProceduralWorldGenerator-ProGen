@@ -14,13 +14,17 @@ public:
     [[nodiscard]] static BoundingBox fromZero(float width, float height);
 
     [[nodiscard]] Point getTopLeft() const;
+
     [[nodiscard]] Point getTopRight() const;
+
     [[nodiscard]] Point getBottomRight() const;
+
     [[nodiscard]] Point getBottomLeft() const;
 
     [[nodiscard]] Point getMiddle() const;
 
     [[nodiscard]] float getWidth() const;
+
     [[nodiscard]] float getHeight() const;
 };
 

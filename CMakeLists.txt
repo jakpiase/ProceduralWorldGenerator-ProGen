@@ -11,6 +11,12 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
+FetchContent_Declare(
+        glog
+        GIT_REPOSITORY https://github.com/google/glog.git
+        CMAKE_ARGS -DBUILD_TESTING=OFF 
+)
+FetchContent_MakeAvailable(glog)
 
 set(SOURCE_DIR src)
 set(TEST_DIR tests)

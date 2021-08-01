@@ -1,8 +1,10 @@
 cmake_minimum_required(VERSION 3.16)
 project(ProGen)
 set(CMAKE_CXX_STANDARD 20)
-include(FetchContent)
 
+include(cmake/CPM.cmake)
+
+include(FetchContent)
 FetchContent_Declare(
         googletest
         URL https://github.com/google/googletest/archive/609281088cfefc76f9d0ce82e1ff6c30cc3591e5.zip
@@ -19,11 +21,14 @@ FetchContent_Declare(
 set(ENTT_BUILD_TESTING OFF)
 FetchContent_MakeAvailable(EnTT)
 
+CPMAddPackage(
+    NAME glog
+    GITHUB_REPOSITORY google/glog
+    VERSION 0.5.0)
 
 set(SOURCE_DIR src)
 set(TEST_DIR tests)
 
-include_directories(EnTT)
 include_directories(${SOURCE_DIR})
 
 add_subdirectory(${SOURCE_DIR})

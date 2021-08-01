@@ -6,5 +6,5 @@ TEST(Sample_tests, addition_test) {
 
     int sum = addend_a + addend_b;
 
-    EXPECT_EQ (sum, 5);
+    EXPECT_EQ (sum,  5);
 }

@@ -4,11 +4,11 @@
 
 int main(int argc, char* argv[]) {
     google::InitGoogleLogging(argv[0]);
-    FLAGS_logtostderr = 1;
+    FLAGS_logtostderr = true;
     LOG(INFO) << "Starting ProGen";
 
 
-    google::ShutdownGoogleLogging();
     LOG(INFO) << "ProGen exited succesfully";
+    google::ShutdownGoogleLogging();
     return 0;
 }

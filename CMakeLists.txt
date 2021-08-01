@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.16)
 project(ProGen)
 set(CMAKE_CXX_STANDARD 20)
 
+include(cmake/CPM.cmake)
+
 include(FetchContent)
 FetchContent_Declare(
         googletest
@@ -11,6 +13,10 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
+CPMAddPackage(
+    NAME glog
+    GITHUB_REPOSITORY google/glog
+    VERSION 0.5.0)
 
 set(SOURCE_DIR src)
 set(TEST_DIR tests)

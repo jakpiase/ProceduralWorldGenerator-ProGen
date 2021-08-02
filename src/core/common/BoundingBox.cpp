@@ -1,39 +1,39 @@
 #include "BoundingBox.h"
 
 BoundingBox::BoundingBox(Point topLeft, Point bottomRight)
-        : topLeft(topLeft),
-          bottomRight(bottomRight) {}
+        : top_left(topLeft),
+          bottom_right(bottomRight) {}
 
-BoundingBox BoundingBox::fromZero(float width, float height) {
+BoundingBox BoundingBox::from_zero(float width, float height) {
     return BoundingBox(Point(0, 0), Point(width, height));
 }
 
-Point BoundingBox::getBottomLeft() const {
-    return Point(topLeft.x, bottomRight.y);
+Point BoundingBox::get_bottom_left() const {
+    return Point(top_left.x, bottom_right.y);
 }
 
-Point BoundingBox::getTopLeft() const {
-    return topLeft;
+Point BoundingBox::get_top_left() const {
+    return top_left;
 }
 
-Point BoundingBox::getBottomRight() const {
-    return bottomRight;
+Point BoundingBox::get_bottom_right() const {
+    return bottom_right;
 }
 
-Point BoundingBox::getTopRight() const {
-    return Point(bottomRight.x, topLeft.y);
+Point BoundingBox::get_top_right() const {
+    return Point(bottom_right.x, top_left.y);
 }
 
-float BoundingBox::getWidth() const {
-    return bottomRight.x - topLeft.x;
+float BoundingBox::get_width() const {
+    return bottom_right.x - top_left.x;
 }
 
-float BoundingBox::getHeight() const {
-    return topLeft.y - bottomRight.y;
+float BoundingBox::get_height() const {
+    return top_left.y - bottom_right.y;
 }
 
-Point BoundingBox::getMiddle() const {
-    const float x = (topLeft.x + bottomRight.x) / 2.0f;
-    const float y = (topLeft.y + bottomRight.y) / 2.0f;
+Point BoundingBox::get_middle() const {
+    const float x = (top_left.x + bottom_right.x) / 2.0f;
+    const float y = (top_left.y + bottom_right.y) / 2.0f;
     return Point(x, y);
 }

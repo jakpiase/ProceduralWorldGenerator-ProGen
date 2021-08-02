@@ -5,12 +5,12 @@
 #include "glog/logging.h"
 
 int main(int argc, const char* argv[]) {
-    google::InitGoogleLogging(argv[0]);
     FLAGS_logtostderr = true;
+    google::InitGoogleLogging(argv[0]);
     LOG(INFO) << "Starting ProGen";
 
     std::unique_ptr<Scene> mainScene = std::make_unique<Scene>();
-    SimpleLevelGenerator levelGenerator(BoundingBox::fromZero(200.0, 200.0));
+    SimpleLevelGenerator levelGenerator(BoundingBox::from_zero(200.0, 200.0));
     levelGenerator.run(*mainScene);
     mainScene->update();
 

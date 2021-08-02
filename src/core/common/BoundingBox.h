@@ -5,26 +5,26 @@
 class BoundingBox {
 
 private:
-    Point topLeft;
-    Point bottomRight;
+    Point top_left;
+    Point bottom_right;
 
 public:
     BoundingBox(Point topLeft, Point bottomRight);
 
-    [[nodiscard]] static BoundingBox fromZero(float width, float height);
+    [[nodiscard]] static BoundingBox from_zero(float width, float height);
 
-    [[nodiscard]] Point getTopLeft() const;
+    [[nodiscard]] Point get_top_left() const;
 
-    [[nodiscard]] Point getTopRight() const;
+    [[nodiscard]] Point get_top_right() const;
 
-    [[nodiscard]] Point getBottomRight() const;
+    [[nodiscard]] Point get_bottom_right() const;
 
-    [[nodiscard]] Point getBottomLeft() const;
+    [[nodiscard]] Point get_bottom_left() const;
 
-    [[nodiscard]] Point getMiddle() const;
+    [[nodiscard]] Point get_middle() const;
 
-    [[nodiscard]] float getWidth() const;
+    [[nodiscard]] float get_width() const;
 
-    [[nodiscard]] float getHeight() const;
+    [[nodiscard]] float get_height() const;
 };
 

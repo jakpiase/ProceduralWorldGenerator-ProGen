@@ -4,8 +4,6 @@
 #include <entt/entity/registry.hpp>
 #include "core/Scene.h"
 
-class Scene;
-
 class Entity {
 
 private:

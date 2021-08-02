@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Generator.h"
-#include "core/common/BoundingBox.h"
+#include "../core/common/BoundingBox.h"
 
 
 class SimpleLevelGenerator : public Generator {

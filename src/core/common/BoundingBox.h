@@ -9,7 +9,7 @@ private:
     Point bottom_right;
 
 public:
-    BoundingBox(Point topLeft, Point bottomRight);
+    BoundingBox(Point top_left, Point bottom_right);
 
     [[nodiscard]] static BoundingBox from_zero(float width, float height);
 

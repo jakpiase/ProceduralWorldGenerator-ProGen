@@ -15,6 +15,7 @@ Entity Scene::create_entity() {
 }
 
 void Scene::update() {
+    DLOG(INFO) << "Updating scene at address" << this;
     for (std::unique_ptr<EntitySystem> &system : systems) {
         system->update();
     }

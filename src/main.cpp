@@ -1,8 +1,8 @@
 #include <iostream>
-#include <core/Scene.h>
+#include "core/Scene.h"
 #include "core/common/BoundingBox.h"
-#include <pcg/SimpleLevelGenerator.h>
-#include "glog/logging.h"
+#include "pcg/SimpleLevelGenerator.h"
+#include <glog/logging.h>
 
 int main(int argc, const char* argv[]) {
     FLAGS_logtostderr = true;

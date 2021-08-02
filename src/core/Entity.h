@@ -2,7 +2,8 @@
 
 #include <vector>
 #include <entt/entity/registry.hpp>
-#include "core/Scene.h"
+#include <glog/logging.h>
+#include "Scene.h"
 
 class Entity {
 
@@ -15,6 +16,8 @@ public:
 
     template<typename T, typename... Args>
     T &add_component(Args &&... args) {
+        DLOG(INFO) << "Adding component type " << typeid(T).name() << " to entity with handle " << static_cast<int>(handle);
+
         return scene.get_registry().emplace<T>(handle, std::forward<Args>(args)...);
     }
 };

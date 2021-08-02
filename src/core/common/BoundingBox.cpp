@@ -1,8 +1,8 @@
 #include "BoundingBox.h"
 
-BoundingBox::BoundingBox(Point topLeft, Point bottomRight)
-        : top_left(topLeft),
-          bottom_right(bottomRight) {}
+BoundingBox::BoundingBox(Point top_left, Point bottom_right)
+        : top_left(top_left),
+          bottom_right(bottom_right) {}
 
 BoundingBox BoundingBox::from_zero(float width, float height) {
     return BoundingBox(Point(0, 0), Point(width, height));

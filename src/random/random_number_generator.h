@@ -10,7 +10,7 @@ public:
     int get_base_seed() const;
     int get_number_of_generations() const;
 protected:
-    virtual int next() = 0;
+    virtual int next() const = 0;
     int base_seed;
     int current_seed;
     int number_of_generations;

@@ -6,6 +6,6 @@ LinearNumberGenerator::LinearNumberGenerator(int base_seed)
 LinearNumberGenerator::LinearNumberGenerator(int base_seed, int modulus, int multiplier, int increment)
                                             : RandomNumberGenerator(base_seed), modulus(modulus), multiplier(multiplier), increment(increment) {};
 
-int LinearNumberGenerator::next() {
+int LinearNumberGenerator::next() const {
     return (multiplier * current_seed + increment) % modulus;
 }

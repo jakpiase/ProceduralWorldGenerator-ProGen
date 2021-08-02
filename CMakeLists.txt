@@ -6,23 +6,20 @@ set (CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
 include(cmake/CPM.cmake)
-include(FetchContent)
 
-FetchContent_Declare(
-        googletest
-        URL https://github.com/google/googletest/archive/609281088cfefc76f9d0ce82e1ff6c30cc3591e5.zip
+CPMAddPackage(
+    NAME googletest
+    GITHUB_REPOSITORY google/googletest
+    GIT_TAG release-1.11.0
 )
-# For Windows: Prevent overriding the parent project's compiler/linker settings
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(googletest)
 
-FetchContent_Declare(
-        EnTT
-        GIT_REPOSITORY https://github.com/skypjack/entt.git
-        GIT_TAG v3.8.1
+CPMAddPackage(
+    NAME EnTT
+    GITHUB_REPOSITORY skypjack/entt
+    VERSION 3.8.1
+    OPTIONS -DBUILD_TESTING=OFF
 )
-set(ENTT_BUILD_TESTING OFF)
-FetchContent_MakeAvailable(EnTT)
 
 if(WIN32)
     add_definitions(-DHAVE_SNPRINTF)

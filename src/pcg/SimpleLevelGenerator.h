@@ -6,11 +6,11 @@
 
 class SimpleLevelGenerator : public Generator {
 private:
-    const BoundingBox &boundingBox;
+    const BoundingBox& bounding_box;
 
 public:
-    explicit SimpleLevelGenerator(const BoundingBox &boundingBox)
-            : boundingBox(boundingBox) {}
+    explicit SimpleLevelGenerator(const BoundingBox& bounding_box)
+            : bounding_box(bounding_box) {}
 
     void run(Scene &scene) override;
 };

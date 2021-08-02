@@ -5,19 +5,19 @@
 void SimpleLevelGenerator::run(Scene &scene) {
     DLOG(INFO) << "SimpleLevelGenerator running";
 
-    float room_width = boundingBox.get_width() / 4;
-    float room_height = boundingBox.get_height() / 4;
-    float corridor_length = boundingBox.get_width() / 3;
+    float room_width = bounding_box.get_width() / 4;
+    float room_height = bounding_box.get_height() / 4;
+    float corridor_length = bounding_box.get_width() / 3;
 
     BoundingBox leftRoomBox = BoundingBox(
-            boundingBox.get_middle().shifted_by(-corridor_length / 2 - room_width, -room_height / 2),
-            boundingBox.get_middle().shifted_by(-corridor_length / 2, room_height / 2));
+            bounding_box.get_middle().shifted_by(-corridor_length / 2 - room_width, -room_height / 2),
+            bounding_box.get_middle().shifted_by(-corridor_length / 2, room_height / 2));
     SimpleRoomGenerator leftRoomGenerator(leftRoomBox);
     leftRoomGenerator.run(scene);
 
     BoundingBox rightRoomBox = BoundingBox(
-            boundingBox.get_middle().shifted_by(corridor_length / 2, -room_height / 2),
-            boundingBox.get_middle().shifted_by(corridor_length / 2 + room_width, room_height / 2));
+            bounding_box.get_middle().shifted_by(corridor_length / 2, -room_height / 2),
+            bounding_box.get_middle().shifted_by(corridor_length / 2 + room_width, room_height / 2));
     SimpleRoomGenerator rightRoomGenerator(rightRoomBox);
     rightRoomGenerator.run(scene);
 

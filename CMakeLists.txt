@@ -11,6 +11,7 @@ CPMAddPackage(
     NAME googletest
     GITHUB_REPOSITORY google/googletest
     GIT_TAG release-1.11.0
+    OPTIONS -DBUILD_TESTING=OFF
 )
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 

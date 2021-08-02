@@ -2,6 +2,11 @@
 
 RandomNumberGenerator::RandomNumberGenerator(int seed): base_seed(seed), current_seed(seed), number_of_generations(0) {};
 
+int RandomNumberGenerator::random() {
+    ++number_of_generations;
+    return current_seed = next();
+}
+
 int RandomNumberGenerator::get_seed() const {
     return current_seed;
 }

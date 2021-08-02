@@ -7,7 +7,7 @@ public:
     LinearNumberGenerator(int base_seed = 1234);
     LinearNumberGenerator(int base_seed, int modulus, int multiplier, int increment);
 
-    int random() override;
+    int next() override;
 private:
     const int modulus;
     const int multiplier;

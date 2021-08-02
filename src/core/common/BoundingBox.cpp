@@ -29,7 +29,7 @@ float BoundingBox::get_width() const {
 }
 
 float BoundingBox::get_height() const {
-    return top_left.y - bottom_right.y;
+    return bottom_right.y - top_left.y;
 }
 
 Point BoundingBox::get_middle() const {

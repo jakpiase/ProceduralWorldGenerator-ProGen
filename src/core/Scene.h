@@ -3,7 +3,7 @@
 #include <vector>
 #include <memory>
 #include <entt/entity/registry.hpp>
-#include "EntitySystem.h"
+#include "src/core/entity_system.h"
 
 class Entity;
 

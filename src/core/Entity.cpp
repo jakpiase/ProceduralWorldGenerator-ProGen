@@ -1,5 +1,4 @@
-#include "Entity.h"
-
+#include "src/core/entity.h"
 
 Entity::Entity(Scene &scene)
         : scene(scene) {

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <glog/logging.h>
-#include "components/DescriptionComponent.h"
-#include "DescribingSystem.h"
+#include "src/core/components/description_component.h"
+#include "src/core/describing_system.h"
 
 void DescribingSystem::update() {
     DLOG(INFO) << "Describing system update running";

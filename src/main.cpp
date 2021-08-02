@@ -1,7 +1,7 @@
 #include <iostream>
-#include "core/Scene.h"
-#include "core/common/BoundingBox.h"
-#include "pcg/SimpleLevelGenerator.h"
+#include "src/core/scene.h"
+#include "src/core/common/bounding_box.h"
+#include "src/pcg/simple_level_generator.h"
 #include <glog/logging.h>
 
 int main(int argc, const char* argv[]) {

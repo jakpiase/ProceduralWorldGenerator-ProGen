@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Point.h"
+#include "src/core/common/point.h"
 
 class BoundingBox {
 

@@ -1,4 +1,4 @@
-#include "BoundingBox.h"
+#include "src/core/common/bounding_box.h"
 
 BoundingBox::BoundingBox(Point top_left, Point bottom_right)
         : top_left(top_left),

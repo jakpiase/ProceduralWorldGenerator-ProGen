@@ -1,6 +1,6 @@
-#include "SimpleLevelGenerator.h"
-#include "SimpleRoomGenerator.h"
 #include <glog/logging.h>
+#include "src/pcg/simple_level_generator.h"
+#include "src/pcg/simple_room_generator.h"
 
 void SimpleLevelGenerator::run(Scene &scene) {
     DLOG(INFO) << "SimpleLevelGenerator running";

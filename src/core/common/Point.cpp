@@ -1,4 +1,4 @@
-#include "Point.h"
+#include "src/core/common/point.h"
 
 std::ostream& operator<<(std::ostream &stream, const Point& point) {
     return stream << "(" << point.x << ", " << point.y << ")";

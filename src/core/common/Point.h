@@ -12,7 +12,7 @@ struct Point {
 
     [[nodiscard]] Point shifted_by(float offset_x, float offset_y) const;
 
-    bool operator==(const Point& other) const = default;
+    bool operator==(const Point& other) const;
 
     friend std::ostream &operator<<(std::ostream &stream, const Point& point);
 };

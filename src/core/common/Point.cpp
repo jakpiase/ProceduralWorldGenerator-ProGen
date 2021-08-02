@@ -7,3 +7,7 @@ std::ostream& operator<<(std::ostream &stream, const Point& point) {
 Point Point::shifted_by(float offset_x, float offset_y) const {
     return Point(x + offset_x, y + offset_y);
 }
+
+bool Point::operator==(const Point &other) const {
+    return x == other.x && y == other.y;
+}

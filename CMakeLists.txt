@@ -37,7 +37,7 @@ CPMAddPackage(
 set(SOURCE_DIR src)
 set(TEST_DIR tests)
 
-include_directories(${SOURCE_DIR})
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}")
 
 add_subdirectory(${SOURCE_DIR})
 add_subdirectory(${TEST_DIR})

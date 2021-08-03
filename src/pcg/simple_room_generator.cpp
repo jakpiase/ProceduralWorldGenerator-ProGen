@@ -1,8 +1,8 @@
 #include <sstream>
-#include "SimpleRoomGenerator.h"
-#include "../core/Scene.h"
-#include "../core/Entity.h"
-#include "../core/components/DescriptionComponent.h"
+#include "src/pcg/simple_room_generator.h"
+#include "src/core/scene.h"
+#include "src/core/entity.h"
+#include "src/core/components/description_component.h"
 
 
 void SimpleRoomGenerator::run(Scene &scene) {

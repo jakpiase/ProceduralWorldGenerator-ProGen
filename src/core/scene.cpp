@@ -1,6 +1,6 @@
-#include "Scene.h"
-#include "Entity.h"
-#include "DescribingSystem.h"
+#include "src/core/scene.h"
+#include "src/core/entity.h"
+#include "src/core/describing_system.h"
 
 Scene::Scene() {
     systems.push_back(std::make_unique<DescribingSystem>(registry));

@@ -3,7 +3,7 @@
 #include <vector>
 #include <entt/entity/registry.hpp>
 #include <glog/logging.h>
-#include "Scene.h"
+#include "src/core/scene.h"
 
 class Entity {
 

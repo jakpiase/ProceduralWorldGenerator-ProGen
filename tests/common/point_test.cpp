@@ -1,5 +1,5 @@
-#include <src/core/common/BoundingBox.h>
 #include "gtest/gtest.h"
+#include "src/core/common/bounding_box.h"
 
 TEST(Point_test, shifting_test) {
     Point point(21, 37);

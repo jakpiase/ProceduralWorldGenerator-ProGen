@@ -1,5 +1,5 @@
-#include <src/core/common/BoundingBox.h>
 #include "gtest/gtest.h"
+#include "src/core/common/bounding_box.h"
 
 TEST(Bounding_box_test, simple_getters_test) {
     BoundingBox box(Point(1, 2), Point(3, 4));

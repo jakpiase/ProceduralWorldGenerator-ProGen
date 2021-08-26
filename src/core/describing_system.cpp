@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <glog/logging.h>
 #include "src/core/components/description_component.h"

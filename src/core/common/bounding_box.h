@@ -1,6 +1,6 @@
 #pragma once
-
 #include "src/core/common/point.h"
+#include "src/core/common/dimensions.h"
 
 class BoundingBox {
 
@@ -12,6 +12,8 @@ public:
     BoundingBox(Point top_left, Point bottom_right);
 
     [[nodiscard]] static BoundingBox from_zero(float width, float height);
+
+    [[nodiscard]] static BoundingBox from_dimensions(Point top_left, Dimensions2f dimensions);
 
     [[nodiscard]] Point get_top_left() const;
 
@@ -26,5 +28,7 @@ public:
     [[nodiscard]] float get_width() const;
 
     [[nodiscard]] float get_height() const;
+
+    [[nodiscard]] Dimensions2f get_dimensions() const;
 };
 

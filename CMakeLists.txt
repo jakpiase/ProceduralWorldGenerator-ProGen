@@ -32,6 +32,11 @@ CPMAddPackage(
     OPTIONS -DBUILD_TESTING=OFF
 )
 
+CPMAddPackage(
+        NAME SDL2
+        URL https://www.libsdl.org/release/SDL2-2.0.16.zip
+)
+
 set(SOURCE_DIR src)
 set(TEST_DIR tests)
 

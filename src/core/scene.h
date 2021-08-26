@@ -1,5 +1,4 @@
 #pragma once
-
 #include <vector>
 #include <memory>
 #include <entt/entity/registry.hpp>
@@ -16,7 +15,7 @@ private:
 public:
     Scene();
 
-    entt::registry &get_registry();
+    entt::registry& get_registry();
 
     Entity create_entity();
 

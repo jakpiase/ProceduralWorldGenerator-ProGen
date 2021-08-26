@@ -1,5 +1,4 @@
 #pragma once
-
 #include <entt/entity/registry.hpp>
 #include "src/core/entity_system.h"
 
@@ -11,9 +10,9 @@ private:
 public:
 
     explicit DescribingSystem(entt::registry &registry)
-            : registry(registry) {}
+        : registry(registry) {}
 
-    void update();
+    void update() override;
 };
 
 

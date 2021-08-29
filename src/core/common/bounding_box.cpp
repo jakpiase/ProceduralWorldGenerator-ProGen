@@ -8,6 +8,10 @@ BoundingBox BoundingBox::from_zero(float width, float height) {
     return BoundingBox(Point(0, 0), Point(width, height));
 }
 
+BoundingBox BoundingBox::from_dimensions(Point top_left, Dimensions2f dimensions) {
+    return BoundingBox(top_left, top_left.shifted_by(dimensions.width, dimensions.height));
+}
+
 Point BoundingBox::get_bottom_left() const {
     return Point(top_left.x, bottom_right.y);
 }
@@ -37,3 +41,8 @@ Point BoundingBox::get_middle() const {
     const float y = (top_left.y + bottom_right.y) / 2.0f;
     return Point(x, y);
 }
+
+Dimensions2f BoundingBox::get_dimensions() const {
+    return Dimensions2f(get_width(), get_height());
+}
+

@@ -4,14 +4,14 @@
 TEST(Random_generators_tests, default_linear_generator_test) {
     LinearNumberGenerator LNG;
     ASSERT_EQ(LNG.get_number_of_generations(), 0);
-    ASSERT_EQ(LNG.random(), 27087);
+    ASSERT_EQ(LNG.random(), 595905495);
     ASSERT_EQ(LNG.get_number_of_generations(), 1);
 
-    LNG.set_seed(1234);
+    LNG.set_seed(12345);
     ASSERT_EQ(LNG.get_number_of_generations(), 0);
-    ASSERT_EQ(LNG.random(), 27087);
+    ASSERT_EQ(LNG.random(), 595905495);
     ASSERT_EQ(LNG.get_number_of_generations(), 1);
-    ASSERT_NE(LNG.random(), 27087);
+    ASSERT_NE(LNG.random(), 595905495);
 }
 
 TEST(Random_generators_tests, custom_linear_generator_test) {

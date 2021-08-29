@@ -37,3 +37,10 @@ Point BoundingBox::get_middle() const {
     const float y = (top_left.y + bottom_right.y) / 2.0f;
     return Point(x, y);
 }
+
+std::ostream& operator<<(std::ostream& stream, 
+                     const BoundingBox& bounding_box) {
+    stream << "((" << bounding_box.top_left.x << ", " << bounding_box.top_left.y << ") ";
+    stream << "(" << bounding_box.bottom_right.x << ", " << bounding_box.bottom_right.y << "))";
+    return stream;
+ }

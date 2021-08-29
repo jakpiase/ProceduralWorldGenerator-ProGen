@@ -4,7 +4,7 @@
 class LinearNumberGenerator : public RandomNumberGenerator {
 public:
     // by default use ZX81's parameters
-    LinearNumberGenerator(int base_seed = 1234);
+    LinearNumberGenerator(int base_seed = 12345);
     LinearNumberGenerator(int base_seed, int modulus, int multiplier, int increment);
 
 protected:

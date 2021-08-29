@@ -5,9 +5,9 @@
 void SimpleLevelGenerator::run(Scene &scene) {
     DLOG(INFO) << "SimpleLevelGenerator running";
 
-    float room_width = bounding_box.get_width() / 4;
-    float room_height = bounding_box.get_height() / 4;
-    float corridor_length = bounding_box.get_width() / 3;
+    const float room_width = bounding_box.get_width() / 4;
+    const float room_height = bounding_box.get_height() / 4;
+    const float corridor_length = bounding_box.get_width() / 3;
 
     BoundingBox left_room_box = BoundingBox(
             bounding_box.get_middle().shifted_by(-corridor_length / 2 - room_width, -room_height / 2),

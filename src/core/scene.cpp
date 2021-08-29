@@ -1,9 +1,11 @@
 #include "src/core/scene.h"
 #include "src/core/entity.h"
 #include "src/core/describing_system.h"
+#include "src/core/physics_system.h"
 
 Scene::Scene() {
     systems.push_back(std::make_unique<DescribingSystem>(registry));
+    systems.push_back(std::make_unique<PhysicsSystem>(registry));
 }
 
 entt::registry &Scene::get_registry() {
@@ -21,3 +23,6 @@ void Scene::update() {
     }
 }
 
+LinearNumberGenerator& Scene::get_random_generator() {
+    return random_generator;
+}

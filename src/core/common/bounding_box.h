@@ -26,5 +26,7 @@ public:
     [[nodiscard]] float get_width() const;
 
     [[nodiscard]] float get_height() const;
+
+    friend std::ostream& operator<<(std::ostream& stream, const BoundingBox& bounding_box);
 };
 

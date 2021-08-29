@@ -1,15 +1,15 @@
 #pragma once
 
-#include "src/pcg/generator.h"
-#include "src/core/common/bounding_box.h"
+#include "src/core/scene.h"
+#include "src/core/entity.h"
+#include "src/core/components/description_component.h"
+#include "src/core/components/physics_component.h"
+#include "src/pcg/space_generator.h"
 
-class SimpleRoomGenerator : public Generator {
-private:
-    const BoundingBox &boundingBox;
-
+class SimpleRoomGenerator : public SpaceGenerator {
 public:
-    explicit SimpleRoomGenerator(const BoundingBox &boundingBox)
-            : boundingBox(boundingBox) {}
+    explicit SimpleRoomGenerator(const BoundingBox &bounding_box)
+            : SpaceGenerator(bounding_box) {}
 
     void run(Scene &scene) override;
 };

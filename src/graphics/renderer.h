@@ -1,8 +1,8 @@
 #pragma once
-#include "src/graphics/texture.h"
 #include <SDL.h>
-#include <src/core/common/bounding_box.h>
-#include <src/graphics/color.h>
+#include "src/graphics/texture.h"
+#include "src/core/common/bounding_box.h"
+#include "src/graphics/color.h"
 #include "src/io/window.h"
 
 class Renderer {
@@ -13,8 +13,8 @@ public:
     explicit Renderer(Window& window);
     ~Renderer();
 
-    void render(Texture& texture, BoundingBox& box);
-    void render(Color& color, BoundingBox& box);
+    void render(Texture& texture, const BoundingBox& box);
+    void render(const Color& color, const BoundingBox& box);
     void clear(const Color& color);
     void updateFrame();
 

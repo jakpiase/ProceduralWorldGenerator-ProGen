@@ -1,30 +1,21 @@
 #pragma once
-#include "src/pcg/simple_generators/simple_level_generator.h"
-#include "src/core/locator.h"
-#include "game.h"
 #include <glog/logging.h>
+#include "src/pcg/simple_generators/simple_level_generator.h"
+#include "src/game.h"
 #include "src/core/entity.h"
-
-std::shared_ptr<Window> locator::window;
-std::shared_ptr<Renderer> locator::renderer;
 
 Game::Game()
         : is_running(true) {
     LOG(INFO) << "Starting ProGen";
 
-    register_singletons();
-    mainScene = std::make_unique<Scene>();
+
+    window = std::make_unique<Window>("ProGen", 640, 480);
+    renderer = std::make_unique<Renderer>(*window);
+    mainScene = std::make_unique<Scene>(*renderer);
 }
 
 Game::~Game() {
-    locator::renderer = nullptr;
-    locator::window = nullptr;
     LOG(INFO) << "ProGen exited succesfully";
-}
-
-void Game::register_singletons() {
-    locator::window = std::make_shared<Window>("ProGen", 640, 480);
-    locator::renderer = std::make_shared<Renderer>(*locator::window);
 }
 
 int Game::run() {
@@ -45,8 +36,8 @@ void Game::generate_content() {
 
 void Game::update() {
     mainScene->update();
-    locator::renderer->updateFrame();
-    locator::renderer->clear(Colors::Black);
+    renderer->updateFrame();
+    renderer->clear(Colors::Black);
 
     process_events();
 }

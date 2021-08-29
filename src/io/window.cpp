@@ -1,6 +1,6 @@
 #pragma once
-#include "window.h"
 #include <glog/logging.h>
+#include "src/io/window.h"
 
 Window::Window(const std::string &title, int width, int height) {
     handle = SDL_CreateWindow(title.c_str(),

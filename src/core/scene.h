@@ -2,6 +2,7 @@
 #include <vector>
 #include <memory>
 #include <entt/entity/registry.hpp>
+#include "src/graphics/renderer.h"
 #include "src/core/entity_system.h"
 
 class Entity;
@@ -13,7 +14,7 @@ private:
     std::vector<std::unique_ptr<EntitySystem>> systems;
 
 public:
-    Scene();
+    Scene(Renderer& renderer);
 
     entt::registry& get_registry();
 

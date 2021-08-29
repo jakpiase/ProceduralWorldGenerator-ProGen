@@ -6,7 +6,7 @@
 #include "src/core/components/description_component.h"
 #include "src/core/scene.h"
 #include "src/core/entity.h"
-#include "simple_corridor_generator.h"
+#include "src/pcg/simple_generators/simple_corridor_generator.h"
 
 void SimpleCorridorGenerator::run(Scene& scene) {
     DLOG(INFO) << "SimpleCorridorGenerator running";

@@ -3,23 +3,22 @@
 #include "src/core/components/transformation_component.h"
 #include "src/core/components/graphics_component.h"
 #include "src/core/entity_system.h"
-#include "src/io/renderer.h"
-#include "src/core/locator.h"
+#include "src/graphics/renderer.h"
 
 class RenderingSystem : public EntitySystem {
 private:
     entt::registry& registry;
-    std::shared_ptr<Renderer> renderer;
+    Renderer& renderer;
 
 public:
-    explicit RenderingSystem(entt::registry& registry)
+    explicit RenderingSystem(entt::registry& registry, Renderer& renderer)
         :   registry(registry),
-            renderer(locator::renderer) {}
+            renderer(renderer) {}
 
     void update() override;
 
 private:
-    void render_entity(TransformationComponent& transformation, GraphicsComponent& graphics);
+    void render_entity(const TransformationComponent& transformation, const GraphicsComponent& graphics);
 
 };
 

@@ -4,9 +4,9 @@
 #include "src/core/describing_system.h"
 #include "src/core/rendering_system.h"
 
-Scene::Scene() {
+Scene::Scene(Renderer& renderer) {
     systems.push_back(std::make_unique<DescribingSystem>(registry));
-    systems.push_back(std::make_unique<RenderingSystem>(registry));
+    systems.push_back(std::make_unique<RenderingSystem>(registry, renderer));
 }
 
 entt::registry &Scene::get_registry() {

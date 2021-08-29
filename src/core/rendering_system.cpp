@@ -1,8 +1,6 @@
 #pragma once
 #include <glog/logging.h>
-#include "rendering_system.h"
-#include "src/core/components/transformation_component.h"
-#include "src/core/components/graphics_component.h"
+#include "src/core/rendering_system.h"
 
 void RenderingSystem::update() {
     DLOG(INFO) << "Rendering system update running";
@@ -17,12 +15,12 @@ void RenderingSystem::update() {
     }
 }
 
-void RenderingSystem::render_entity(TransformationComponent& transformation, GraphicsComponent& graphics) {
+void RenderingSystem::render_entity(const TransformationComponent& transformation, const GraphicsComponent& graphics) {
     BoundingBox box = BoundingBox::from_dimensions(transformation.position, graphics.dimensions.cast<float>());
     if(graphics.texture){
-        renderer->render(*graphics.texture, box);
+        renderer.render(*graphics.texture, box);
     } else {
-        renderer->render(graphics.color, box);
+        renderer.render(graphics.color, box);
     }
 }
 

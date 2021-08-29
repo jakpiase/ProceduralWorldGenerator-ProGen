@@ -1,9 +1,9 @@
 #pragma once
+#include <memory>
 #include "src/core/common/bounding_box.h"
 #include "src/graphics/color.h"
 #include "src/core/common/dimensions.h"
 #include "src/graphics/texture.h"
-#include <memory>
 
 struct GraphicsComponent {
     std::shared_ptr<Texture> texture;

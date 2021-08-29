@@ -1,8 +1,8 @@
 #pragma once
-#include "texture.h"
-#include "SDL.h"
-#include "src/io/renderer.h"
+#include <SDL.h>
 #include <glog/logging.h>
+#include "src/graphics/texture.h"
+#include "src/graphics/renderer.h"
 
 Texture::Texture()
     : handle(nullptr) {}

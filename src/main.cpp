@@ -1,7 +1,7 @@
 #pragma once
-#include "src/game.h"
-#include <glog/logging.h>
 #include <SDL.h>
+#include <glog/logging.h>
+#include "src/game.h"
 
 #undef main //SDL defines main and it needs to be undefined
 

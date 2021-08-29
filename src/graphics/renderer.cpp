@@ -1,6 +1,6 @@
 #pragma once
 #include <glog/logging.h>
-#include "renderer.h"
+#include "src/graphics/renderer.h"
 
 Renderer::Renderer(Window& window) {
     handle = SDL_CreateRenderer(window.get_handle(), -1, SDL_RENDERER_ACCELERATED);
@@ -19,7 +19,7 @@ SDL_Renderer* Renderer::get_handle() {
     return handle;
 }
 
-void Renderer::render(Texture& texture, BoundingBox& box) {
+void Renderer::render(Texture& texture, const BoundingBox& box) {
     const SDL_Rect destination_rect = convert_to_sdl_rect(box);
 
     if (SDL_RenderCopy(handle, texture.get_handle(), nullptr, &destination_rect)) {
@@ -27,7 +27,7 @@ void Renderer::render(Texture& texture, BoundingBox& box) {
     };
 }
 
-void Renderer::render(Color& color, BoundingBox& box) {
+void Renderer::render(const Color& color, const BoundingBox& box) {
     set_drawing_color(color);
     const SDL_Rect destination_rect = convert_to_sdl_rect(box);
 

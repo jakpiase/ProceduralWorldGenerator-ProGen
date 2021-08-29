@@ -1,5 +1,4 @@
 #pragma once
-
 #include <vector>
 #include <entt/entity/registry.hpp>
 #include <glog/logging.h>

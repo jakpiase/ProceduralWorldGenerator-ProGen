@@ -1,8 +1,8 @@
 #pragma once
-
 #include <vector>
 #include <memory>
 #include <entt/entity/registry.hpp>
+#include "src/graphics/renderer.h"
 #include "src/core/entity_system.h"
 #include "src/random/linear_number_generator.h"
 
@@ -16,9 +16,9 @@ private:
     LinearNumberGenerator random_generator;
 
 public:
-    Scene();
+    Scene(Renderer& renderer);
 
-    entt::registry &get_registry();
+    entt::registry& get_registry();
 
     Entity create_entity();
 

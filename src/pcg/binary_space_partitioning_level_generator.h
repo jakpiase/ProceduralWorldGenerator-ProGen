@@ -4,12 +4,12 @@
 #include <sstream>
 #include "src/core/scene.h"
 #include "src/core/entity.h"
-#include "src/pcg/simple_room_generator.h"
+#include "src/pcg/simple_generators/simple_room_generator.h"
 
-class BinarySpacePartitioningLevelGenerator : public SpaceGenerator {
+class BinarySpacePartitioningLevelGenerator : public Generator {
 public:
     explicit BinarySpacePartitioningLevelGenerator(const BoundingBox& bounding_box)
-            : minimal_split_size(bounding_box.get_width()/9 + bounding_box.get_height()/9), minimal_room_size(minimal_split_size * 0.6), bounding_box_padding(5), SpaceGenerator(bounding_box){}
+            : minimal_split_size(bounding_box.get_width()/9 + bounding_box.get_height()/9), minimal_room_size(minimal_split_size * 0.6), bounding_box_padding(5), Generator(bounding_box){}
 
     void run(Scene &scene) override;
 private:

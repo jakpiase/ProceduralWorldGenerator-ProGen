@@ -9,5 +9,7 @@ protected:
     const BoundingBox& bounding_box;
 
 public:
+    explicit Generator(const BoundingBox& bounding_box)
+            : bounding_box(bounding_box) {};
     virtual void run(Scene& scene) = 0;
 };

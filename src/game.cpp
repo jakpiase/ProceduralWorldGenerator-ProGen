@@ -1,4 +1,3 @@
-#pragma once
 #include <glog/logging.h>
 #include "src/pcg/simple_generators/simple_level_generator.h"
 #include "src/game.h"
@@ -11,7 +10,7 @@ Game::Game()
 
     window = std::make_unique<Window>("ProGen", 640, 480);
     renderer = std::make_unique<Renderer>(*window);
-    mainScene = std::make_unique<Scene>(*renderer);
+    main_scene = std::make_unique<Scene>(*renderer);
 }
 
 Game::~Game() {
@@ -31,11 +30,11 @@ int Game::run() {
 
 void Game::generate_content() {
     SimpleLevelGenerator levelGenerator(BoundingBox::from_zero(200.0, 200.0));
-    levelGenerator.run(*mainScene);
+    levelGenerator.run(*main_scene);
 }
 
 void Game::update() {
-    mainScene->update();
+    main_scene->update();
     renderer->updateFrame();
     renderer->clear(Colors::Black);
 

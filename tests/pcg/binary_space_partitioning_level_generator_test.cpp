@@ -1,5 +1,7 @@
 #include "gtest/gtest.h"
 #include "src/pcg/binary_space_partitioning_level_generator.h"
+#include "src/graphics/renderer.h"
+#include "src/io/window.h"
 
 bool rooms_overlap(const BoundingBox& first, const BoundingBox& second) {
     // skip comparing walls, only floors are meaningful
@@ -15,7 +17,10 @@ bool rooms_overlap(const BoundingBox& first, const BoundingBox& second) {
 }
 
 TEST(BSP_level_generator_tests, BSP_level_generator_no_overlapping_rooms_test) {
-    std::unique_ptr<Scene> main_scene = std::make_unique<Scene>();
+    auto window = std::make_unique<Window>("ProGen", 640, 480);
+    auto renderer = std::make_unique<Renderer>(*window);
+    auto main_scene = std::make_unique<Scene>(*renderer);
+
     BinarySpacePartitioningLevelGenerator level_generator(BoundingBox::from_zero(800.0, 800.0));
     level_generator.run(*main_scene);
     main_scene->update();

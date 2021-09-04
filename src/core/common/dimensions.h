@@ -9,6 +9,7 @@ struct Dimensions {
             : width(width),
               height(height) {}
 
+
     template<typename K>
     Dimensions<K> cast() const {
         return Dimensions<K>(static_cast<K>(width), static_cast<K>(height));

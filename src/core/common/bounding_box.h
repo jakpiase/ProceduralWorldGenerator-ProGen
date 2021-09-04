@@ -11,6 +11,8 @@ private:
 public:
     BoundingBox(Point top_left, Point bottom_right);
 
+    BoundingBox(Point position, Dimensions2f dimensions);
+
     [[nodiscard]] static BoundingBox from_zero(float width, float height);
 
     [[nodiscard]] static BoundingBox from_dimensions(Point top_left, Dimensions2f dimensions);

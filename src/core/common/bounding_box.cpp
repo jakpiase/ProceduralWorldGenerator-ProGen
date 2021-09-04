@@ -4,6 +4,10 @@ BoundingBox::BoundingBox(Point top_left, Point bottom_right)
         : top_left(top_left),
           bottom_right(bottom_right) {}
 
+BoundingBox::BoundingBox(Point position, Dimensions2f dimensions)
+        : top_left(position), 
+          bottom_right(Point(position.x + dimensions.width, position.y + dimensions.height)) {}
+
 BoundingBox BoundingBox::from_zero(float width, float height) {
     return BoundingBox(Point(0, 0), Point(width, height));
 }
@@ -46,8 +50,7 @@ Dimensions2f BoundingBox::get_dimensions() const {
     return Dimensions2f(get_width(), get_height());
 }
 
-std::ostream& operator<<(std::ostream& stream, 
-                     const BoundingBox& bounding_box) {
+std::ostream& operator<<(std::ostream& stream, const BoundingBox& bounding_box) {
     stream << "((" << bounding_box.top_left.x << ", " << bounding_box.top_left.y << ") ";
     stream << "(" << bounding_box.bottom_right.x << ", " << bounding_box.bottom_right.y << "))";
     return stream;

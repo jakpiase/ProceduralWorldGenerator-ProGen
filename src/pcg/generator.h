@@ -11,5 +11,7 @@ protected:
 public:
     explicit Generator(const BoundingBox& bounding_box)
             : bounding_box(bounding_box) {};
+    explicit Generator() = default;
+    
     virtual void run(Scene& scene) = 0;
 };

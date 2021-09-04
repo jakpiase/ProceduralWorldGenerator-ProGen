@@ -4,9 +4,6 @@
 #include <glog/logging.h>
 #include <SDL.h>
 #include "src/game.h"
-#include "src/core/scene.h"
-#include "src/core/common/bounding_box.h"
-#include "src/pcg/binary_space_partitioning_level_generator.h"
 
 #undef main //SDL defines main and it needs to be undefined
 

@@ -1,7 +1,5 @@
 #include <glog/logging.h>
-#include "src/pcg/simple_generators/simple_level_generator.h"
 #include "src/game.h"
-#include "src/core/entity.h"
 
 Game::Game()
         : is_running(true) {
@@ -29,8 +27,8 @@ int Game::run() {
 }
 
 void Game::generate_content() {
-    SimpleLevelGenerator levelGenerator(BoundingBox::from_zero(200.0, 200.0));
-    levelGenerator.run(*main_scene);
+    StochasticBinarySpacePartitioningLevelGenerator level_generator(BoundingBox::from_zero(640.0, 480.0));
+    level_generator.run(*main_scene);
 }
 
 void Game::update() {
@@ -49,4 +47,3 @@ void Game::process_events() {
         }
     }
 }
-

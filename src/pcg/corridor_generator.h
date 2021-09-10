@@ -8,12 +8,12 @@ class CorridorGenerator : public Generator {
 
 public:
     CorridorGenerator(const BoundingBox& first_room, const BoundingBox& second_room)
-        : first_room(first_room), second_room(second_room) {};
+        : first_room(first_room), second_room(second_room), Generator(BoundingBox(Point(0, 0), Point(0, 0))) {};
 
     void run(Scene& scene) override;
 
 private:
-    [[nodiscard]] BoundingBox create_corridor_box() const;
+    std::vector<BoundingBox> calculate_corridor_boxes();
 };
 
 

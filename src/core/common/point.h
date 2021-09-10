@@ -14,4 +14,6 @@ struct Point {
     [[nodiscard]] bool operator==(const Point& other) const;
 
     friend std::ostream &operator<<(std::ostream &stream, const Point& point);
+
+    static int manhattan_distance(Point first, Point second);
 };

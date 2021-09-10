@@ -6,6 +6,7 @@ public:
 
     unsigned int random();
     unsigned int random(unsigned int max_value);
+    unsigned int random(unsigned int min_value, unsigned int max_value);
     bool random_bool();
     unsigned int get_seed() const;
     void set_seed(unsigned int seed);

@@ -51,8 +51,8 @@ Dimensions2f BoundingBox::get_dimensions() const {
 }
 
 std::ostream& operator<<(std::ostream& stream, const BoundingBox& bounding_box) {
-    stream << "((" << bounding_box.top_left.x << ", " << bounding_box.top_left.y << ") ";
-    stream << "(" << bounding_box.bottom_right.x << ", " << bounding_box.bottom_right.y << "))";
+    stream << "((" << bounding_box.top_left << ") ";
+    stream << "(" << bounding_box.bottom_right << "))";
     return stream;
  }
  

@@ -5,8 +5,6 @@
 #include "src/graphics/renderer.h"
 #include "src/io/window.h"
 #include "src/pcg/stochastic_binary_space_partitioning_level_generator.h"
-#include "src/game.h"
-
 
 class Game {
     bool is_running;

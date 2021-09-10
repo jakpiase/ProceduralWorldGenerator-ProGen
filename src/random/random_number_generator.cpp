@@ -7,8 +7,14 @@ unsigned int RandomNumberGenerator::random() {
     return current_seed = next();
 }
 
+// returns random value in range <0, max_value)
 unsigned int RandomNumberGenerator::random(unsigned int max_value) {
     return random() % max_value;
+}
+
+// returns random value in range <min_value, max_value)
+unsigned int RandomNumberGenerator::random(unsigned int min_value, unsigned int max_value) {
+    return min_value + random(max_value - min_value); 
 }
 
 bool RandomNumberGenerator::random_bool() {

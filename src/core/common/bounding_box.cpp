@@ -56,3 +56,38 @@ std::ostream& operator<<(std::ostream& stream, const BoundingBox& bounding_box) 
     return stream;
  }
  
+int BoundingBox::manhattan_distance(const BoundingBox& first, const BoundingBox& second) {
+    const float first_x1 = first.get_top_left().x;
+    const float first_y1 = first.get_top_left().y;
+    const float first_x2 = first.get_bottom_right().x;
+    const float first_y2 = first.get_bottom_right().y;
+
+    const float second_x1 = second.get_top_left().x;
+    const float second_y1 = second.get_top_left().y;
+    const float second_x2 = second.get_bottom_right().x;
+    const float second_y2 = second.get_bottom_right().y;
+
+    // check if straight connection is possible
+    if (first_x1 < second_x1 && first_x2 > second_x1 || first_x1 < second_x2 && first_x2 > second_x2 ||
+        second_x1 < first_x1 && second_x2 < first_x1 || second_x1 < first_x2 && second_x2 > first_x2) {
+        return std::min(std::abs(first_x2 - second_x1), std::abs(first_x1 - second_x2));
+    } else if (first_y1 < second_y1 && first_y2 > second_y1 || first_y1 < second_y2 && first_y2 > second_y2 ||
+        second_y1 < first_y1 && second_y2 < first_y1 || second_y1 < first_y2 && second_y2 > first_y2) {
+        return std::min(std::abs(first_y2 - second_y1), std::abs(first_y1 - second_y2));
+    }
+
+    // otherwise return closest distance between any bbox points
+    const Point first_bbox_points[] = {first.get_top_left(), first.get_top_right(), first.get_bottom_left(), first.get_bottom_right()};
+    const Point second_bbox_points[] = {second.get_top_left(), second.get_top_right(), second.get_bottom_left(), second.get_bottom_right()};
+
+    int minimal_distance = Point::manhattan_distance(first_bbox_points[0], second_bbox_points[0]);
+
+    for(int i = 0; i < 4; ++i) {
+        for(int j = 0; j < 4; ++j) {
+            int distance = Point::manhattan_distance(first_bbox_points[i], second_bbox_points[j]);
+            minimal_distance = std::min(minimal_distance, distance);
+        }
+    }
+
+    return minimal_distance;
+}

@@ -2,7 +2,7 @@
 #include "src/random/linear_number_generator.h"
 
 TEST(Random_generators_tests, default_linear_generator_test) {
-    LinearNumberGenerator LNG;
+    LinearNumberGenerator LNG(12345, 2147483647, 48271, 0);
     ASSERT_EQ(LNG.get_number_of_generations(), 0);
     ASSERT_EQ(LNG.random(), 595905495);
     ASSERT_EQ(LNG.get_number_of_generations(), 1);

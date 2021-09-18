@@ -127,11 +127,11 @@ std::pair<BoundingBox, BoundingBox> StochasticBinarySpacePartitioningLevelGenera
     int first_idx = 0;
     int second_idx = 0;
 
-    int closest_distace = Point::manhattan_distance(result_first.get_middle(), result_second.get_middle());
+    int closest_distace = BoundingBox::manhattan_distance(result_first, result_second);
 
-    for(int i=1; i<first.size(); ++i) {
-        for(int j=1; j<second.size(); ++j) {
-            int distance = Point::manhattan_distance(first[i].get_middle(), second[j].get_middle());
+    for(int i=0; i<first.size(); ++i) {
+        for(int j=0; j<second.size(); ++j) {
+            int distance = BoundingBox::manhattan_distance(first[i], second[j]);
             if(closest_distace > distance) {
                 closest_distace = distance;
                 first_idx = i;

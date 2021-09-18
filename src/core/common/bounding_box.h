@@ -34,5 +34,7 @@ public:
     [[nodiscard]] Dimensions2f get_dimensions() const;
 
     friend std::ostream& operator<<(std::ostream& stream, const BoundingBox& bounding_box);
+
+    static int manhattan_distance(const BoundingBox& first, const BoundingBox& second);
 };
 

@@ -15,7 +15,7 @@ class StochasticBinarySpacePartitioningLevelGenerator : public Generator {
     const int bounding_box_padding;
     const bool maximum_spliting;
 public:
-    explicit StochasticBinarySpacePartitioningLevelGenerator(const BoundingBox& bounding_box, bool maximum_spliting = true)
+    explicit StochasticBinarySpacePartitioningLevelGenerator(const BoundingBox& bounding_box, bool maximum_spliting = false)
             : minimal_split_size(80), bounding_box_padding(7), minimal_room_size(20), maximum_spliting(maximum_spliting), Generator(bounding_box){
                 assert(minimal_split_size >= 2 * minimal_room_size + 4 * bounding_box_padding);
             }

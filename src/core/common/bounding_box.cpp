@@ -69,10 +69,10 @@ int BoundingBox::manhattan_distance(const BoundingBox& first, const BoundingBox&
 
     // check if straight connection is possible
     if (first_x1 < second_x1 && first_x2 > second_x1 || first_x1 < second_x2 && first_x2 > second_x2 ||
-        second_x1 < first_x1 && second_x2 < first_x1 || second_x1 < first_x2 && second_x2 > first_x2) {
+        second_x1 < first_x1 && second_x2 > first_x1 || second_x1 < first_x2 && second_x2 > first_x2) {
         return std::min(std::abs(first_x2 - second_x1), std::abs(first_x1 - second_x2));
     } else if (first_y1 < second_y1 && first_y2 > second_y1 || first_y1 < second_y2 && first_y2 > second_y2 ||
-        second_y1 < first_y1 && second_y2 < first_y1 || second_y1 < first_y2 && second_y2 > first_y2) {
+        second_y1 < first_y1 && second_y2 > first_y1 || second_y1 < first_y2 && second_y2 > first_y2) {
         return std::min(std::abs(first_y2 - second_y1), std::abs(first_y1 - second_y2));
     }
 

@@ -12,6 +12,22 @@ bool Point::operator==(const Point &other) const {
     return x == other.x && y == other.y;
 }
 
-int Point::manhattan_distance(Point first, Point second) {
+bool Point::is_above(const Point& other) const {
+    return y < other.y;
+}
+
+bool Point::is_on_left(const Point& other) const {
+    return x < other.x;
+}
+
+int Point::manhattan_distance(const Point& first, const Point& second) {
     return std::abs(first.x - second.x) + std::abs(first.y - second.y);
+}
+
+Point Point::midpoint(const Point& first, const Point& second) {
+    return Point((first.x + second.x) / 2, (first.y + second.y) / 2);
+}
+
+bool Point::is_vertical_distance_bigger(const Point& first, const Point& second) {
+    return std::abs(first.x - second.x) < std::abs(first.y - second.y);
 }

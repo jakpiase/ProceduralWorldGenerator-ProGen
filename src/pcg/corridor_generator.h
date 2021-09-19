@@ -1,4 +1,5 @@
 #pragma once
+#include <tuple>
 #include "src/pcg/generator.h"
 #include "src/core/common/bounding_box.h"
 
@@ -14,7 +15,7 @@ public:
 
 private:
     std::vector<BoundingBox> calculate_corridor_boxes();
+    std::tuple<Point, Point, bool> calculate_corridor_end_points_and_alignment();
+    void generate_corridor_boxes(std::vector<BoundingBox>& corridor_boxes, const Point& first_connecting_point,
+                                 const Point& fourth_connecting_point, bool horizontal_corridor);
 };
-
-
-

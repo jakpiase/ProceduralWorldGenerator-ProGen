@@ -1,5 +1,6 @@
 #include <glog/logging.h>
 #include "src/game.h"
+#include "src/pcg/blind_agent_level_generator.h"
 
 Game::Game()
         : is_running(true) {
@@ -27,7 +28,8 @@ int Game::run() {
 }
 
 void Game::generate_content() {
-    StochasticBinarySpacePartitioningLevelGenerator level_generator(BoundingBox::from_zero(640.0, 480.0));
+    //StochasticBinarySpacePartitioningLevelGenerator level_generator(BoundingBox::from_zero(640.0, 480.0));
+    BlindAgentLevelGenerator level_generator(BoundingBox::from_zero(640.0, 480.0));
     level_generator.run(*main_scene);
 }
 

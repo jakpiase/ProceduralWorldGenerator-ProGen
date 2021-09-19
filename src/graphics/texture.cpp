@@ -1,4 +1,3 @@
-#pragma once
 #include <SDL.h>
 #include <glog/logging.h>
 #include "src/graphics/texture.h"

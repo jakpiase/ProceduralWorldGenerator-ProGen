@@ -20,6 +20,3 @@ public:
 private:
     [[nodiscard]] BoundingBox create_corridor_box() const;
 };
-
-
-

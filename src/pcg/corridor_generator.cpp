@@ -1,4 +1,3 @@
-#pragma once
 #include <sstream>
 #include <cassert>
 #include "src/core/components/graphics_component.h"

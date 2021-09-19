@@ -8,16 +8,12 @@ enum class SimpleCorridorAlignment{
 };
 
 class SimpleCorridorGenerator : public Generator {
-
-    const BoundingBox& bounding_box;
     const SimpleCorridorAlignment alignment;
-
     static constexpr float CORRIDOR_WIDTH = 10.0;
 
 public:
     SimpleCorridorGenerator(const BoundingBox& bounding_box, SimpleCorridorAlignment alignment)
-        :   bounding_box(bounding_box),
-            alignment(alignment) {}
+        : Generator(bounding_box), alignment(alignment) {};
 
     void run(Scene& scene) override;
 

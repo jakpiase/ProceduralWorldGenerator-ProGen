@@ -2,16 +2,19 @@
 
 class RandomNumberGenerator{
 public:
-    RandomNumberGenerator(int base_seed = 1234);
+    RandomNumberGenerator(unsigned int base_seed = 1234);
 
-    int random();
-    int get_seed() const;
-    void set_seed(int seed);
-    int get_base_seed() const;
-    int get_number_of_generations() const;
+    unsigned int random();
+    unsigned int random(unsigned int max_value);
+    unsigned int random(unsigned int min_value, unsigned int max_value);
+    bool random_bool();
+    unsigned int get_seed() const;
+    void set_seed(unsigned int seed);
+    unsigned int get_base_seed() const;
+    unsigned int get_number_of_generations() const;
 protected:
-    virtual int next() const = 0;
-    int base_seed;
-    int current_seed;
-    int number_of_generations;
+    virtual unsigned int next() const = 0;
+    unsigned int base_seed;
+    unsigned int current_seed;
+    unsigned int number_of_generations;
 };

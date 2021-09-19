@@ -4,14 +4,14 @@
 class LinearNumberGenerator : public RandomNumberGenerator {
 public:
     // by default use ZX81's parameters
-    LinearNumberGenerator(int base_seed = 1234);
-    LinearNumberGenerator(int base_seed, int modulus, int multiplier, int increment);
+    LinearNumberGenerator(unsigned int base_seed = 1234);
+    LinearNumberGenerator(unsigned int base_seed, unsigned int modulus, unsigned int multiplier, unsigned int increment);
 
 protected:
-    int next() const override;
+    unsigned int next() const override;
 
 private:
-    const int modulus;
-    const int multiplier;
-    const int increment;
+    const unsigned int modulus;
+    const unsigned int multiplier;
+    const unsigned int increment;
 };

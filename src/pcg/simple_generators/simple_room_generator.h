@@ -10,7 +10,7 @@
 
 class SimpleRoomGenerator : public Generator {
 public:
-    explicit SimpleRoomGenerator(const BoundingBox &bounding_box)
+    explicit SimpleRoomGenerator(const BoundingBox2f &bounding_box)
             : Generator(bounding_box) {}
 
     void run(Scene &scene) override;

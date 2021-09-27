@@ -1,9 +1,7 @@
-#include "gtest/gtest.h"
+#include <gtest/gtest.h>
 #include "src/pcg/stochastic_binary_space_partitioning_level_generator.h"
-#include "src/graphics/renderer.h"
-#include "src/io/window.h"
 
-bool rooms_overlap(const BoundingBox& first, const BoundingBox& second) {
+bool rooms_overlap(const BoundingBox2f& first, const BoundingBox2f& second) {
     // skip comparing walls, only floors are meaningful
     if (first.get_top_left().x == first.get_bottom_right().x ||
         first.get_top_left().y == first.get_bottom_right().y ||
@@ -21,7 +19,7 @@ TEST(SBSP_level_generator_tests, SBSP_level_generator_no_overlapping_rooms_test)
     auto renderer = std::make_unique<Renderer>(*window);
     auto main_scene = std::make_unique<Scene>(*renderer);
 
-    StochasticBinarySpacePartitioningLevelGenerator level_generator(BoundingBox::from_zero(640.0, 480.0));
+    StochasticBinarySpacePartitioningLevelGenerator level_generator(BoundingBox2f::from_zero(640.0, 480.0));
     level_generator.run(*main_scene);
     main_scene->update();
 

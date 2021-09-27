@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include <climits>
 #include "src/random/linear_number_generator.h"
 
 LinearNumberGenerator::LinearNumberGenerator(unsigned int base_seed)

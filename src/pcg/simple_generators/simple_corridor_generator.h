@@ -12,13 +12,13 @@ class SimpleCorridorGenerator : public Generator {
     static constexpr float CORRIDOR_WIDTH = 10.0;
 
 public:
-    SimpleCorridorGenerator(const BoundingBox& bounding_box, SimpleCorridorAlignment alignment)
+    SimpleCorridorGenerator(const BoundingBox2f& bounding_box, SimpleCorridorAlignment alignment)
         : Generator(bounding_box), alignment(alignment) {};
 
     void run(Scene& scene) override;
 
 private:
-    [[nodiscard]] BoundingBox create_corridor_box() const;
+    [[nodiscard]] BoundingBox2f create_corridor_box() const;
 };
 
 

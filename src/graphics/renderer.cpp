@@ -19,7 +19,7 @@ SDL_Renderer* Renderer::get_handle() {
     return handle;
 }
 
-void Renderer::render(Texture& texture, const BoundingBox& box) {
+void Renderer::render(Texture& texture, const BoundingBox2f& box) {
     const SDL_Rect destination_rect = convert_to_sdl_rect(box);
 
     if (SDL_RenderCopy(handle, texture.get_handle(), nullptr, &destination_rect)) {
@@ -27,7 +27,7 @@ void Renderer::render(Texture& texture, const BoundingBox& box) {
     };
 }
 
-void Renderer::render(const Color& color, const BoundingBox& box) {
+void Renderer::render(const Color& color, const BoundingBox2f& box) {
     set_drawing_color(color);
     const SDL_Rect destination_rect = convert_to_sdl_rect(box);
 
@@ -51,7 +51,7 @@ void Renderer::set_drawing_color(const Color& color) {
     }
 }
 
-SDL_Rect Renderer::convert_to_sdl_rect(const BoundingBox& box) {
+SDL_Rect Renderer::convert_to_sdl_rect(const BoundingBox2f& box) {
     const Point top_left = box.get_top_left();
     return {
             .x = static_cast<int>(top_left.x),

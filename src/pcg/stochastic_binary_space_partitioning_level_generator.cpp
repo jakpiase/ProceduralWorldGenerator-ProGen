@@ -9,23 +9,23 @@ void StochasticBinarySpacePartitioningLevelGenerator::run(Scene &scene) {
     DLOG(INFO) << "StochasticBinarySpacePartitioningLevelGenerator finished";
 }
 
-bool StochasticBinarySpacePartitioningLevelGenerator::can_be_splited(const BoundingBox& bounding_box) {
+bool StochasticBinarySpacePartitioningLevelGenerator::can_be_splited(const BoundingBox2f& bounding_box) {
     if (maximum_spliting)
         return can_be_splited_horizontally(bounding_box) || can_be_splited_vertically(bounding_box);
     else
         return can_be_splited_horizontally(bounding_box) && can_be_splited_vertically(bounding_box);
 }
 
-bool StochasticBinarySpacePartitioningLevelGenerator::can_be_splited_vertically(const BoundingBox& bounding_box) {
+bool StochasticBinarySpacePartitioningLevelGenerator::can_be_splited_vertically(const BoundingBox2f& bounding_box) {
     return bounding_box.get_width() > 2 * minimal_split_size;
 }
 
-bool StochasticBinarySpacePartitioningLevelGenerator::can_be_splited_horizontally(const BoundingBox& bounding_box) {
+bool StochasticBinarySpacePartitioningLevelGenerator::can_be_splited_horizontally(const BoundingBox2f& bounding_box) {
     return bounding_box.get_height() > 2 * minimal_split_size;
 }
 
 // returns true if horizontal
-bool StochasticBinarySpacePartitioningLevelGenerator::get_split_orientation(const BoundingBox& bounding_box, RandomNumberGenerator* random_generator) {
+bool StochasticBinarySpacePartitioningLevelGenerator::get_split_orientation(const BoundingBox2f& bounding_box, RandomNumberGenerator* random_generator) {
     if (maximum_spliting) {
         if (can_be_splited_horizontally(bounding_box) && can_be_splited_vertically(bounding_box))
             return random_generator->random_bool();
@@ -36,7 +36,7 @@ bool StochasticBinarySpacePartitioningLevelGenerator::get_split_orientation(cons
     }
 }
 
-BoundingBox StochasticBinarySpacePartitioningLevelGenerator::generate_room(const BoundingBox& bounding_box, Scene& scene) {
+BoundingBox2f StochasticBinarySpacePartitioningLevelGenerator::generate_room(const BoundingBox2f& bounding_box, Scene& scene) {
     auto& random_generator = scene.get_random_generator();
 
     float room_width, room_height;
@@ -65,28 +65,28 @@ BoundingBox StochasticBinarySpacePartitioningLevelGenerator::generate_room(const
     return room_bounding_box;
 }
 
-std::pair<BoundingBox, BoundingBox> StochasticBinarySpacePartitioningLevelGenerator::calculate_new_bounding_boxes(const BoundingBox& bounding_box, RandomNumberGenerator* random_generator) {
-    Point first_top_left = bounding_box.get_top_left();
-    Point second_bottom_right = bounding_box.get_bottom_right();
+std::pair<BoundingBox2f, BoundingBox2f> StochasticBinarySpacePartitioningLevelGenerator::calculate_new_bounding_boxes(const BoundingBox2f& bounding_box, RandomNumberGenerator* random_generator) {
+    Point2f first_top_left = bounding_box.get_top_left();
+    Point2f second_bottom_right = bounding_box.get_bottom_right();
 
     bool horizontal = get_split_orientation(bounding_box, random_generator);
 
     // minimal split length/width constraint ensures that room layout will be spread out realisticly
     // f.e. instead of split <0, DIMENSION_SIZE) we have <minimal_split_size, DIMENSION_SIZE - minimal_split_size)
-    Point first_bottom_right(0, 0), second_top_left(0, 0);
+    Point2f first_bottom_right(0, 0), second_top_left(0, 0);
     if (horizontal) {
         int split_height = minimal_split_size + bounding_box.get_top_left().y + random_generator->random(static_cast<int>(bounding_box.get_height() - 2 * minimal_split_size));
     
-        first_bottom_right = Point(bounding_box.get_bottom_right().x, split_height);
-        second_top_left = Point(bounding_box.get_top_left().x, split_height);
+        first_bottom_right = Point2f(bounding_box.get_bottom_right().x, split_height);
+        second_top_left = Point2f(bounding_box.get_top_left().x, split_height);
     } else {
         int split_width = minimal_split_size + bounding_box.get_top_left().x + random_generator->random(static_cast<int>(bounding_box.get_width() - 2 * minimal_split_size));
             
-        first_bottom_right = Point(split_width, bounding_box.get_bottom_right().y);
-        second_top_left = Point(split_width, bounding_box.get_top_left().y);            
+        first_bottom_right = Point2f(split_width, bounding_box.get_bottom_right().y);
+        second_top_left = Point2f(split_width, bounding_box.get_top_left().y);
     }
 
-    return std::pair<BoundingBox, BoundingBox>{{first_top_left, first_bottom_right}, {second_top_left, second_bottom_right}};
+    return std::pair<BoundingBox2f, BoundingBox2f>{{first_top_left, first_bottom_right}, {second_top_left, second_bottom_right}};
 }
 
 // Split divides bounding_box into two smaller ones, either by vertical or horizontal cut
@@ -97,11 +97,11 @@ std::pair<BoundingBox, BoundingBox> StochasticBinarySpacePartitioningLevelGenera
 // dividing ((10, 30), (20, 40)) bounding box by a perfectly symetric vertical cut will result
 // in first:((10, 30), (15, 40)) second:((15, 30), (20, 40)) 
 
-std::vector<BoundingBox> StochasticBinarySpacePartitioningLevelGenerator::split_space(const BoundingBox& bounding_box, Scene& scene) {
+std::vector<BoundingBox2f> StochasticBinarySpacePartitioningLevelGenerator::split_space(const BoundingBox2f& bounding_box, Scene& scene) {
     auto& random_generator = scene.get_random_generator();
 
     if (can_be_splited(bounding_box)) {
-        std::pair<BoundingBox, BoundingBox> new_bounding_boxes = calculate_new_bounding_boxes(bounding_box, &random_generator);
+        std::pair<BoundingBox2f, BoundingBox2f> new_bounding_boxes = calculate_new_bounding_boxes(bounding_box, &random_generator);
 
         DLOG(INFO) << "Spliting surface from " << bounding_box << " into " << new_bounding_boxes.first << " and " << new_bounding_boxes.second;
         auto first_rooms = split_space(new_bounding_boxes.first, scene);
@@ -120,18 +120,18 @@ std::vector<BoundingBox> StochasticBinarySpacePartitioningLevelGenerator::split_
     }
 }
 
-std::pair<BoundingBox, BoundingBox> StochasticBinarySpacePartitioningLevelGenerator::find_closest_rooms(const std::vector<BoundingBox>& first, const std::vector<BoundingBox>& second) {
+std::pair<BoundingBox2f, BoundingBox2f> StochasticBinarySpacePartitioningLevelGenerator::find_closest_rooms(const std::vector<BoundingBox2f>& first, const std::vector<BoundingBox2f>& second) {
     
     BoundingBox result_first = first[0];
     BoundingBox result_second = second[0];
     int first_idx = 0;
     int second_idx = 0;
 
-    int closest_distance = BoundingBox::manhattan_distance(result_first, result_second);
+    int closest_distance = BoundingBox2f::manhattan_distance(result_first, result_second);
 
     for(int i=0; i<first.size(); ++i) {
         for(int j=0; j<second.size(); ++j) {
-            int distance = BoundingBox::manhattan_distance(first[i], second[j]);
+            int distance = BoundingBox2f::manhattan_distance(first[i], second[j]);
             if(closest_distance > distance) {
                 closest_distance = distance;
                 first_idx = i;
@@ -139,5 +139,5 @@ std::pair<BoundingBox, BoundingBox> StochasticBinarySpacePartitioningLevelGenera
             }
         }
     }
-    return std::pair<BoundingBox, BoundingBox>(first[first_idx], second[second_idx]);
+    return std::pair<BoundingBox2f, BoundingBox2f>(first[first_idx], second[second_idx]);
 }

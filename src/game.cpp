@@ -27,7 +27,7 @@ int Game::run() {
 }
 
 void Game::generate_content() {
-    StochasticBinarySpacePartitioningLevelGenerator level_generator(BoundingBox::from_zero(640.0, 480.0));
+    StochasticBinarySpacePartitioningLevelGenerator level_generator(BoundingBox2f::from_zero(640.0, 480.0));
     level_generator.run(*main_scene);
 }
 

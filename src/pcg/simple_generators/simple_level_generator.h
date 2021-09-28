@@ -4,7 +4,7 @@
 
 class SimpleLevelGenerator : public Generator {
 public:
-    explicit SimpleLevelGenerator(const BoundingBox& bounding_box)
+    explicit SimpleLevelGenerator(const BoundingBox2f& bounding_box)
             : Generator(bounding_box) {}
 
     void run(Scene& scene) override;

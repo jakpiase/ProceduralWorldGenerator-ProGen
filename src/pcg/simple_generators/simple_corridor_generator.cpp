@@ -25,7 +25,7 @@ void SimpleCorridorGenerator::run(Scene& scene) {
     DLOG(INFO) << "SimpleCorridorGenerator finished";
 }
 
-BoundingBox SimpleCorridorGenerator::create_corridor_box() const {
+BoundingBox2f SimpleCorridorGenerator::create_corridor_box() const {
     assert((alignment == SimpleCorridorAlignment::Horizontal ? bounding_box.get_width() >= CORRIDOR_WIDTH :
             bounding_box.get_height() >= CORRIDOR_WIDTH));
 

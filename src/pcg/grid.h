@@ -4,7 +4,7 @@
 #include "src/core/common/bounding_box.h"
 
 enum class GridElement {
-    NONE,
+    EMPTY,
     ROOM,
     CORRIDOR
 };

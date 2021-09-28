@@ -9,7 +9,7 @@ Grid::Grid(size_t width, size_t height)
         LOG(ERROR) << "Could not allocate space for grid of size: " << width << " x " << height;
     }
 
-    std::fill(array.get(), array.get() + size, GridElement::NONE);
+    std::fill(array.get(), array.get() + size, GridElement::EMPTY);
 }
 
 void Grid::fill(const BoundingBox2i& box, GridElement element) {

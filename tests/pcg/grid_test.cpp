@@ -9,7 +9,7 @@ TEST(Grid_test, should_be_empty_at_start) {
 
     for (int row = 0; row < HEIGHT; ++row) {
         for (int column = 0; column < WIDTH; ++column) {
-            ASSERT_EQ(grid(row, column), GridElement::NONE);
+            ASSERT_EQ(grid(row, column), GridElement::EMPTY);
         }
     }
 }
@@ -28,7 +28,7 @@ TEST(Grid_test, should_properly_store_data) {
             if ((row + column) % 2 == 0) {
                 ASSERT_EQ(grid(row, column), GridElement::ROOM);
             } else {
-                ASSERT_EQ(grid(row, column), GridElement::NONE);
+                ASSERT_EQ(grid(row, column), GridElement::EMPTY);
             }
         }
     }
@@ -44,7 +44,7 @@ TEST(Grid_test, fill_method_test) {
             if (column >= 1 && column <= 5 && row >= 2 && row <= 6) {
                 ASSERT_EQ(grid(row, column), GridElement::ROOM);
             } else {
-                ASSERT_EQ(grid(row, column), GridElement::NONE);
+                ASSERT_EQ(grid(row, column), GridElement::EMPTY);
             }
         }
     }

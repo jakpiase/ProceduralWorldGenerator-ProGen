@@ -13,8 +13,8 @@ Grid::Grid(size_t width, size_t height)
 }
 
 void Grid::fill(const BoundingBox2i& box, GridElement element) {
-    for (int row = box.get_top(); row <= box.get_bottom(); row++) {
-        for (int column = box.get_left(); column <= box.get_right(); column++) {
+    for (int row = box.get_top(); row <= box.get_bottom(); ++row) {
+        for (int column = box.get_left(); column <= box.get_right(); ++column) {
             this->operator()(row, column) = element;
         }
     }

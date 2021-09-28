@@ -31,8 +31,3 @@ struct Point {
 
 typedef Point<float> Point2f;
 typedef Point<int> Point2i;
-
-template<typename T>
-std::ostream& operator<<(std::ostream &stream, const Point<T>& point) {
-    return stream << "(" << point.x << ", " << point.y << ")";
-}

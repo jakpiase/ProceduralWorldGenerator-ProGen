@@ -6,7 +6,7 @@ Game::Game()
     LOG(INFO) << "Starting ProGen";
 
 
-    window = std::make_unique<Window>("ProGen", 640, 480);
+    window = std::make_unique<Window>("ProGen", BOARD_WIDTH, BOARD_HEIGHT);
     renderer = std::make_unique<Renderer>(*window);
     main_scene = std::make_unique<Scene>(*renderer);
 }
@@ -27,7 +27,9 @@ int Game::run() {
 }
 
 void Game::generate_content() {
-    StochasticBinarySpacePartitioningLevelGenerator level_generator(BoundingBox2i::from_zero(640, 480));
+    constexpr int GRID_WIDTH = BOARD_WIDTH / Grid::ELEMENT_SIZE;
+    constexpr int GRID_HEIGHT = BOARD_HEIGHT / Grid::ELEMENT_SIZE;
+    StochasticBinarySpacePartitioningLevelGenerator level_generator(BoundingBox2i::from_zero(GRID_WIDTH, GRID_HEIGHT));
     level_generator.run(*main_scene);
 }
 

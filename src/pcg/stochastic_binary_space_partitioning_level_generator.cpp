@@ -44,47 +44,26 @@ BoundingBox2i StochasticBinarySpacePartitioningLevelGenerator::generate_room(con
 
     if (bounding_box.get_width() > bounding_box.get_height()) {
         room_height = random_generator.random(minimal_room_size, bounding_box.get_height() - 2 * bounding_box_padding);
-        room_height -= room_height % Grid::ELEMENT_SIZE; // to be sure that grid size is an integer
+
 
         int width_upper_bound = std::min<int>({MAX_PROPORTION * room_height, bounding_box.get_width(), maximal_room_size});
         int width_lower_bound = std::max<int>(MIN_PROPORTION * room_height, minimal_room_size);
         room_width = random_generator.random(width_lower_bound, width_upper_bound - 2 * bounding_box_padding);
-        room_width -= room_width % Grid::ELEMENT_SIZE; // to be sure that grid size is an integer
     } else {
         room_width = random_generator.random(minimal_room_size, bounding_box.get_width() - 2 * bounding_box_padding);
-        room_width -= room_width % Grid::ELEMENT_SIZE; // to be sure that grid size is an integer
 
         int height_upper_bound = std::min<int>({MAX_PROPORTION * room_width, bounding_box.get_height(), maximal_room_size});
         int height_lower_bound = std::max<int>(MIN_PROPORTION * room_width, minimal_room_size);
         room_height = random_generator.random(height_lower_bound, height_upper_bound - 2 * bounding_box_padding);
-        room_height -= room_height % Grid::ELEMENT_SIZE; // to be sure that grid size is an integer
     }
 
     int room_x = bounding_box.get_top_left().x + bounding_box_padding + random_generator.random(bounding_box.get_width() - room_width - 2 * bounding_box_padding);
     int room_y = bounding_box.get_top_left().y + bounding_box_padding + random_generator.random(bounding_box.get_height() - room_height - 2 * bounding_box_padding);
 
-    room_x -= room_x % Grid::ELEMENT_SIZE;
-    room_y -= room_y % Grid::ELEMENT_SIZE;
-
     BoundingBox2i room_bounding_box(Point2i(room_x, room_y), Point2i(room_x + room_width, room_y + room_height));
     SimpleRoomGenerator room_generator(room_bounding_box);
 
-    int grid_x = room_x / Grid::ELEMENT_SIZE;
-    int grid_y = room_y / Grid::ELEMENT_SIZE;
-    int grid_width = room_width / Grid::ELEMENT_SIZE;
-    int grid_height = room_height / Grid::ELEMENT_SIZE;
-    grid->fill(grid_x, grid_y, grid_width, grid_height, GridElement::ROOM);
-
-    // DEBUG CODE TO CHECK IF GRIDS ARE WORKING PROPERLY, WILL BE DELETED SOON
-    //for(int i = 0; i < grid->get_width(); ++i) {
-    //    for(int j = 0; j < grid->get_height(); ++j) {
-    //        if((*grid)(i, j) == GridElement::ROOM) {
-    //            Entity entity = scene.create_entity();
-    //            entity.add_component<TransformationComponent>(Point2i(i * Grid::ELEMENT_SIZE, j * Grid::ELEMENT_SIZE));
-    //            entity.add_component<GraphicsComponent>(Colors::Red, Dimensions2i(Grid::ELEMENT_SIZE, Grid::ELEMENT_SIZE));
-    //        }
-    //    }
-    //}
+    grid->fill(room_bounding_box, GridElement::ROOM);
 
     room_generator.run(scene);
 
@@ -102,16 +81,14 @@ std::pair<BoundingBox2i, BoundingBox2i> StochasticBinarySpacePartitioningLevelGe
     Point2i first_bottom_right(0, 0), second_top_left(0, 0);
     if (horizontal) {
         int split_height = minimal_split_size + bounding_box.get_top_left().y + random_generator->random(bounding_box.get_height() - 2 * minimal_split_size);
-        split_height -= split_height % Grid::ELEMENT_SIZE;
 
         first_bottom_right = Point2i(bounding_box.get_bottom_right().x, split_height);
-        second_top_left = Point2i(bounding_box.get_top_left().x, split_height);
+        second_top_left = Point2i(bounding_box.get_top_left().x, split_height + 1);
     } else {
         int split_width = minimal_split_size + bounding_box.get_top_left().x + random_generator->random(bounding_box.get_width() - 2 * minimal_split_size);
-        split_width -= split_width % Grid::ELEMENT_SIZE;
 
         first_bottom_right = Point2i(split_width, bounding_box.get_bottom_right().y);
-        second_top_left = Point2i(split_width, bounding_box.get_top_left().y);
+        second_top_left = Point2i(split_width + 1, bounding_box.get_top_left().y);
     }
 
     return std::pair<BoundingBox2i, BoundingBox2i>{{first_top_left, first_bottom_right}, {second_top_left, second_bottom_right}};

@@ -1,18 +1,7 @@
 #include <gtest/gtest.h>
 #include "src/pcg/stochastic_binary_space_partitioning_level_generator.h"
 
-bool rooms_overlap(const BoundingBox2i& first, const BoundingBox2i& second) {
-    // skip comparing walls, only floors are meaningful
-    if (first.get_top_left().x == first.get_bottom_right().x ||
-        first.get_top_left().y == first.get_bottom_right().y ||
-        second.get_top_left().x == second.get_bottom_right().x ||
-        second.get_top_left().y == second.get_bottom_right().y) return false;
 
-    return !(first.get_top_left().x > second.get_bottom_right().x || 
-           second.get_top_left().x > first.get_bottom_right().x || 
-           first.get_top_left().y > second.get_bottom_right().y || 
-           second.get_top_left().y > first.get_bottom_right().y);
-}
 
 TEST(SBSP_level_generator_tests, SBSP_level_generator_no_overlapping_rooms_test) {
     auto window = std::make_unique<Window>("ProGen", 640, 480);
@@ -33,7 +22,7 @@ TEST(SBSP_level_generator_tests, SBSP_level_generator_no_overlapping_rooms_test)
                 TransformationComponent& first_transform = view.get<TransformationComponent>(first_entity);
                 TransformationComponent& second_transform = view.get<TransformationComponent>(second_entity);
 
-                ASSERT_FALSE(rooms_overlap(BoundingBox(first_transform.position, first_physics.dimensions),
+                ASSERT_FALSE(BoundingBox(first_transform.position, first_physics.dimensions).collides_with(
                                            BoundingBox(second_transform.position, second_physics.dimensions)));          
             }
         }

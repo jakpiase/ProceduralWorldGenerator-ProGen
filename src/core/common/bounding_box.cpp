@@ -83,6 +83,20 @@ T BoundingBox<T>::get_right() const {
 }
 
 template<typename T>
+bool BoundingBox<T>::collides_with(const BoundingBox<T>& other) const {
+    // skip comparing walls, only floors are meaningful
+    if (get_top_left().x == get_bottom_right().x ||
+        get_top_left().y == get_bottom_right().y ||
+        other.get_top_left().x == other.get_bottom_right().x ||
+        other.get_top_left().y == other.get_bottom_right().y) return false;
+
+    return !(get_top_left().x > other.get_bottom_right().x || 
+           other.get_top_left().x > get_bottom_right().x || 
+           get_top_left().y > other.get_bottom_right().y || 
+           other.get_top_left().y > get_bottom_right().y);
+}
+
+template<typename T>
 int BoundingBox<T>::manhattan_distance(const BoundingBox& first, const BoundingBox& second) {
     const T first_x1 = first.get_top_left().x;
     const T first_y1 = first.get_top_left().y;

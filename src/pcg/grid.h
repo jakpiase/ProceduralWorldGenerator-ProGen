@@ -25,8 +25,6 @@ public:
 
     void fill(const BoundingBox2i& box, GridElement element);
 
-    void fill(int x, int y, int width, int height, GridElement element);
-
     [[nodiscard]] size_t get_width() const;
 
     [[nodiscard]] size_t get_height() const;

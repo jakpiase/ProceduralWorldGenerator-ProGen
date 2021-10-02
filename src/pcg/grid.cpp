@@ -20,14 +20,6 @@ void Grid::fill(const BoundingBox2i& box, GridElement element) {
     }
 }
 
-void Grid::fill(int x, int y, int width, int height, GridElement element) {
-    for (int row = x; row < x + width; ++row) {
-        for (int col = y; col < y + height; ++col) {
-            this->operator()(row, col) = element;
-        }
-    }
-}
-
 GridElement& Grid::operator()(size_t row, size_t column) {
     return array[get_index(row, column)];
 }

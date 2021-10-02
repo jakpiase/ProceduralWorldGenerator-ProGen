@@ -18,20 +18,19 @@ class StochasticBinarySpacePartitioningLevelGenerator : public Generator {
     const int bounding_box_padding;
     const bool maximum_spliting;
 public:
+    // minimal_split_size - the higher the value, the less room will be generated
+    // boundin_box_padding - room padding from split bounding box
+    // minimal_room_size - smallest possible value for width and height of generated room
+    // maximal_room_size - highest possible value for width and height of generated room
     explicit StochasticBinarySpacePartitioningLevelGenerator(const BoundingBox2i& bounding_box, bool maximum_spliting = true)
-            : minimal_split_size(130), bounding_box_padding(5), minimal_room_size(40), maximal_room_size(80),
+            : minimal_split_size(25), bounding_box_padding(1), minimal_room_size(6), maximal_room_size(16),
               maximum_spliting(maximum_spliting), Generator(bounding_box){
                 int width = bounding_box.get_width();
                 int height = bounding_box.get_height();
                 
                 assert(minimal_split_size >= 2 * minimal_room_size + 4 * bounding_box_padding);
 
-                assert(bounding_box_padding % Grid::ELEMENT_SIZE == 0);
-                assert(minimal_room_size % Grid::ELEMENT_SIZE == 0);
-                assert(width % Grid::ELEMENT_SIZE == 0);
-                assert(height % Grid::ELEMENT_SIZE == 0);
-
-                grid = std::make_shared<Grid>(width / Grid::ELEMENT_SIZE, height / Grid::ELEMENT_SIZE);
+                grid = std::make_shared<Grid>(width, height);
             }
 
     void run(Scene &scene) override;

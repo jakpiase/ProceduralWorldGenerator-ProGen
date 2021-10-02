@@ -1,6 +1,7 @@
 #pragma once
 #include <glog/logging.h>
 #include "src/graphics/renderer.h"
+#include "src/pcg/grid.h"
 
 Renderer::Renderer(Window& window) {
     handle = SDL_CreateRenderer(window.get_handle(), -1, SDL_RENDERER_ACCELERATED);
@@ -52,12 +53,13 @@ void Renderer::set_drawing_color(const Color& color) {
 }
 
 SDL_Rect Renderer::convert_to_sdl_rect(const BoundingBox2i& box) {
-    const Point top_left = box.get_top_left();
+    const Point2i top_left = box.get_top_left();
+    const int scaling_factor = Grid::ELEMENT_SIZE;
     return {
-            .x = static_cast<int>(top_left.x),
-            .y = static_cast<int>(top_left.y),
-            .w = static_cast<int>(box.get_width()),
-            .h = static_cast<int>(box.get_height())
+            .x = scaling_factor * top_left.x,
+            .y = scaling_factor * top_left.y,
+            .w = scaling_factor * box.get_width(),
+            .h = scaling_factor * box.get_height()
     };
 }
 

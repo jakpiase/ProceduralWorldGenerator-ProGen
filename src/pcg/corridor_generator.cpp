@@ -44,17 +44,17 @@ D - fourth_connecting_point
 */
 
 
-std::vector<BoundingBox2f> CorridorGenerator::calculate_corridor_boxes() {
+std::vector<BoundingBox2i> CorridorGenerator::calculate_corridor_boxes() {
     const auto first_middle = first_room.get_middle();
     const auto second_middle = second_room.get_middle();
 
-    const std::tuple<Point2f, Point2f, bool> corridor_characteristics = calculate_corridor_end_points_and_alignment();
+    const std::tuple<Point2i, Point2i, bool> corridor_characteristics = calculate_corridor_end_points_and_alignment();
 
-    const Point first_connecting_point(std::get<0>(corridor_characteristics));
-    const Point fourth_connecting_point(std::get<1>(corridor_characteristics));
+    const Point2i first_connecting_point(std::get<0>(corridor_characteristics));
+    const Point2i fourth_connecting_point(std::get<1>(corridor_characteristics));
     const bool horizontal_corridor(std::get<2>(corridor_characteristics));
 
-    std::vector<BoundingBox2f> corridor_boxes;
+    std::vector<BoundingBox2i> corridor_boxes;
     corridor_boxes.reserve(3);
 
     generate_corridor_boxes(corridor_boxes, first_connecting_point, fourth_connecting_point, horizontal_corridor);
@@ -63,15 +63,15 @@ std::vector<BoundingBox2f> CorridorGenerator::calculate_corridor_boxes() {
 }
 
 //returns first and last corridor points and alignment(true if horizontal)
-std::tuple<Point2f, Point2f, bool> CorridorGenerator::calculate_corridor_end_points_and_alignment() {
-    Point2f first_middle = first_room.get_middle();
-    Point2f second_middle = second_room.get_middle();
+std::tuple<Point2i, Point2i, bool> CorridorGenerator::calculate_corridor_end_points_and_alignment() {
+    Point2i first_middle = first_room.get_middle();
+    Point2i second_middle = second_room.get_middle();
 
-    Point2f first_connecting_point(0, 0);
-    Point2f fourth_connecting_point(0, 0);
+    Point2i first_connecting_point(0, 0);
+    Point2i fourth_connecting_point(0, 0);
 
     bool horizontal_corridor = true;
-    if (Point2f::is_vertical_distance_bigger(first_middle, second_middle)) {
+    if (Point2i::is_vertical_distance_bigger(first_middle, second_middle)) {
         horizontal_corridor = false;
         if (second_middle.is_above(first_middle)) {
             fourth_connecting_point = first_middle.shifted_by(0, -first_room.get_height() / 2);
@@ -90,15 +90,15 @@ std::tuple<Point2f, Point2f, bool> CorridorGenerator::calculate_corridor_end_poi
         }
     }
 
-    return std::tuple<Point2f, Point2f, bool>(first_connecting_point, fourth_connecting_point, horizontal_corridor);
+    return std::tuple<Point2i, Point2i, bool>(first_connecting_point, fourth_connecting_point, horizontal_corridor);
 }
 
-void CorridorGenerator::generate_corridor_boxes(std::vector<BoundingBox2f>& corridor_boxes, const Point2f& first_connecting_point,
-                                                const Point2f& fourth_connecting_point, bool horizontal_corridor) {
+void CorridorGenerator::generate_corridor_boxes(std::vector<BoundingBox2i>& corridor_boxes, const Point2i& first_connecting_point,
+                                                const Point2i& fourth_connecting_point, bool horizontal_corridor) {
 
-    const Point2f midpoint = Point2f::midpoint(first_connecting_point, fourth_connecting_point);
-    Point2f second_connecting_point(0, 0);
-    Point2f third_connecting_point(0, 0);
+    const Point2i midpoint = Point2i::midpoint(first_connecting_point, fourth_connecting_point);
+    Point2i second_connecting_point(0, 0);
+    Point2i third_connecting_point(0, 0);
 
     if (horizontal_corridor) {
         second_connecting_point = Point(midpoint.x, first_connecting_point.y);

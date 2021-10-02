@@ -13,8 +13,8 @@ public:
     explicit Renderer(Window& window);
     ~Renderer();
 
-    void render(Texture& texture, const BoundingBox2f& box);
-    void render(const Color& color, const BoundingBox2f& box);
+    void render(Texture& texture, const BoundingBox2i& box);
+    void render(const Color& color, const BoundingBox2i& box);
     void clear(const Color& color);
     void updateFrame();
 
@@ -23,7 +23,7 @@ public:
 private:
     void set_drawing_color(const Color& color);
 
-    static SDL_Rect convert_to_sdl_rect(const BoundingBox2f& box);
+    static SDL_Rect convert_to_sdl_rect(const BoundingBox2i& box);
 };
 
 

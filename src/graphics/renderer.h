@@ -9,6 +9,7 @@ class Renderer {
     SDL_Renderer* handle;
 
 public:
+    static constexpr int SCALING_FACTOR = 5;
 
     explicit Renderer(Window& window);
     ~Renderer();

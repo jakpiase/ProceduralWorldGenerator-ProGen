@@ -84,7 +84,6 @@ T BoundingBox<T>::get_right() const {
 
 template<typename T>
 bool BoundingBox<T>::collides_with(const BoundingBox<T>& other) const {
-    // skip comparing walls, only floors are meaningful
     if (get_top_left().x == get_bottom_right().x ||
         get_top_left().y == get_bottom_right().y ||
         other.get_top_left().x == other.get_bottom_right().x ||

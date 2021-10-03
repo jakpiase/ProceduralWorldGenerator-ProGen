@@ -54,12 +54,11 @@ void Renderer::set_drawing_color(const Color& color) {
 
 SDL_Rect Renderer::convert_to_sdl_rect(const BoundingBox2i& box) {
     const Point2i top_left = box.get_top_left();
-    const int scaling_factor = Grid::ELEMENT_SIZE;
     return {
-            .x = scaling_factor * top_left.x,
-            .y = scaling_factor * top_left.y,
-            .w = scaling_factor * box.get_width(),
-            .h = scaling_factor * box.get_height()
+            .x = SCALING_FACTOR * top_left.x,
+            .y = SCALING_FACTOR * top_left.y,
+            .w = SCALING_FACTOR * box.get_width(),
+            .h = SCALING_FACTOR * box.get_height()
     };
 }
 

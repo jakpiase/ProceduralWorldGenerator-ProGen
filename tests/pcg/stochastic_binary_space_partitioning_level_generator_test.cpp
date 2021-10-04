@@ -1,25 +1,14 @@
 #include <gtest/gtest.h>
 #include "src/pcg/stochastic_binary_space_partitioning_level_generator.h"
 
-bool rooms_overlap(const BoundingBox2f& first, const BoundingBox2f& second) {
-    // skip comparing walls, only floors are meaningful
-    if (first.get_top_left().x == first.get_bottom_right().x ||
-        first.get_top_left().y == first.get_bottom_right().y ||
-        second.get_top_left().x == second.get_bottom_right().x ||
-        second.get_top_left().y == second.get_bottom_right().y) return false;
 
-    return !(first.get_top_left().x > second.get_bottom_right().x || 
-           second.get_top_left().x > first.get_bottom_right().x || 
-           first.get_top_left().y > second.get_bottom_right().y || 
-           second.get_top_left().y > first.get_bottom_right().y);
-}
 
 TEST(SBSP_level_generator_tests, SBSP_level_generator_no_overlapping_rooms_test) {
     auto window = std::make_unique<Window>("ProGen", 640, 480);
     auto renderer = std::make_unique<Renderer>(*window);
     auto main_scene = std::make_unique<Scene>(*renderer);
 
-    StochasticBinarySpacePartitioningLevelGenerator level_generator(BoundingBox2f::from_zero(640.0, 480.0));
+    StochasticBinarySpacePartitioningLevelGenerator level_generator(BoundingBox2i::from_zero(640, 480));
     level_generator.run(*main_scene);
     main_scene->update();
 
@@ -33,7 +22,7 @@ TEST(SBSP_level_generator_tests, SBSP_level_generator_no_overlapping_rooms_test)
                 TransformationComponent& first_transform = view.get<TransformationComponent>(first_entity);
                 TransformationComponent& second_transform = view.get<TransformationComponent>(second_entity);
 
-                ASSERT_FALSE(rooms_overlap(BoundingBox(first_transform.position, first_physics.dimensions),
+                ASSERT_FALSE(BoundingBox(first_transform.position, first_physics.dimensions).collides_with(
                                            BoundingBox(second_transform.position, second_physics.dimensions)));          
             }
         }

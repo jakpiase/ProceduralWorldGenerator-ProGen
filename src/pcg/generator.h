@@ -5,10 +5,10 @@ class Scene;
 
 class Generator {
 protected:
-    const BoundingBox2f& bounding_box; //FIXME: it should probably be changed to BoundingBox2i
+    const BoundingBox2i& bounding_box;
 
 public:
-    explicit Generator(const BoundingBox2f& bounding_box)
+    explicit Generator(const BoundingBox2i& bounding_box)
             : bounding_box(bounding_box) {};
     
     virtual void run(Scene& scene) = 0;

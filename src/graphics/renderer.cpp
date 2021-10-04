@@ -1,6 +1,7 @@
 #pragma once
 #include <glog/logging.h>
 #include "src/graphics/renderer.h"
+#include "src/pcg/grid.h"
 
 Renderer::Renderer(Window& window) {
     handle = SDL_CreateRenderer(window.get_handle(), -1, SDL_RENDERER_ACCELERATED);
@@ -19,7 +20,7 @@ SDL_Renderer* Renderer::get_handle() {
     return handle;
 }
 
-void Renderer::render(Texture& texture, const BoundingBox2f& box) {
+void Renderer::render(Texture& texture, const BoundingBox2i& box) {
     const SDL_Rect destination_rect = convert_to_sdl_rect(box);
 
     if (SDL_RenderCopy(handle, texture.get_handle(), nullptr, &destination_rect)) {
@@ -27,7 +28,7 @@ void Renderer::render(Texture& texture, const BoundingBox2f& box) {
     };
 }
 
-void Renderer::render(const Color& color, const BoundingBox2f& box) {
+void Renderer::render(const Color& color, const BoundingBox2i& box) {
     set_drawing_color(color);
     const SDL_Rect destination_rect = convert_to_sdl_rect(box);
 
@@ -51,13 +52,13 @@ void Renderer::set_drawing_color(const Color& color) {
     }
 }
 
-SDL_Rect Renderer::convert_to_sdl_rect(const BoundingBox2f& box) {
-    const Point top_left = box.get_top_left();
+SDL_Rect Renderer::convert_to_sdl_rect(const BoundingBox2i& box) {
+    const Point2i top_left = box.get_top_left();
     return {
-            .x = static_cast<int>(top_left.x),
-            .y = static_cast<int>(top_left.y),
-            .w = static_cast<int>(box.get_width()),
-            .h = static_cast<int>(box.get_height())
+            .x = SCALING_FACTOR * top_left.x,
+            .y = SCALING_FACTOR * top_left.y,
+            .w = SCALING_FACTOR * box.get_width(),
+            .h = SCALING_FACTOR * box.get_height()
     };
 }
 

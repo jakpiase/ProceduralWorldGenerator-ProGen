@@ -11,7 +11,7 @@
 void SimpleCorridorGenerator::run(Scene& scene) {
     DLOG(INFO) << "SimpleCorridorGenerator running";
 
-    const BoundingBox corridor_box = create_corridor_box();
+    const BoundingBox2i corridor_box = create_corridor_box();
 
     std::stringstream corridor_description_stream;
     corridor_description_stream << "Corridor from " << corridor_box.get_top_left() << " to "
@@ -25,7 +25,7 @@ void SimpleCorridorGenerator::run(Scene& scene) {
     DLOG(INFO) << "SimpleCorridorGenerator finished";
 }
 
-BoundingBox2f SimpleCorridorGenerator::create_corridor_box() const {
+BoundingBox2i SimpleCorridorGenerator::create_corridor_box() const {
     assert((alignment == SimpleCorridorAlignment::Horizontal ? bounding_box.get_width() >= CORRIDOR_WIDTH :
             bounding_box.get_height() >= CORRIDOR_WIDTH));
 

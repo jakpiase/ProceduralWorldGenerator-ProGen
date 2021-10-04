@@ -43,6 +43,8 @@ public:
 
     [[nodiscard]] T get_right() const;
 
+    [[nodiscard]] bool collides_with(const BoundingBox<T>& other) const;
+
     friend std::ostream& operator<<(std::ostream& stream, const BoundingBox& bounding_box) {
         stream << "((" << bounding_box.top_left << ") ";
         stream << "(" << bounding_box.bottom_right << "))";

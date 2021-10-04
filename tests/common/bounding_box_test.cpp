@@ -70,3 +70,35 @@ TEST(Bounding_box_manhattan_distance_tests, top_right_and_bottom_left_distance) 
     ASSERT_EQ(BoundingBox2i::manhattan_distance(first_box, second_box), 300);
     ASSERT_EQ(BoundingBox2i::manhattan_distance(second_box, first_box), 300);
 }
+
+TEST(Bounding_box_collision_tests, floors_collision) {
+    BoundingBox2i first_box = BoundingBox2i(Point2i(100, 100), Point2i(200, 200));
+    BoundingBox2i second_box = BoundingBox2i(Point2i(190, 190), Point2i(210, 210));
+
+    ASSERT_TRUE(first_box.collides_with(second_box));
+    ASSERT_TRUE(second_box.collides_with(first_box));
+}
+
+TEST(Bounding_box_collision_tests, floors_no_collision) {
+    BoundingBox2i first_box = BoundingBox2i(Point2i(100, 100), Point2i(200, 200));
+    BoundingBox2i second_box = BoundingBox2i(Point2i(201, 201), Point2i(210, 210));
+
+    ASSERT_FALSE(first_box.collides_with(second_box));
+    ASSERT_FALSE(second_box.collides_with(first_box));
+}
+
+TEST(Bounding_box_collision_tests, floors_wall_skipped_collision) {
+    BoundingBox2i first_box = BoundingBox2i(Point2i(100, 100), Point2i(200, 200));
+    BoundingBox2i second_box = BoundingBox2i(Point2i(150, 150), Point2i(150, 180));
+
+    ASSERT_FALSE(first_box.collides_with(second_box));
+    ASSERT_FALSE(second_box.collides_with(first_box));
+}
+
+TEST(Bounding_box_collision_tests, walls_skipped_collision) {
+    BoundingBox2i first_box = BoundingBox2i(Point2i(120, 160), Point2i(180, 160));
+    BoundingBox2i second_box = BoundingBox2i(Point2i(150, 150), Point2i(150, 180));
+
+    ASSERT_FALSE(first_box.collides_with(second_box));
+    ASSERT_FALSE(second_box.collides_with(first_box));
+}

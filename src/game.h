@@ -13,6 +13,9 @@ class Game {
     std::unique_ptr<Renderer> renderer;
 
 public:
+    static constexpr int WINDOW_WIDTH = 640;
+    static constexpr int WINDOW_HEIGHT = 480;
+
     Game();
     ~Game();
     int run();

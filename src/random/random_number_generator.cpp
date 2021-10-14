@@ -18,7 +18,7 @@ unsigned int RandomNumberGenerator::random(unsigned int min_value, unsigned int 
 }
 
 bool RandomNumberGenerator::random_bool() {
-    return (random() & 0x100);
+    return random() & 0x1;
 }
 
 unsigned int RandomNumberGenerator::get_seed() const {

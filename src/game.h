@@ -21,7 +21,6 @@ public:
     int run();
 
 private:
-    void register_singletons();
     void generate_content();
 
     void process_events();

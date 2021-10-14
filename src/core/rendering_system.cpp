@@ -3,7 +3,7 @@
 #include "src/core/rendering_system.h"
 
 void RenderingSystem::update() {
-    DLOG(INFO) << "Rendering system update running";
+    //DLOG(INFO) << "Rendering system update running";
 
     auto view = registry.view<TransformationComponent, GraphicsComponent>();
 

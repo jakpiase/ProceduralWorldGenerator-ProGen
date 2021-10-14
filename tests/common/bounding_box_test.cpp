@@ -32,6 +32,13 @@ TEST(Bounding_box_test, from_dimensions_constructor_test) {
     ASSERT_EQ(box.get_bottom_right(), Point(4, 6));
 }
 
+TEST(Bounding_box_test, from_dimensions_centered_constructor_test) {
+    BoundingBox box = BoundingBox2i::from_dimensions_centered(Point(3, 3), Dimensions(3, 2));
+
+    ASSERT_EQ(box.get_top_left(), Point(2, 2));
+    ASSERT_EQ(box.get_bottom_right(), Point(4, 3));
+}
+
 TEST(Bounding_box_test, from_zero_constructor_test) {
     BoundingBox box = BoundingBox2i::from_zero(6, 9);
 
@@ -101,4 +108,21 @@ TEST(Bounding_box_collision_tests, walls_skipped_collision) {
 
     ASSERT_FALSE(first_box.collides_with(second_box));
     ASSERT_FALSE(second_box.collides_with(first_box));
+}
+
+TEST(Bounding_box_test, grown_by) {
+    BoundingBox2i box(Point(1, 2), Point(3, 4));
+
+    BoundingBox2i grown_box = box.grown_by(1);
+
+    ASSERT_EQ(grown_box, BoundingBox2i(Point(0, 1), Point(4, 5)));
+}
+
+TEST(Bounding_box_test, contains) {
+    BoundingBox2i box(Point(1, 2), Point(6, 7));
+
+    ASSERT_TRUE(box.contains(box));
+    ASSERT_TRUE(box.contains(BoundingBox2i(Point(3, 4), Point(5, 6))));
+    ASSERT_FALSE(box.contains(BoundingBox2i(Point(10, 10), Point(12, 13))));
+    ASSERT_FALSE(box.contains(BoundingBox2i(Point(1, 1), Point(3, 3))));
 }

@@ -5,7 +5,7 @@ class Scene;
 
 class Generator {
 protected:
-    const BoundingBox2i& bounding_box;
+    const BoundingBox2i bounding_box;
 
 public:
     explicit Generator(const BoundingBox2i& bounding_box)

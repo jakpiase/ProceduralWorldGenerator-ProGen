@@ -21,6 +21,13 @@ BoundingBox<T> BoundingBox<T>::from_dimensions(Point<T> top_left, Dimensions<T> 
 }
 
 template<typename T>
+BoundingBox<T> BoundingBox<T>::from_dimensions_centered(Point<T> center, Dimensions<T> dimensions) {
+    return BoundingBox::from_dimensions(center.shifted_by(-dimensions.width / 2,
+                                                          -dimensions.height / 2),
+                                        dimensions);
+}
+
+template<typename T>
 Point<T> BoundingBox<T>::get_bottom_left() const {
     return Point<T>(top_left.x, bottom_right.y);
 }
@@ -89,10 +96,10 @@ bool BoundingBox<T>::collides_with(const BoundingBox<T>& other) const {
         other.get_top_left().x == other.get_bottom_right().x ||
         other.get_top_left().y == other.get_bottom_right().y) return false;
 
-    return !(get_top_left().x > other.get_bottom_right().x || 
-           other.get_top_left().x > get_bottom_right().x || 
-           get_top_left().y > other.get_bottom_right().y || 
-           other.get_top_left().y > get_bottom_right().y);
+    return !(get_top_left().x > other.get_bottom_right().x ||
+             other.get_top_left().x > get_bottom_right().x ||
+             get_top_left().y > other.get_bottom_right().y ||
+             other.get_top_left().y > get_bottom_right().y);
 }
 
 template<typename T>
@@ -132,6 +139,25 @@ int BoundingBox<T>::manhattan_distance(const BoundingBox& first, const BoundingB
     }
 
     return minimal_distance;
+}
+
+template<typename T>
+BoundingBox<T> BoundingBox<T>::grown_by(T value) const {
+    return BoundingBox(get_top_left().shifted_by(-value, -value),
+                       get_bottom_right().shifted_by(value, value));
+}
+
+template<typename T>
+bool BoundingBox<T>::contains(const BoundingBox& other) const {
+    return get_left() <= other.get_left() &&
+            get_right() >= other.get_right() &&
+            get_top() <= other.get_top() &&
+            get_bottom() >= other.get_bottom();
+}
+
+template<typename T>
+bool BoundingBox<T>::operator==(const BoundingBox& other) const {
+    return top_left == other.top_left && bottom_right == other.bottom_right;
 }
 
 template

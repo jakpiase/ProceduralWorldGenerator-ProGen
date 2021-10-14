@@ -6,7 +6,7 @@ struct TransformationComponent {
 
     TransformationComponent() = default;
 
-    TransformationComponent(const TransformationComponent &) = default;
+    TransformationComponent(const TransformationComponent&) = default;
 
     explicit TransformationComponent(const Point2i& position)
             : position(position) {}

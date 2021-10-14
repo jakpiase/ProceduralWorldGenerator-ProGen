@@ -46,13 +46,13 @@ BoundingBox2i StochasticBinarySpacePartitioningLevelGenerator::generate_room(con
         room_height = random_generator.random(minimal_room_size, bounding_box.get_height() - 2 * bounding_box_padding);
 
 
-        int width_upper_bound = std::min<int>({MAX_PROPORTION * room_height, bounding_box.get_width(), maximal_room_size});
+        int width_upper_bound = std::min<int>({static_cast<int>(MAX_PROPORTION * room_height), bounding_box.get_width(), maximal_room_size});
         int width_lower_bound = std::max<int>(MIN_PROPORTION * room_height, minimal_room_size);
         room_width = random_generator.random(width_lower_bound, width_upper_bound - 2 * bounding_box_padding);
     } else {
         room_width = random_generator.random(minimal_room_size, bounding_box.get_width() - 2 * bounding_box_padding);
 
-        int height_upper_bound = std::min<int>({MAX_PROPORTION * room_width, bounding_box.get_height(), maximal_room_size});
+        int height_upper_bound = std::min<int>({static_cast<int>(MAX_PROPORTION * room_width), bounding_box.get_height(), maximal_room_size});
         int height_lower_bound = std::max<int>(MIN_PROPORTION * room_width, minimal_room_size);
         room_height = random_generator.random(height_lower_bound, height_upper_bound - 2 * bounding_box_padding);
     }

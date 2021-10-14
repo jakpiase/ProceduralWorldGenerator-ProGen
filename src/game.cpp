@@ -1,4 +1,6 @@
 #include <glog/logging.h>
+#include "src/pcg/agent_generators/agent_generator.h"
+#include "src/pcg/agent_generators/agents/look_ahead_agent.h"
 #include "src/game.h"
 
 Game::Game()
@@ -27,7 +29,8 @@ int Game::run() {
 }
 
 void Game::generate_content() {
-    StochasticBinarySpacePartitioningLevelGenerator level_generator(BoundingBox2i::from_zero(128, 96));
+    LinearNumberGenerator linear_number_generator;
+    AgentGenerator level_generator(std::make_unique<LookAheadAgent>(), BoundingBox2i::from_zero(100, 100), linear_number_generator);
     level_generator.run(*main_scene);
 }
 

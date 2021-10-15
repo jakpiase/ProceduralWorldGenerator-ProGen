@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <random>
 #include <glog/logging.h>
+#include <ranges>
 #include "src/pcg/agent_generators/agents/look_ahead_agent.h"
 #include "src/pcg/utils/direction.h"
 #include "src/pcg/utils/entity_creator.h"

@@ -8,3 +8,4 @@ add_executable(${TEST_BINARY} ${TEST_SOURCES})
 add_test(NAME ${TEST_BINARY} COMMAND ${TEST_BINARY})
 
 target_link_libraries(${TEST_BINARY} PUBLIC ${CMAKE_PROJECT_NAME}_lib gtest)
+target_link_libraries(${TEST_BINARY} PUBLIC ${CMAKE_PROJECT_NAME}_lib gmock)

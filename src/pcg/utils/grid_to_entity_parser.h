@@ -4,6 +4,7 @@
 class GridToEntityParser {
     const Grid& grid;
     Scene& scene;
+    EntityCreator& entity_creator;
 
     std::unique_ptr<bool[]> visits_map;
 
@@ -33,6 +34,5 @@ private:
     void mark_visited(size_t row, size_t column);
 
     size_t get_index(size_t row, size_t column);
-
 
 };

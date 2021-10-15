@@ -235,7 +235,7 @@ void LookAheadAgent::flush_rooms_buffer(Scene& scene, Grid& grid) {
 
     for(const BoundingBox2i& room_box : rooms_buffer){
         grid.fill(room_box, GridElement::ROOM);
-        EntityCreator::create_room_floor(scene, room_box);
+        //EntityCreatorImpl::create_room_floor(scene, room_box);
     }
 
     rooms_buffer.clear();
@@ -246,7 +246,7 @@ void LookAheadAgent::flush_corridors_buffer(Scene& scene, Grid& grid) {
 
     for(const BoundingBox2i corridor_box : corridors_buffer){
         grid.fill_no_override(corridor_box, GridElement::CORRIDOR);
-        EntityCreator::create_corridor_floor(scene, corridor_box);
+        //EntityCreatorImpl::create_corridor_floor(scene, corridor_box);
     }
 
     corridors_buffer.clear();

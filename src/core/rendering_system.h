@@ -1,5 +1,6 @@
 #pragma once
 #include <entt/entity/registry.hpp>
+#include <entt/locator/locator.hpp>
 #include "src/core/components/transformation_component.h"
 #include "src/core/components/graphics_component.h"
 #include "src/core/entity_system.h"
@@ -11,9 +12,9 @@ private:
     Renderer& renderer;
 
 public:
-    explicit RenderingSystem(entt::registry& registry, Renderer& renderer)
+    explicit RenderingSystem(entt::registry& registry)
         :   registry(registry),
-            renderer(renderer) {}
+            renderer(entt::service_locator<Renderer>::ref()) {}
 
     void update() override;
 

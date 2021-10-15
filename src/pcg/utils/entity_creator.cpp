@@ -4,7 +4,7 @@
 #include "src/core/entity.h"
 #include "src/pcg/utils/entity_creator.h"
 
-void EntityCreator::create_corridor_floor(Scene& scene, const BoundingBox2i& corridor_box) {
+void EntityCreatorImpl::create_corridor_floor(Scene& scene, const BoundingBox2i& corridor_box) const {
     DLOG(INFO) << "Creating corridor floor entity with box: " << corridor_box;
 
     Entity entity = scene.create_entity();
@@ -14,7 +14,7 @@ void EntityCreator::create_corridor_floor(Scene& scene, const BoundingBox2i& cor
     DLOG(INFO) << "Created corridor floor";
 }
 
-void EntityCreator::create_room_floor(Scene& scene, const BoundingBox2i& room_box) {
+void EntityCreatorImpl::create_room_floor(Scene& scene, const BoundingBox2i& room_box) const {
     DLOG(INFO) << "Creating room floor entity with box: " << room_box;
 
     Entity entity = scene.create_entity();
@@ -23,3 +23,4 @@ void EntityCreator::create_room_floor(Scene& scene, const BoundingBox2i& room_bo
 
     DLOG(INFO) << "Created room floor";
 }
+

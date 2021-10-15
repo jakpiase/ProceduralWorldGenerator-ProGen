@@ -6,7 +6,7 @@
 TEST(SBSP_level_generator_tests, SBSP_level_generator_no_overlapping_rooms_test) {
     auto window = std::make_unique<Window>("ProGen", 640, 480);
     auto renderer = std::make_unique<Renderer>(*window);
-    auto main_scene = std::make_unique<Scene>(*renderer);
+    auto main_scene = std::make_unique<Scene>();
 
     StochasticBinarySpacePartitioningLevelGenerator level_generator(BoundingBox2i::from_zero(640, 480));
     level_generator.run(*main_scene);

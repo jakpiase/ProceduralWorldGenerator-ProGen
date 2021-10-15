@@ -1,4 +1,6 @@
 #include <glog/logging.h>
+#include <entt/locator/locator.hpp>
+#include "src/pcg/utils/entity_creator.h"
 #include "src/pcg/agent_generators/agent_generator.h"
 #include "src/pcg/agent_generators/agents/look_ahead_agent.h"
 #include "src/game.h"
@@ -8,9 +10,9 @@ Game::Game()
     LOG(INFO) << "Starting ProGen";
 
 
-    window = std::make_unique<Window>("ProGen", WINDOW_WIDTH, WINDOW_HEIGHT);
-    renderer = std::make_unique<Renderer>(*window);
-    main_scene = std::make_unique<Scene>(*renderer);
+    window = std::make_shared<Window>("ProGen", WINDOW_WIDTH, WINDOW_HEIGHT);
+    renderer = std::make_shared<Renderer>(*window);
+    main_scene = std::make_unique<Scene>();
 }
 
 Game::~Game() {
@@ -29,6 +31,8 @@ int Game::run() {
 }
 
 void Game::generate_content() {
+    register_singletons();
+
     LinearNumberGenerator linear_number_generator;
     AgentGenerator level_generator(std::make_unique<LookAheadAgent>(), BoundingBox2i::from_zero(100, 100), linear_number_generator);
     level_generator.run(*main_scene);
@@ -49,4 +53,10 @@ void Game::process_events() {
             is_running = false;
         }
     }
+}
+
+void Game::register_singletons() {
+    entt::service_locator<Renderer>::set(renderer);
+    entt::service_locator<Window>::set(window);
+    entt::service_locator<EntityCreator>::set<EntityCreatorImpl>();
 }

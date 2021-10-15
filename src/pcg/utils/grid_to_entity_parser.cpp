@@ -1,8 +1,12 @@
+#include <entt/locator/locator.hpp>
 #include <glog/logging.h>
 #include "src/pcg/utils/entity_creator.h"
 #include "src/pcg/utils/grid_to_entity_parser.h"
 
-GridToEntityParser::GridToEntityParser(Grid& grid, Scene& scene) : grid(grid), scene(scene) {
+GridToEntityParser::GridToEntityParser(Grid& grid, Scene& scene)
+        : grid(grid),
+          scene(scene),
+          entity_creator(entt::service_locator<EntityCreator>::ref()) {
     const size_t size = grid.get_width() * grid.get_height();
     visits_map = std::make_unique<bool[]>(size);
 
@@ -39,9 +43,9 @@ void GridToEntityParser::create_entity_from_grid(size_t row, size_t column) {
 
     switch (element) {
         case GridElement::ROOM:
-            return EntityCreator::create_room_floor(scene, box);
+            return entity_creator.create_room_floor(scene, box);
         case GridElement::CORRIDOR:
-            return EntityCreator::create_corridor_floor(scene, box);
+            return entity_creator.create_corridor_floor(scene, box);
         default:
             return;
     }
@@ -91,7 +95,7 @@ void GridToEntityParser::mark_row_as_visited(size_t row, size_t column_from, siz
 }
 
 bool GridToEntityParser::is_visited(size_t row, size_t column) {
-    visits_map.get()[get_index(row, column)];
+    return visits_map.get()[get_index(row, column)];
 }
 
 void GridToEntityParser::mark_visited(size_t row, size_t column) {

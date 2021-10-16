@@ -15,6 +15,9 @@ jobs:
 
     - name: cmake-configure
       run: cmake -S $GITHUB_WORKSPACE -B ${{runner.workspace}}/build
+      env:
+        CC: gcc-10
+        CXX: g++-10
 
     - name: build
       working-directory: ${{runner.workspace}}/build

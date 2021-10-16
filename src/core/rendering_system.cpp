@@ -20,7 +20,7 @@ void RenderingSystem::render_entity(const TransformationComponent& transformatio
     if(graphics.texture){
         renderer.render(*graphics.texture, box);
     } else {
-        renderer.render(graphics.color, box);
+        renderer->render(graphics.color, box);
     }
 }
 

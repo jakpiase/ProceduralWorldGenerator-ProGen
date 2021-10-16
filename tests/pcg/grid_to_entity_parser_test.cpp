@@ -1,4 +1,4 @@
-#ifdef USE_MOCKS
+//#ifdef USE_MOCKS
 
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
@@ -14,8 +14,8 @@ public:
 };
 
 TEST(Grid_to_entity_parser, should_parse_entities_properly) {
-    entt::service_locator<EntityCreator>::set<EntityCreatorMock>();
-    EntityCreatorMock& entity_creator = entt::service_locator<EntityCreatorMock>::ref();
+    std::shared_ptr<EntityCreatorMock> entity_creator_mock = std::make_shared<EntityCreatorMock>();
+    entt::service_locator<EntityCreator>::set(std::reinterpret_pointer_cast<EntityCreator>(entity_creator_mock));
 
     Scene scene;
     Grid grid(10, 10);
@@ -26,12 +26,12 @@ TEST(Grid_to_entity_parser, should_parse_entities_properly) {
     GridToEntityParser grid_to_entity_parser(grid, scene);
     grid_to_entity_parser.parse();
 
-    EXPECT_CALL(entity_creator, create_room_floor(testing::Ref(scene), BoundingBox2i(Point2i(6, 1), Point2i(7, 7))))
+    EXPECT_CALL(*entity_creator_mock, create_room_floor(testing::Ref(scene), BoundingBox2i(Point2i(6, 1), Point2i(7, 7))))
             .Times(1);
-    EXPECT_CALL(entity_creator, create_room_floor(testing::Ref(scene), BoundingBox2i(Point2i(3, 2), Point2i(5, 5))))
+    EXPECT_CALL(*entity_creator_mock, create_room_floor(testing::Ref(scene), BoundingBox2i(Point2i(3, 2), Point2i(5, 5))))
             .Times(1);
-    EXPECT_CALL(entity_creator, create_corridor_floor(testing::Ref(scene), BoundingBox2i(Point2i(4, 6), Point2i(5, 8))))
+    EXPECT_CALL(*entity_creator_mock, create_corridor_floor(testing::Ref(scene), BoundingBox2i(Point2i(4, 6), Point2i(5, 8))))
             .Times(1);
 }
-
-#endif
+//
+//#endif

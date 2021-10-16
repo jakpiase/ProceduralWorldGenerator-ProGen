@@ -9,12 +9,12 @@
 class RenderingSystem : public EntitySystem {
 private:
     entt::registry& registry;
-    Renderer& renderer;
+    std::shared_ptr<Renderer> renderer;
 
 public:
     explicit RenderingSystem(entt::registry& registry)
         :   registry(registry),
-            renderer(entt::service_locator<Renderer>::ref()) {}
+            renderer(entt::service_locator<Renderer>::get().lock()) {}
 
     void update() override;
 

@@ -1,4 +1,4 @@
-#ifdef USE_MOCKS
+
 
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
@@ -32,6 +32,9 @@ TEST(Grid_to_entity_parser, should_parse_entities_properly) {
 
     GridToEntityParser grid_to_entity_parser(grid, scene);
     grid_to_entity_parser.parse();
+
+    entity_creator_mock.reset();
+    entt::service_locator<EntityCreator>::reset();
 }
 
 #endif

@@ -1,4 +1,4 @@
-//#ifdef USE_MOCKS
+#ifdef USE_MOCKS
 
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
@@ -7,7 +7,7 @@
 #include "src/pcg/utils/grid_to_entity_parser.h"
 
 
-class EntityCreatorMock : public EntityCreator {
+class EntityCreatorMock : public EntityCreatorImpl {
 public:
     MOCK_METHOD(void, create_corridor_floor, (Scene & scene, const BoundingBox2i& corridor_box), (const override));
     MOCK_METHOD(void, create_room_floor, (Scene & scene, const BoundingBox2i& room_box), (const override));
@@ -33,5 +33,5 @@ TEST(Grid_to_entity_parser, should_parse_entities_properly) {
     EXPECT_CALL(*entity_creator_mock, create_corridor_floor(testing::Ref(scene), BoundingBox2i(Point2i(4, 6), Point2i(5, 8))))
             .Times(1);
 }
-//
-//#endif
+
+#endif

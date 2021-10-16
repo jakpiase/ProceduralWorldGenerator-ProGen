@@ -18,7 +18,7 @@ void RenderingSystem::update() {
 void RenderingSystem::render_entity(const TransformationComponent& transformation, const GraphicsComponent& graphics) {
     BoundingBox2i box = BoundingBox2i::from_dimensions(transformation.position, graphics.dimensions);
     if(graphics.texture){
-        renderer.render(*graphics.texture, box);
+        renderer->render(*graphics.texture, box);
     } else {
         renderer->render(graphics.color, box);
     }

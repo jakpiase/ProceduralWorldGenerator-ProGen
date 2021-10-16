@@ -36,7 +36,7 @@ TEST(Bounding_box_test, from_dimensions_centered_constructor_test) {
     BoundingBox box = BoundingBox2i::from_dimensions_centered(Point(3, 3), Dimensions(3, 2));
 
     ASSERT_EQ(box.get_top_left(), Point(2, 2));
-    ASSERT_EQ(box.get_bottom_right(), Point(4, 3));
+    ASSERT_EQ(box.get_bottom_right(), Point(5, 4));
 }
 
 TEST(Bounding_box_test, from_zero_constructor_test) {

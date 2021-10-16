@@ -1,6 +1,10 @@
 set(TEST_BINARY ${CMAKE_PROJECT_NAME}_tests)
-
 file(GLOB_RECURSE TEST_SOURCES LIST_DIRECTORIES false *.h *.cpp)
+
+if(NOT MSVC)
+    add_definitions(-DUSE_MOCKS)
+endif()
+
 
 enable_testing()
 

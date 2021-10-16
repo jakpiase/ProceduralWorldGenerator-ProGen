@@ -1,3 +1,5 @@
+#ifdef USE_MOCKS
+
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 #include <entt/locator/locator.hpp>
@@ -31,3 +33,5 @@ TEST(Grid_to_entity_parser, should_parse_entities_properly) {
     EXPECT_CALL(entity_creator, create_corridor_floor(testing::Ref(scene), BoundingBox2i(Point2i(4, 6), Point2i(5, 8))))
             .Times(1);
 }
+
+#endif

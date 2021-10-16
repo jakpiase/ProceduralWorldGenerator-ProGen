@@ -1,4 +1,4 @@
-
+#ifdef USE_MOCKS
 
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>

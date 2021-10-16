@@ -23,15 +23,15 @@ TEST(Grid_to_entity_parser, should_parse_entities_properly) {
     grid.fill(BoundingBox2i(Point2i(6, 1), Point2i(7, 7)), GridElement::ROOM);
     grid.fill(BoundingBox2i(Point2i(4, 6), Point2i(5, 8)), GridElement::CORRIDOR);
 
+    EXPECT_CALL(*entity_creator_mock, create_room_floor(testing::Ref(scene), BoundingBox2i(Point2i(6, 1), Point2i(7, 7))))
+        .Times(1);
+    EXPECT_CALL(*entity_creator_mock, create_room_floor(testing::Ref(scene), BoundingBox2i(Point2i(3, 2), Point2i(5, 5))))
+        .Times(1);
+    EXPECT_CALL(*entity_creator_mock, create_corridor_floor(testing::Ref(scene), BoundingBox2i(Point2i(4, 6), Point2i(5, 8))))
+        .Times(1);
+
     GridToEntityParser grid_to_entity_parser(grid, scene);
     grid_to_entity_parser.parse();
-
-    EXPECT_CALL(*entity_creator_mock, create_room_floor(testing::Ref(scene), BoundingBox2i(Point2i(6, 1), Point2i(7, 7))))
-            .Times(1);
-    EXPECT_CALL(*entity_creator_mock, create_room_floor(testing::Ref(scene), BoundingBox2i(Point2i(3, 2), Point2i(5, 5))))
-            .Times(1);
-    EXPECT_CALL(*entity_creator_mock, create_corridor_floor(testing::Ref(scene), BoundingBox2i(Point2i(4, 6), Point2i(5, 8))))
-            .Times(1);
 }
 
 #endif

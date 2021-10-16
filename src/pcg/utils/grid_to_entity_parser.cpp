@@ -56,7 +56,7 @@ BoundingBox2i GridToEntityParser::find_entity_box(size_t row, size_t column) {
     const size_t rect_right = traverse_horizontally(row, column, element);
     const size_t rect_bottom = traverse_vertically(row, column, rect_right, element);
 
-    return BoundingBox2i(Point2i(row, column),
+    return BoundingBox2i(Point2i(column, row),
                          Point2i(rect_right, rect_bottom));
 }
 
@@ -79,7 +79,7 @@ size_t GridToEntityParser::traverse_vertically(size_t row, size_t left, size_t r
 
 bool GridToEntityParser::can_row_be_included(size_t row, size_t column_from, size_t column_to, GridElement element) {
     while (column_from <= column_to) {
-        if (is_visited(row, column_from) || grid(row, column_from) != element) {
+        if (grid(row, column_from) != element) {
             return false;
         }
         column_from++;

@@ -1,5 +1,7 @@
+#pragma once
 #include "src/pcg/grid.h"
 #include "src/core/scene.h"
+#include "src/pcg/utils/entity_creator.h"
 
 class GridToEntityParser {
     const Grid& grid;

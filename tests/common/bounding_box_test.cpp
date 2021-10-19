@@ -78,7 +78,7 @@ TEST(Bounding_box_manhattan_distance_tests, top_right_and_bottom_left_distance) 
     ASSERT_EQ(BoundingBox2i::manhattan_distance(second_box, first_box), 300);
 }
 
-TEST(Bounding_box_collision_tests, floors_collision) {
+TEST(Bounding_box_collision_tests, collision) {
     BoundingBox2i first_box = BoundingBox2i(Point2i(100, 100), Point2i(200, 200));
     BoundingBox2i second_box = BoundingBox2i(Point2i(190, 190), Point2i(210, 210));
 
@@ -86,25 +86,9 @@ TEST(Bounding_box_collision_tests, floors_collision) {
     ASSERT_TRUE(second_box.collides_with(first_box));
 }
 
-TEST(Bounding_box_collision_tests, floors_no_collision) {
+TEST(Bounding_box_collision_tests, no_collision) {
     BoundingBox2i first_box = BoundingBox2i(Point2i(100, 100), Point2i(200, 200));
     BoundingBox2i second_box = BoundingBox2i(Point2i(201, 201), Point2i(210, 210));
-
-    ASSERT_FALSE(first_box.collides_with(second_box));
-    ASSERT_FALSE(second_box.collides_with(first_box));
-}
-
-TEST(Bounding_box_collision_tests, floors_wall_skipped_collision) {
-    BoundingBox2i first_box = BoundingBox2i(Point2i(100, 100), Point2i(200, 200));
-    BoundingBox2i second_box = BoundingBox2i(Point2i(150, 150), Point2i(150, 180));
-
-    ASSERT_FALSE(first_box.collides_with(second_box));
-    ASSERT_FALSE(second_box.collides_with(first_box));
-}
-
-TEST(Bounding_box_collision_tests, walls_skipped_collision) {
-    BoundingBox2i first_box = BoundingBox2i(Point2i(120, 160), Point2i(180, 160));
-    BoundingBox2i second_box = BoundingBox2i(Point2i(150, 150), Point2i(150, 180));
 
     ASSERT_FALSE(first_box.collides_with(second_box));
     ASSERT_FALSE(second_box.collides_with(first_box));
@@ -125,4 +109,31 @@ TEST(Bounding_box_test, contains) {
     ASSERT_TRUE(box.contains(BoundingBox2i(Point(3, 4), Point(5, 6))));
     ASSERT_FALSE(box.contains(BoundingBox2i(Point(10, 10), Point(12, 13))));
     ASSERT_FALSE(box.contains(BoundingBox2i(Point(1, 1), Point(3, 3))));
+}
+
+TEST(Bounding_box_test, common_part_with_contained) {
+    BoundingBox2i box(Point(1, 1), Point(8, 8));
+    BoundingBox2i contained_box(Point(2, 3), Point(6, 7));
+
+    BoundingBox2i common_part = box.common_part_with(contained_box);
+
+    ASSERT_EQ(common_part, BoundingBox2i(Point(2, 3), Point(6, 7)));
+}
+
+TEST(Bounding_box_test, common_part_with_containing) {
+    BoundingBox2i box(Point(2, 3), Point(6, 7));
+    BoundingBox2i contained_box(Point(1, 1), Point(8, 8));
+
+    BoundingBox2i common_part = box.common_part_with(contained_box);
+
+    ASSERT_EQ(common_part, BoundingBox2i(Point(2, 3), Point(6, 7)));
+}
+
+TEST(Bounding_box_test, common_part_with_collider) {
+    BoundingBox2i box(Point(2, 3), Point(6, 7));
+    BoundingBox2i contained_box(Point(4, 5), Point(8, 9));
+
+    BoundingBox2i common_part = box.common_part_with(contained_box);
+
+    ASSERT_EQ(common_part, BoundingBox2i(Point(4, 5), Point(6, 7)));
 }

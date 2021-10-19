@@ -3,7 +3,7 @@
 #include "src/pcg/utils/entity_creator.h"
 #include "src/pcg/utils/grid_to_entity_parser.h"
 
-GridToEntityParser::GridToEntityParser(Grid& grid, Scene& scene)
+GridToEntityParser::GridToEntityParser(Grid &grid, Scene &scene)
         : grid(grid),
           scene(scene),
           entity_creator(entt::service_locator<EntityCreator>::ref()) {
@@ -56,12 +56,12 @@ BoundingBox2i GridToEntityParser::find_entity_box(size_t row, size_t column) {
     const size_t rect_right = traverse_horizontally(row, column, element);
     const size_t rect_bottom = traverse_vertically(row, column, rect_right, element);
 
-    return BoundingBox2i(Point2i(column, row),
-                         Point2i(rect_right, rect_bottom));
+    return {Point2i(column, row),
+            Point2i(rect_right + 1, rect_bottom + 1)};
 }
 
 size_t GridToEntityParser::traverse_horizontally(size_t row, size_t column, GridElement element) {
-    while (!is_visited(row, column) && grid(row, column) == element) {
+    while (column < grid.get_width() && !is_visited(row, column) && grid(row, column) == element) {
         mark_visited(row, column++);
     }
 
@@ -78,6 +78,10 @@ size_t GridToEntityParser::traverse_vertically(size_t row, size_t left, size_t r
 }
 
 bool GridToEntityParser::can_row_be_included(size_t row, size_t column_from, size_t column_to, GridElement element) {
+    if(row >= grid.get_height()){
+        return false;
+    }
+
     while (column_from <= column_to) {
         if (grid(row, column_from) != element) {
             return false;

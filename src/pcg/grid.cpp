@@ -1,5 +1,6 @@
 #include <glog/logging.h>
 #include <algorithm>
+#include <cassert>
 #include "src/pcg/grid.h"
 
 Grid::Grid(size_t width, size_t height)
@@ -24,14 +25,14 @@ void Grid::fill(const BoundingBox2i& box, GridElement element) {
 }
 
 void Grid::fill_no_override(const BoundingBox2i& box, GridElement element) {
-    std::ranges::for_each(begin(box), end(box), [element](GridElement& current_element){
-        if(current_element == GridElement::EMPTY)
+    std::ranges::for_each(begin(box), end(box), [element](GridElement& current_element) {
+        if (current_element == GridElement::EMPTY)
             current_element = element;
     });
 }
 
 bool Grid::contains(const BoundingBox2i& box) const {
-    return BoundingBox2i::from_zero(width, height).contains(box);
+    return get_bounding_box().contains(box);
 }
 
 GridElement& Grid::operator()(size_t row, size_t column) {
@@ -43,7 +44,9 @@ const GridElement& Grid::operator()(size_t row, size_t column) const {
 }
 
 size_t Grid::get_index(size_t row, size_t column) const {
-    return row * height + column;
+    assert((row < height && column < width));
+
+    return row * width + column;
 }
 
 size_t Grid::get_width() const {
@@ -62,11 +65,38 @@ Grid::Iterator Grid::end(const BoundingBox2i& box) {
     return Iterator(*this, box, false);
 }
 
+BoundingBox2i Grid::get_bounding_box() const {
+    return BoundingBox2i::from_zero(width - 1, height - 1);
+}
+
+std::ostream& operator<<(std::ostream& stream, const Grid& grid) {
+//    stream << '\n';
+//    for(int i = 0; i<grid.height; i++){
+//        for(int j = 0; j< grid.width; j++){
+//            stream << static_cast<int>((grid(i, j)));
+//        }
+//        stream << '\n';
+//    }
+    return stream;
+}
+
+std::vector<GridElement> Grid::get_neumann_neighbourhood(size_t row, size_t column) const {
+    std::vector<GridElement> neighbourhood;
+    neighbourhood.reserve(4);
+
+    if(row > 0) neighbourhood.push_back(this->operator()(row - 1, column));
+    if(row < height - 1) neighbourhood.push_back(this->operator()(row + 1, column));
+    if(column > 0) neighbourhood.push_back(this->operator()(row, column - 1));
+    if(row > width - 1) neighbourhood.push_back(this->operator()(row, column + 1));
+
+    return neighbourhood;
+}
+
 Grid::Iterator::Iterator(Grid& grid, const BoundingBox2i& box, bool is_begin)
-    :   grid(&grid),
-        box(box),
-        row(is_begin ? box.get_top() : box.get_bottom() + 1),
-        column(box.get_left()) {}
+        : grid(&grid),
+          box(box),
+          row(is_begin ? box.get_top() : box.get_bottom() + 1),
+          column(box.get_left()) {}
 
 GridElement* Grid::Iterator::operator->() {
     return &(*grid)(row, column);

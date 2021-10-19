@@ -1,6 +1,8 @@
 #pragma once
 
+#include <vector>
 #include <memory>
+#include <iostream>
 #include "src/core/common/bounding_box.h"
 
 enum class GridElement {
@@ -28,15 +30,21 @@ public:
 
     void fill_no_override(const BoundingBox2i& box, GridElement element);
 
+    [[nodiscard]] std::vector<GridElement> get_neumann_neighbourhood(size_t row, size_t column) const;
+
     [[nodiscard]] bool contains(const BoundingBox2i& box) const;
 
     [[nodiscard]] size_t get_width() const;
 
     [[nodiscard]] size_t get_height() const;
 
+    [[nodiscard]] BoundingBox2i get_bounding_box() const;
+
     Iterator begin(const BoundingBox2i& box);
 
     Iterator end(const BoundingBox2i& box);
+
+    friend std::ostream& operator<<(std::ostream& stream, const Grid& grid);
 
     class Iterator {
         friend class Grid;

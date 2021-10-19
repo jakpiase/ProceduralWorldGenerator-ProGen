@@ -53,6 +53,8 @@ public:
 
     [[nodiscard]] bool collides_with(const BoundingBox<T>& other) const;
 
+    [[nodiscard]] BoundingBox common_part_with(const BoundingBox<T>& other) const;
+
     bool operator==(const BoundingBox& other) const;
 
     friend std::ostream& operator<<(std::ostream& stream, const BoundingBox& bounding_box) {

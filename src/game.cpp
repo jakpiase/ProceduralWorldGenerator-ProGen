@@ -13,6 +13,7 @@ Game::Game()
 
     window = std::make_shared<Window>("ProGen", WINDOW_WIDTH, WINDOW_HEIGHT);
     renderer = std::make_shared<Renderer>(*window);
+    register_singletons();
     main_scene = std::make_unique<Scene>();
 }
 
@@ -32,16 +33,6 @@ int Game::run() {
 }
 
 void Game::generate_content() {
-    register_singletons();
-
-    Grid grid(10, 10);
-    grid.fill(BoundingBox2i(Point2i(3, 2), Point2i(7, 5)), GridElement::ROOM);
-    grid.fill(BoundingBox2i(Point2i(6,1), Point2i(7,7)), GridElement::ROOM);
-    grid.fill(BoundingBox2i(Point2i(4,6), Point2i(5, 8)), GridElement::CORRIDOR);
-
-    GridToEntityParser grid_to_entity_parser(grid, *main_scene);
-    grid_to_entity_parser.parse();
-
     LinearNumberGenerator linear_number_generator;
     AgentGenerator level_generator(std::make_unique<LookAheadAgent>(), BoundingBox2i::from_zero(100, 100), linear_number_generator);
     level_generator.run(*main_scene);

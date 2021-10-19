@@ -71,3 +71,12 @@ TEST(Grid_test, fill_no_override_test) {
         }
     }
 }
+
+TEST(Grid_test, neumann_neighbourhood) {
+    Grid grid(WIDTH, HEIGHT);
+
+    auto x = grid.get_neumann_neighbourhood(5, 5);
+
+    int a = x.size();
+
+}

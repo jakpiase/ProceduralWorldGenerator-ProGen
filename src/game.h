@@ -13,8 +13,8 @@ class Game {
     std::shared_ptr<Renderer> renderer;
 
 public:
-    static constexpr int WINDOW_WIDTH = 640;
-    static constexpr int WINDOW_HEIGHT = 480;
+    static constexpr int WINDOW_WIDTH = 500;
+    static constexpr int WINDOW_HEIGHT = 500;
 
     Game();
     ~Game();

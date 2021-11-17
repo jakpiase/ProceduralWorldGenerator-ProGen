@@ -17,7 +17,6 @@ class LookAheadAgent : public Agent {
     const int MAX_CORRIDOR_SEEK_TIME = 4;
 
     Point2i position;
-    int corridor_seek_time = 0;
     std::vector<BoundingBox2i> rooms_buffer;
     std::vector<BoundingBox2i> corridors_buffer;
 

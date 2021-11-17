@@ -117,12 +117,9 @@ void LookAheadAgent::run(Scene& scene, Grid& grid, RandomNumberGenerator& rng) {
 
     while (true) {
         if (try_to_place_room(scene, grid, rng)) {
-            corridor_seek_time = 0;
-        } else {
-            corridor_seek_time++;
         }
 
-        if (corridor_seek_time > MAX_CORRIDOR_SEEK_TIME || !try_to_place_corridor(scene, grid, rng)) {
+        if (corridors_buffer.size() > MAX_CORRIDOR_SEEK_TIME || !try_to_place_corridor(scene, grid, rng)) {
             break;
         }
     }

@@ -19,7 +19,7 @@ class StochasticBinarySpacePartitioningLevelGenerator : public Generator {
     const bool maximum_spliting;
 public:
     // minimal_split_size - the higher the value, the less room will be generated
-    // boundin_box_padding - room padding from split bounding box
+    // bounding_box_padding - room padding from split bounding box
     // minimal_room_size - smallest possible value for width and height of generated room
     // maximal_room_size - highest possible value for width and height of generated room
     explicit StochasticBinarySpacePartitioningLevelGenerator(const BoundingBox2i& bounding_box, bool maximum_spliting = true)

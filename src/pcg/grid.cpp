@@ -87,7 +87,7 @@ std::vector<GridElement> Grid::get_neumann_neighbourhood(size_t row, size_t colu
     if(row > 0) neighbourhood.push_back(this->operator()(row - 1, column));
     if(row < height - 1) neighbourhood.push_back(this->operator()(row + 1, column));
     if(column > 0) neighbourhood.push_back(this->operator()(row, column - 1));
-    if(row < width - 1) neighbourhood.push_back(this->operator()(row, column + 1));
+    if(column < width - 1) neighbourhood.push_back(this->operator()(row, column + 1));
 
     return neighbourhood;
 }

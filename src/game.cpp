@@ -1,7 +1,6 @@
 #include <glog/logging.h>
 #include <entt/locator/locator.hpp>
 #include <src/pcg/utils/grid_to_entity_parser.h>
-#include "src/pcg/utils/entity_creator.h"
 #include "src/pcg/agent_generators/agent_generator.h"
 #include "src/pcg/agent_generators/agents/look_ahead_agent.h"
 #include "src/game.h"
@@ -33,7 +32,7 @@ int Game::run() {
 }
 
 void Game::generate_content() {
-    LinearNumberGenerator linear_number_generator;
+    LinearNumberGenerator linear_number_generator(3);
     AgentGenerator level_generator(std::make_unique<LookAheadAgent>(), BoundingBox2i::from_zero(100, 100), linear_number_generator);
     level_generator.run(*main_scene);
 }

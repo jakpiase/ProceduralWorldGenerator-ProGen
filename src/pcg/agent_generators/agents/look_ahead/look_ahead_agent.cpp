@@ -1,9 +1,10 @@
 #include <random>
 #include <glog/logging.h>
 #include <algorithm>
-#include "src/pcg/agent_generators/agents/look_ahead_agent.h"
+#include "look_ahead_agent.h"
 #include "src/pcg/utils/grid_to_entity_parser.h"
-#include "src/pcg/agent_generators/agents/utils/spatial_iterators.h"
+#include "src/pcg/agent_generators/agents/look_ahead/utils/collision_utils.h"
+#include "src/pcg/agent_generators/agents/look_ahead/utils/spatial_iterators.h"
 
 void LookAheadAgent::run(Scene& scene, Grid& grid, RandomNumberGenerator& rng) {
     position = get_starting_position(grid, rng);
@@ -80,15 +81,9 @@ bool LookAheadAgent::try_to_place_corridor(Scene& scene, Grid& grid, RandomNumbe
 
 bool LookAheadAgent::can_place_corridor(Grid& grid, BoundingBox2i corridor_box, Point2i corridor_end) {
     return grid.contains(corridor_box) &&
-           std::ranges::none_of(corridors_buffer, [corridor_box](const BoundingBox2i& box) {
-               return corridor_box.collides_with(box);
-           }) &&
-           std::ranges::none_of(grid.get_neumann_neighbourhood(corridor_end.y, corridor_end.x), [](const GridElement& element){
-               return element == GridElement::ROOM;
-           }) &&
-           std::ranges::all_of(grid.begin(corridor_box), grid.end(corridor_box), [](const GridElement& elem) {
-               return elem == GridElement::EMPTY || elem == GridElement::CORRIDOR;
-           });
+            !CollisionUtils::collides_with(corridors_buffer, corridor_box) &&
+            !CollisionUtils::has_room_in_neumann_neighbourhood(grid, corridor_end) &&
+            CollisionUtils::is_empty_or_has_corridor(grid, corridor_box);
 }
 
 void LookAheadAgent::place_corridor(Scene& scene, Grid& grid, BoundingBox2i corridor_box, Point2i new_position) {

@@ -2,7 +2,7 @@
 #include <entt/locator/locator.hpp>
 #include <src/pcg/utils/grid_to_entity_parser.h>
 #include "src/pcg/agent_generators/agent_generator.h"
-#include "src/pcg/agent_generators/agents/look_ahead_agent.h"
+#include "src/pcg/agent_generators/agents/look_ahead/look_ahead_agent.h"
 #include "src/game.h"
 
 Game::Game()

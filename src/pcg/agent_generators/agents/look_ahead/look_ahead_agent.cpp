@@ -79,13 +79,6 @@ bool LookAheadAgent::try_to_place_corridor(Scene& scene, Grid& grid, RandomNumbe
     return false;
 }
 
-bool LookAheadAgent::can_place_corridor(Grid& grid, BoundingBox2i corridor_box, Point2i corridor_end) {
-    return grid.contains(corridor_box) &&
-            !CollisionUtils::collides_with(corridors_buffer, corridor_box) &&
-            !CollisionUtils::has_room_in_neumann_neighbourhood(grid, corridor_end) &&
-            CollisionUtils::is_empty_or_has_corridor(grid, corridor_box);
-}
-
 void LookAheadAgent::place_corridor(Scene& scene, Grid& grid, BoundingBox2i corridor_box, Point2i new_position) {
     position = new_position;
     flush_rooms_buffer(scene, grid);
@@ -166,4 +159,8 @@ void LookAheadAgent::flush_corridors_buffer(Scene& scene, Grid& grid) {
     }
 
     corridors_buffer.clear();
+}
+
+const std::vector<BoundingBox2i>& LookAheadAgent::get_corridors_buffer() const{
+    return corridors_buffer;
 }

@@ -21,7 +21,7 @@ protected:
     bool try_to_place_room(Scene &scene, Grid &grid, RandomNumberGenerator &rng);
     bool can_place_room(Grid& grid, BoundingBox2i room_box);
     void place_room(Scene& scene, Grid& grid, BoundingBox2i room_box);
-    bool can_place_corridor(Grid& grid, BoundingBox2i corridor_box, Point2i corridor_end);
+    virtual bool can_place_corridor(Grid& grid, BoundingBox2i corridor_box, Point2i corridor_end) = 0;
     void place_corridor(Scene& scene, Grid& grid, BoundingBox2i corridor_box, Point2i new_position);
     bool try_to_place_corridor(Scene& scene, Grid& grid, RandomNumberGenerator& rng);
 
@@ -31,6 +31,8 @@ protected:
 
     std::pair<BoundingBox2i, Point2i> get_corridor_box_with_updated_position(int length, Direction direction);
     Point2i get_starting_position(const Grid& grid, RandomNumberGenerator& rng) const;
+
+    [[nodiscard]] const std::vector<BoundingBox2i>& get_corridors_buffer() const;
 };
 
 

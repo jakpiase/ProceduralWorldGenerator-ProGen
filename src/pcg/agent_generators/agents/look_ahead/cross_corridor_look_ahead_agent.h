@@ -1,7 +1,8 @@
 #pragma once
 #include "src/pcg/agent_generators/agents/look_ahead/look_ahead_agent.h"
 
-class BasicLookAheadAgent : public  LookAheadAgent {
+
+class CrossCorridorLookAheadAgent : public  LookAheadAgent {
     bool can_place_corridor(Grid& grid, BoundingBox2i corridor_box, Point2i corridor_end) override;
 };
 

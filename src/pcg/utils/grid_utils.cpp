@@ -18,5 +18,15 @@ Point2i GridUtils::move_position_diagonally(const Grid& grid, const Point2i& pos
         tmp_point = tmp_point.shifted_by(offset_x, offset_y);
     } while (grid.contains(tmp_point) && grid(tmp_point) == element);
 
+    tmp_point = result.shifted_by(offset_x, 0);
+    if (grid.contains(tmp_point) && grid(tmp_point) == element) {
+        result = tmp_point;
+    }
+
+    tmp_point = result.shifted_by(0, offset_y);
+    if (grid.contains(tmp_point) && grid(tmp_point) == element) {
+        result = tmp_point;
+    }
+
     return result;
 }

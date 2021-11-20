@@ -3,8 +3,8 @@
 #include <src/pcg/utils/grid_to_entity_parser.h>
 #include "src/pcg/agent_generators/agent_generator.h"
 #include "src/pcg/agent_generators/agents/look_ahead/look_ahead_agent.h"
-#include "src/pcg/agent_generators/agents/look_ahead/basic_look_ahead_agent.h"
 #include "src/pcg/agent_generators/agents/look_ahead/cross_corridor_look_ahead_agent.h"
+#include "src/pcg/agent_generators/agents/look_ahead/recurring_look_ahead_agent.h"
 #include "src/game.h"
 
 Game::Game()
@@ -34,8 +34,8 @@ int Game::run() {
 }
 
 void Game::generate_content() {
-    LinearNumberGenerator linear_number_generator(3);
-    AgentGenerator level_generator(std::make_unique<CrossCorridorLookAheadAgent>(), BoundingBox2i::from_zero(100, 100), linear_number_generator);
+    LinearNumberGenerator linear_number_generator(6);
+    AgentGenerator level_generator(std::make_unique<LookAheadAgent>(), BoundingBox2i::from_zero(100, 100), linear_number_generator);
     level_generator.run(*main_scene);
 }
 

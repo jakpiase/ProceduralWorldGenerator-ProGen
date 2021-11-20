@@ -155,6 +155,11 @@ BoundingBox<T> BoundingBox<T>::grown_by(T value) const {
 }
 
 template<typename T>
+bool BoundingBox<T>::contains(const Point<T>& point) const {
+    return point.x >= get_left() && point.x <= get_right() && point.y >= get_top() && point.y <= get_bottom();
+}
+
+template<typename T>
 bool BoundingBox<T>::contains(const BoundingBox& other) const {
     return get_left() <= other.get_left() &&
            get_right() >= other.get_right() &&

@@ -24,3 +24,20 @@ bool CollisionUtils::is_empty_or_has_corridor(Grid& grid, const BoundingBox2i& b
         return elem == GridElement::EMPTY || elem == GridElement::CORRIDOR;
     });
 }
+
+bool CollisionUtils::is_empty(const Grid& grid, const BoundingBox2i& box, const BoundingBox2i& exclusion) {
+    for(int row = box.get_top(); row <= box.get_bottom(); row++){
+        for(int column = box.get_left(); column <= box.get_right(); column++){
+            const Point2i position = Point2i(column, row);
+            if(exclusion.contains(position)){
+                continue;
+            }
+
+            if(grid(position) != GridElement::EMPTY){
+                return false;
+            }
+        }
+    }
+
+    return true;
+}

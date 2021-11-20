@@ -31,8 +31,16 @@ void Grid::fill_no_override(const BoundingBox2i& box, GridElement element) {
     });
 }
 
+bool Grid::contains(Point2i& position) const {
+    return position.y > 0 && position.y < height && position.x > 0 && position.x < width;
+}
+
 bool Grid::contains(const BoundingBox2i& box) const {
     return get_bounding_box().contains(box);
+}
+
+const GridElement& Grid::operator()(Point2i point) const {
+    return this->operator()(point.y, point.x);
 }
 
 GridElement& Grid::operator()(size_t row, size_t column) {
@@ -67,17 +75,6 @@ Grid::Iterator Grid::end(const BoundingBox2i& box) {
 
 BoundingBox2i Grid::get_bounding_box() const {
     return BoundingBox2i::from_zero(width - 1, height - 1);
-}
-
-std::ostream& operator<<(std::ostream& stream, const Grid& grid) {
-//    stream << '\n';
-//    for(int i = 0; i<grid.height; i++){
-//        for(int j = 0; j< grid.width; j++){
-//            stream << static_cast<int>((grid(i, j)));
-//        }
-//        stream << '\n';
-//    }
-    return stream;
 }
 
 std::vector<GridElement> Grid::get_neumann_neighbourhood(size_t row, size_t column) const {

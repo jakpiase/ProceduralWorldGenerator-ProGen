@@ -51,6 +51,8 @@ public:
 
     [[nodiscard]] bool contains(const BoundingBox& other) const;
 
+    [[nodiscard]] bool contains(const Point<T>& other) const;
+
     [[nodiscard]] bool collides_with(const BoundingBox<T>& other) const;
 
     [[nodiscard]] BoundingBox common_part_with(const BoundingBox<T>& other) const;

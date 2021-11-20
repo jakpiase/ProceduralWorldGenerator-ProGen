@@ -26,11 +26,15 @@ public:
 
     const GridElement& operator()(size_t row, size_t column) const;
 
+    const GridElement& operator()(Point2i point) const;
+
     void fill(const BoundingBox2i& box, GridElement element);
 
     void fill_no_override(const BoundingBox2i& box, GridElement element);
 
     [[nodiscard]] std::vector<GridElement> get_neumann_neighbourhood(size_t row, size_t column) const;
+
+    [[nodiscard]] bool contains(Point2i& position) const;
 
     [[nodiscard]] bool contains(const BoundingBox2i& box) const;
 

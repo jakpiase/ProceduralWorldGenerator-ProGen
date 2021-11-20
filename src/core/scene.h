@@ -13,7 +13,6 @@ class Scene {
 private:
     entt::registry registry;
     std::vector<std::unique_ptr<EntitySystem>> systems;
-    LinearNumberGenerator random_generator;
 
 public:
     Scene();
@@ -23,8 +22,6 @@ public:
     Entity create_entity();
 
     void update();
-
-    LinearNumberGenerator& get_random_generator();
 };
 
 

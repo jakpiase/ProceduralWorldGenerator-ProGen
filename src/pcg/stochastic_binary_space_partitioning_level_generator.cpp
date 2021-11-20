@@ -26,39 +26,37 @@ bool StochasticBinarySpacePartitioningLevelGenerator::can_be_splited_horizontall
 }
 
 // returns true if horizontal
-bool StochasticBinarySpacePartitioningLevelGenerator::get_split_orientation(const BoundingBox2i& bounding_box, RandomNumberGenerator* random_generator) {
+bool StochasticBinarySpacePartitioningLevelGenerator::get_split_orientation(const BoundingBox2i& bounding_box) {
     if (maximum_spliting) {
         if (can_be_splited_horizontally(bounding_box) && can_be_splited_vertically(bounding_box))
-            return random_generator->random_bool();
+            return rng.random_bool();
         else
             return can_be_splited_horizontally(bounding_box);
     } else {
-        return random_generator->random_bool();
+        return rng.random_bool();
     }
 }
 
 BoundingBox2i StochasticBinarySpacePartitioningLevelGenerator::generate_room(const BoundingBox2i& bounding_box, Scene& scene) {
-    auto& random_generator = scene.get_random_generator();
-
     int room_width, room_height;
 
     if (bounding_box.get_width() > bounding_box.get_height()) {
-        room_height = random_generator.random(minimal_room_size, bounding_box.get_height() - 2 * bounding_box_padding);
+        room_height = rng.random(minimal_room_size, bounding_box.get_height() - 2 * bounding_box_padding);
 
 
         int width_upper_bound = std::min<int>({static_cast<int>(MAX_PROPORTION * room_height), bounding_box.get_width(), maximal_room_size});
         int width_lower_bound = std::max<int>(MIN_PROPORTION * room_height, minimal_room_size);
-        room_width = random_generator.random(width_lower_bound, width_upper_bound - 2 * bounding_box_padding);
+        room_width = rng.random(width_lower_bound, width_upper_bound - 2 * bounding_box_padding);
     } else {
-        room_width = random_generator.random(minimal_room_size, bounding_box.get_width() - 2 * bounding_box_padding);
+        room_width = rng.random(minimal_room_size, bounding_box.get_width() - 2 * bounding_box_padding);
 
         int height_upper_bound = std::min<int>({static_cast<int>(MAX_PROPORTION * room_width), bounding_box.get_height(), maximal_room_size});
         int height_lower_bound = std::max<int>(MIN_PROPORTION * room_width, minimal_room_size);
-        room_height = random_generator.random(height_lower_bound, height_upper_bound - 2 * bounding_box_padding);
+        room_height = rng.random(height_lower_bound, height_upper_bound - 2 * bounding_box_padding);
     }
 
-    int room_x = bounding_box.get_top_left().x + bounding_box_padding + random_generator.random(bounding_box.get_width() - room_width - 2 * bounding_box_padding);
-    int room_y = bounding_box.get_top_left().y + bounding_box_padding + random_generator.random(bounding_box.get_height() - room_height - 2 * bounding_box_padding);
+    int room_x = bounding_box.get_top_left().x + bounding_box_padding + rng.random(bounding_box.get_width() - room_width - 2 * bounding_box_padding);
+    int room_y = bounding_box.get_top_left().y + bounding_box_padding + rng.random(bounding_box.get_height() - room_height - 2 * bounding_box_padding);
 
     BoundingBox2i room_bounding_box(Point2i(room_x, room_y), Point2i(room_x + room_width, room_y + room_height));
     SimpleRoomGenerator room_generator(room_bounding_box);
@@ -70,22 +68,22 @@ BoundingBox2i StochasticBinarySpacePartitioningLevelGenerator::generate_room(con
     return room_bounding_box;
 }
 
-std::pair<BoundingBox2i, BoundingBox2i> StochasticBinarySpacePartitioningLevelGenerator::calculate_new_bounding_boxes(const BoundingBox2i& bounding_box, RandomNumberGenerator* random_generator) {
+std::pair<BoundingBox2i, BoundingBox2i> StochasticBinarySpacePartitioningLevelGenerator::calculate_new_bounding_boxes(const BoundingBox2i& bounding_box) {
     Point2i first_top_left = bounding_box.get_top_left();
     Point2i second_bottom_right = bounding_box.get_bottom_right();
 
-    bool horizontal = get_split_orientation(bounding_box, random_generator);
+    bool horizontal = get_split_orientation(bounding_box);
 
     // minimal split length/width constraint ensures that room layout will be spread out realisticly
     // f.e. instead of split <0, DIMENSION_SIZE) we have <minimal_split_size, DIMENSION_SIZE - minimal_split_size)
     Point2i first_bottom_right(0, 0), second_top_left(0, 0);
     if (horizontal) {
-        int split_height = minimal_split_size + bounding_box.get_top_left().y + random_generator->random(bounding_box.get_height() - 2 * minimal_split_size);
+        int split_height = minimal_split_size + bounding_box.get_top_left().y + rng.random(bounding_box.get_height() - 2 * minimal_split_size);
 
         first_bottom_right = Point2i(bounding_box.get_bottom_right().x, split_height);
         second_top_left = Point2i(bounding_box.get_top_left().x, split_height + 1);
     } else {
-        int split_width = minimal_split_size + bounding_box.get_top_left().x + random_generator->random(bounding_box.get_width() - 2 * minimal_split_size);
+        int split_width = minimal_split_size + bounding_box.get_top_left().x + rng.random(bounding_box.get_width() - 2 * minimal_split_size);
 
         first_bottom_right = Point2i(split_width, bounding_box.get_bottom_right().y);
         second_top_left = Point2i(split_width + 1, bounding_box.get_top_left().y);
@@ -103,10 +101,8 @@ std::pair<BoundingBox2i, BoundingBox2i> StochasticBinarySpacePartitioningLevelGe
 // in first:((10, 30), (15, 40)) second:((15, 30), (20, 40)) 
 
 std::vector<BoundingBox2i> StochasticBinarySpacePartitioningLevelGenerator::split_space(const BoundingBox2i& bounding_box, Scene& scene) {
-    auto& random_generator = scene.get_random_generator();
-
     if (can_be_splited(bounding_box)) {
-        std::pair<BoundingBox2i, BoundingBox2i> new_bounding_boxes = calculate_new_bounding_boxes(bounding_box, &random_generator);
+        std::pair<BoundingBox2i, BoundingBox2i> new_bounding_boxes = calculate_new_bounding_boxes(bounding_box);
 
         DLOG(INFO) << "Spliting surface from " << bounding_box << " into " << new_bounding_boxes.first << " and " << new_bounding_boxes.second;
         auto first_rooms = split_space(new_bounding_boxes.first, scene);

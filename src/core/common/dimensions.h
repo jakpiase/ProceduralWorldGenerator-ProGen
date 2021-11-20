@@ -18,6 +18,11 @@ struct Dimensions {
     bool operator==(const Dimensions& other) const {
         return width == other.width && height == other.height;
     }
+
+    friend std::ostream& operator<<(std::ostream& stream, const Dimensions& dimensions) {
+        stream << dimensions.width << " x " << dimensions.height;
+        return stream;
+    }
 };
 
 typedef Dimensions<int> Dimensions2i;

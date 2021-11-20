@@ -9,20 +9,20 @@
 class Game {
     bool is_running;
     std::unique_ptr<Scene> main_scene;
-    std::unique_ptr<Window> window;
-    std::unique_ptr<Renderer> renderer;
+    std::shared_ptr<Window> window;
+    std::shared_ptr<Renderer> renderer;
 
 public:
-    static constexpr int WINDOW_WIDTH = 640;
-    static constexpr int WINDOW_HEIGHT = 480;
+    static constexpr int WINDOW_WIDTH = 500;
+    static constexpr int WINDOW_HEIGHT = 500;
 
     Game();
     ~Game();
     int run();
 
 private:
-    void register_singletons();
     void generate_content();
+    void register_singletons();
 
     void process_events();
     void update();

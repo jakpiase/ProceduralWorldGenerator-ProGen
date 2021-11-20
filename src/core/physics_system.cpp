@@ -5,7 +5,7 @@
 #include "src/core/physics_system.h"
 
 void PhysicsSystem::update() {
-    DLOG(INFO) << "Physics system update running";
+    //DLOG(INFO) << "Physics system update running";
 
     auto view = registry.view<PhysicsComponent>();
 

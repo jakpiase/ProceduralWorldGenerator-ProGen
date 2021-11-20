@@ -49,3 +49,34 @@ TEST(Grid_test, fill_method_test) {
         }
     }
 }
+
+TEST(Grid_test, fill_no_override_test) {
+    Grid grid(WIDTH, HEIGHT);
+
+    grid.fill_no_override(BoundingBox2i(Point(2, 2), Point(7, 3)), GridElement::CORRIDOR);
+    grid.fill_no_override(BoundingBox2i(Point(2, 2), Point(7, 7)), GridElement::ROOM);
+
+    for (int row = 0; row < HEIGHT; ++row) {
+        for (int column = 0; column < WIDTH; ++column) {
+            if (row >= 2 && row <= 7 && column >= 2 && column <= 7) {
+                if (row <= 3) {
+                    ASSERT_EQ(grid(row, column), GridElement::CORRIDOR);
+                } else {
+                    ASSERT_EQ(grid(row, column), GridElement::ROOM);
+
+                }
+            } else {
+                ASSERT_EQ(grid(row, column), GridElement::EMPTY);
+            }
+        }
+    }
+}
+
+TEST(Grid_test, neumann_neighbourhood) {
+    Grid grid(WIDTH, HEIGHT);
+
+    auto x = grid.get_neumann_neighbourhood(5, 5);
+
+    int a = x.size();
+
+}

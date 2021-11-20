@@ -25,6 +25,7 @@ CPMAddPackage(
 if(WIN32)
     add_definitions(-DHAVE_SNPRINTF)
 endif(WIN32)
+
 CPMAddPackage(
     NAME glog
     GITHUB_REPOSITORY google/glog

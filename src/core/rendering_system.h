@@ -1,5 +1,6 @@
 #pragma once
 #include <entt/entity/registry.hpp>
+#include <entt/locator/locator.hpp>
 #include "src/core/components/transformation_component.h"
 #include "src/core/components/graphics_component.h"
 #include "src/core/entity_system.h"
@@ -8,12 +9,12 @@
 class RenderingSystem : public EntitySystem {
 private:
     entt::registry& registry;
-    Renderer& renderer;
+    std::shared_ptr<Renderer> renderer;
 
 public:
-    explicit RenderingSystem(entt::registry& registry, Renderer& renderer)
+    explicit RenderingSystem(entt::registry& registry)
         :   registry(registry),
-            renderer(renderer) {}
+            renderer(entt::service_locator<Renderer>::get().lock()) {}
 
     void update() override;
 

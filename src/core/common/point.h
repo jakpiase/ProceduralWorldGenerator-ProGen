@@ -6,6 +6,8 @@ struct Point {
     T x;
     T y;
 
+    Point() = default;
+
     Point(T x, T y)
             : x(x),
               y(y) {}

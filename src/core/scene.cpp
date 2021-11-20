@@ -5,10 +5,10 @@
 #include "src/core/physics_system.h"
 #include "src/core/rendering_system.h"
 
-Scene::Scene(Renderer& renderer) {
+Scene::Scene() {
     systems.push_back(std::make_unique<DescribingSystem>(registry));
     systems.push_back(std::make_unique<PhysicsSystem>(registry));
-    systems.push_back(std::make_unique<RenderingSystem>(registry, renderer));
+    systems.push_back(std::make_unique<RenderingSystem>(registry));
 }
 
 entt::registry &Scene::get_registry() {
@@ -20,7 +20,7 @@ Entity Scene::create_entity() {
 }
 
 void Scene::update() {
-    DLOG(INFO) << "Updating scene at address " << this;
+    //DLOG(INFO) << "Updating scene at address " << this;
     for (std::unique_ptr<EntitySystem> &system : systems) {
         system->update();
     }

@@ -16,7 +16,7 @@ private:
     LinearNumberGenerator random_generator;
 
 public:
-    Scene(Renderer& renderer);
+    Scene();
 
     entt::registry& get_registry();
 

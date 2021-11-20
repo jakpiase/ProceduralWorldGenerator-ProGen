@@ -5,7 +5,7 @@
 #include "src/core/describing_system.h"
 
 void DescribingSystem::update() {
-    DLOG(INFO) << "Describing system update running";
+    //DLOG(INFO) << "Describing system update running";
 
     auto view = registry.view<DescriptionComponent>();
 

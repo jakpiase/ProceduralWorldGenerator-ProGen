@@ -1,7 +1,6 @@
 #pragma once
 #include <glog/logging.h>
 #include "src/graphics/renderer.h"
-#include "src/pcg/grid.h"
 
 Renderer::Renderer(Window& window) {
     handle = SDL_CreateRenderer(window.get_handle(), -1, SDL_RENDERER_ACCELERATED);

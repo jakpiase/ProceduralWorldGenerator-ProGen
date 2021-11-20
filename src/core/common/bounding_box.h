@@ -11,6 +11,8 @@ private:
     Point<T> bottom_right;
 
 public:
+    BoundingBox() = default;
+
     BoundingBox(Point<T> top_left, Point<T> bottom_right);
 
     BoundingBox(Point<T> position, Dimensions<T> dimensions);
@@ -18,6 +20,8 @@ public:
     [[nodiscard]] static BoundingBox from_zero(T width, T height);
 
     [[nodiscard]] static BoundingBox from_dimensions(Point<T> top_left, Dimensions<T> dimensions);
+
+    [[nodiscard]] static BoundingBox from_dimensions_centered(Point<T> center, Dimensions<T> dimensions);
 
     [[nodiscard]] Point<T> get_top_left() const;
 
@@ -43,7 +47,17 @@ public:
 
     [[nodiscard]] T get_right() const;
 
+    [[nodiscard]] BoundingBox grown_by(T value) const;
+
+    [[nodiscard]] bool contains(const BoundingBox& other) const;
+
+    [[nodiscard]] bool contains(const Point<T>& other) const;
+
     [[nodiscard]] bool collides_with(const BoundingBox<T>& other) const;
+
+    [[nodiscard]] BoundingBox common_part_with(const BoundingBox<T>& other) const;
+
+    bool operator==(const BoundingBox& other) const;
 
     friend std::ostream& operator<<(std::ostream& stream, const BoundingBox& bounding_box) {
         stream << "((" << bounding_box.top_left << ") ";

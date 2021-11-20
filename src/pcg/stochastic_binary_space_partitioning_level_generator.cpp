@@ -1,4 +1,5 @@
 #include <iostream>
+#include "src/pcg/utils/grid_to_entity_parser.h"
 #include "src/pcg/stochastic_binary_space_partitioning_level_generator.h"
 
 
@@ -6,32 +7,33 @@ void StochasticBinarySpacePartitioningLevelGenerator::run(Scene &scene) {
     DLOG(INFO) << "StochasticBinarySpacePartitioningLevelGenerator running";
 
     split_space(bounding_box, scene);
+    GridToEntityParser(*grid, scene).parse();
 
     DLOG(INFO) << "StochasticBinarySpacePartitioningLevelGenerator finished";
 }
 
-bool StochasticBinarySpacePartitioningLevelGenerator::can_be_splited(const BoundingBox2i& bounding_box) {
+bool StochasticBinarySpacePartitioningLevelGenerator::can_be_splitted(const BoundingBox2i& bounding_box) {
     if (maximum_spliting)
-        return can_be_splited_horizontally(bounding_box) || can_be_splited_vertically(bounding_box);
+        return can_be_splitted_horizontally(bounding_box) || can_be_splitted_vertically(bounding_box);
     else
-        return can_be_splited_horizontally(bounding_box) && can_be_splited_vertically(bounding_box);
+        return can_be_splitted_horizontally(bounding_box) && can_be_splitted_vertically(bounding_box);
 }
 
-bool StochasticBinarySpacePartitioningLevelGenerator::can_be_splited_vertically(const BoundingBox2i& bounding_box) {
+bool StochasticBinarySpacePartitioningLevelGenerator::can_be_splitted_vertically(const BoundingBox2i& bounding_box) {
     return bounding_box.get_width() > 2 * minimal_split_size;
 }
 
-bool StochasticBinarySpacePartitioningLevelGenerator::can_be_splited_horizontally(const BoundingBox2i& bounding_box) {
+bool StochasticBinarySpacePartitioningLevelGenerator::can_be_splitted_horizontally(const BoundingBox2i& bounding_box) {
     return bounding_box.get_height() > 2 * minimal_split_size;
 }
 
 // returns true if horizontal
 bool StochasticBinarySpacePartitioningLevelGenerator::get_split_orientation(const BoundingBox2i& bounding_box) {
     if (maximum_spliting) {
-        if (can_be_splited_horizontally(bounding_box) && can_be_splited_vertically(bounding_box))
+        if (can_be_splitted_horizontally(bounding_box) && can_be_splitted_vertically(bounding_box))
             return rng.random_bool();
         else
-            return can_be_splited_horizontally(bounding_box);
+            return can_be_splitted_horizontally(bounding_box);
     } else {
         return rng.random_bool();
     }
@@ -59,11 +61,8 @@ BoundingBox2i StochasticBinarySpacePartitioningLevelGenerator::generate_room(con
     int room_y = bounding_box.get_top_left().y + bounding_box_padding + rng.random(bounding_box.get_height() - room_height - 2 * bounding_box_padding);
 
     BoundingBox2i room_bounding_box(Point2i(room_x, room_y), Point2i(room_x + room_width, room_y + room_height));
-    SimpleRoomGenerator room_generator(room_bounding_box);
 
     grid->fill(room_bounding_box, GridElement::ROOM);
-
-    room_generator.run(scene);
 
     return room_bounding_box;
 }
@@ -101,17 +100,17 @@ std::pair<BoundingBox2i, BoundingBox2i> StochasticBinarySpacePartitioningLevelGe
 // in first:((10, 30), (15, 40)) second:((15, 30), (20, 40)) 
 
 std::vector<BoundingBox2i> StochasticBinarySpacePartitioningLevelGenerator::split_space(const BoundingBox2i& bounding_box, Scene& scene) {
-    if (can_be_splited(bounding_box)) {
+    if (can_be_splitted(bounding_box)) {
         std::pair<BoundingBox2i, BoundingBox2i> new_bounding_boxes = calculate_new_bounding_boxes(bounding_box);
 
         DLOG(INFO) << "Spliting surface from " << bounding_box << " into " << new_bounding_boxes.first << " and " << new_bounding_boxes.second;
         auto first_rooms = split_space(new_bounding_boxes.first, scene);
         auto second_rooms = split_space(new_bounding_boxes.second, scene);
 
-        //auto closest_rooms = find_closest_rooms(first_rooms, second_rooms);
-        //auto corridor_generator = CorridorGenerator(closest_rooms.first, closest_rooms.second);
-        //DLOG(INFO) << "Corridor between: " << closest_rooms.first << " and " << closest_rooms.second << std::endl;
-        //corridor_generator.run(scene);
+//        auto closest_rooms = find_closest_rooms(first_rooms, second_rooms);
+//        auto corridor_generator = CorridorGenerator(closest_rooms.first, closest_rooms.second);
+//        DLOG(INFO) << "Corridor between: " << closest_rooms.first << " and " << closest_rooms.second << std::endl;
+//        corridor_generator.run(scene);
 
         // combine both subgroups into one big group
         first_rooms.insert(first_rooms.end(), second_rooms.begin(), second_rooms.end());

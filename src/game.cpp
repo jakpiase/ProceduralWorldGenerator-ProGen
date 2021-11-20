@@ -34,7 +34,7 @@ int Game::run() {
 }
 
 void Game::generate_content() {
-    LinearNumberGenerator linear_number_generator(6);
+    LinearNumberGenerator linear_number_generator(6111);
     //AgentGenerator level_generator(std::make_unique<RecurringLookAheadAgent>(), BoundingBox2i::from_zero(100, 100), linear_number_generator);
     StochasticBinarySpacePartitioningLevelGenerator level_generator(BoundingBox2i::from_zero(100, 100), linear_number_generator);
     level_generator.run(*main_scene);

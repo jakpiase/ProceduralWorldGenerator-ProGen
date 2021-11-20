@@ -37,9 +37,9 @@ public:
 
     void run(Scene &scene) override;
 private:
-    bool can_be_splited(const BoundingBox2i& bounding_box);
-    bool can_be_splited_vertically(const BoundingBox2i& bounding_box);
-    bool can_be_splited_horizontally(const BoundingBox2i& bounding_box);
+    bool can_be_splitted(const BoundingBox2i& bounding_box);
+    bool can_be_splitted_vertically(const BoundingBox2i& bounding_box);
+    bool can_be_splitted_horizontally(const BoundingBox2i& bounding_box);
     bool get_split_orientation(const BoundingBox2i& bounding_box);
     BoundingBox2i generate_room(const BoundingBox2i& bounding_box, Scene& scene);
     std::pair<BoundingBox2i, BoundingBox2i> calculate_new_bounding_boxes(const BoundingBox2i& bounding_box);

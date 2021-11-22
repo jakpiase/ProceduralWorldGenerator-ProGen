@@ -49,6 +49,8 @@ public:
 
     [[nodiscard]] BoundingBox grown_by(T value) const;
 
+    [[nodiscard]] BoundingBox shrunk_by(T value) const;
+
     [[nodiscard]] bool contains(const BoundingBox& other) const;
 
     [[nodiscard]] bool contains(const Point<T>& other) const;

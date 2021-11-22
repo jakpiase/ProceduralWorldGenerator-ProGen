@@ -1,6 +1,7 @@
 #include <glog/logging.h>
 #include <entt/locator/locator.hpp>
 #include <src/pcg/utils/grid_to_entity_parser.h>
+#include "src/pcg/stochastic_bsp_generator.h"
 #include "src/pcg/agent_generators/agent_generator.h"
 #include "src/pcg/agent_generators/agents/look_ahead/look_ahead_agent.h"
 #include "src/pcg/agent_generators/agents/look_ahead/cross_corridor_look_ahead_agent.h"
@@ -34,8 +35,10 @@ int Game::run() {
 }
 
 void Game::generate_content() {
-    LinearNumberGenerator linear_number_generator(6);
-    AgentGenerator level_generator(std::make_unique<RecurringLookAheadAgent>(), BoundingBox2i::from_zero(100, 100), linear_number_generator);
+    //TOP for SBSP: 2, 10
+    LinearNumberGenerator linear_number_generator(51);
+    //AgentGenerator level_generator(std::make_unique<RecurringLookAheadAgent>(), BoundingBox2i::from_zero(100, 100), linear_number_generator);
+    StochasticBSPGenerator level_generator(BoundingBox2i::from_zero(100, 100), linear_number_generator);
     level_generator.run(*main_scene);
 }
 

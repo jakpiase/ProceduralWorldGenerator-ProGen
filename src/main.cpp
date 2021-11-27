@@ -20,8 +20,7 @@ int main(int argc, const char* argv[]) {
 
     google::InitGoogleLogging(argv[0]);
 
-    init_data();
-    return 0;
+    //init_data();
     if (SDL_Init(SDL_INIT_VIDEO) < 0){
         LOG(ERROR) << "Could not initialize SDL! Error: " << SDL_GetError();
     }

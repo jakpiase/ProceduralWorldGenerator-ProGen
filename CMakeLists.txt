@@ -8,12 +8,6 @@ set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 include(cmake/CPM.cmake)
 
 CPMAddPackage(
-    NAME cnpy
-    GITHUB_REPOSITORY ACDSLab/cnpy
-    GIT_TAG master
-)
-
-CPMAddPackage(
     NAME googletest
     GITHUB_REPOSITORY google/googletest
     GIT_TAG release-1.11.0
@@ -43,6 +37,9 @@ CPMAddPackage(
         NAME SDL2
         URL https://www.libsdl.org/release/SDL2-2.0.16.zip
 )
+
+find_package(ZLIB REQUIRED)
+include_directories(${ZLIB_INCLUDE_DIRS})
 
 set(SOURCE_DIR src)
 set(TEST_DIR tests)

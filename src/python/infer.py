@@ -125,6 +125,6 @@ def infer():
 
     #print(result.shape)
     #print("saving", result.shape[0], "images")
-    np.save("generated_images", result)
+    np.save("generated_images", result.astype("int32"))
 
 infer()

@@ -7,13 +7,8 @@
 #include <iostream>
 
 void RoomContentProviderImpl::load_data_from_file(const std::string& filepath) {
-    // DLOG(INFO) << "Creating corridor floor entity with box: " << corridor_box;
+    DLOG(INFO) << "Loading room contet data from file " + filepath;
 
-    // Entity entity = scene.create_entity();
-    // entity.add_component<TransformationComponent>(corridor_box.get_top_left());
-    // entity.add_component<GraphicsComponent>(Colors::Blue, corridor_box.get_dimensions());
-
-    // DLOG(INFO) << "Created corridor floor";
     auto arr = cnpy::npy_load(filepath);
 
     int32_t* data_ptr = reinterpret_cast<int32_t*>(arr.data_holder->data());

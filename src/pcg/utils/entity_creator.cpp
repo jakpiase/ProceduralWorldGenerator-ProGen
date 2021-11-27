@@ -65,20 +65,6 @@ void EntityCreatorImpl::handle_room_content_generation(Scene& scene, const Bound
             Entity entity = scene.create_entity();
             entity.add_component<TransformationComponent>(room_box.get_top_left().shifted_by(i, j));
             entity.add_component<GraphicsComponent>(get_color_for_room_tile(room[i][j]), Dimensions2i(1, 1));
-            //entity.add_component<GraphicsComponent>(Colors::Red, room_box.get_dimensions());
         }
     }
-
-    int a;
-    a = 5;
-    a = a;
-    // DLOG(INFO) << "Creating room floor entity with box: " << room_box;
-
-    // Entity entity = scene.create_entity();
-    // entity.add_component<TransformationComponent>(room_box.get_top_left());
-    // entity.add_component<GraphicsComponent>(Colors::Red, room_box.get_dimensions());
-
-    // handle_room_content_generation(scene, room_box);
-
-    // DLOG(INFO) << "Created room floor";
 }

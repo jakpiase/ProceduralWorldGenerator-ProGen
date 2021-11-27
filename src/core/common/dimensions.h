@@ -5,6 +5,8 @@ struct Dimensions {
     T width;
     T height;
 
+    Dimensions(){}
+
     Dimensions(T width, T height)
             : width(width),
               height(height) {}

@@ -94,9 +94,9 @@ template<typename T>
 bool BoundingBox<T>::collides_with(const BoundingBox<T>& other) const {
 
     return get_left() <= other.get_right() &&
-        get_right() >= other.get_left() &&
-        get_top() <= other.get_bottom() &&
-        get_bottom() >= other.get_top();
+           get_right() >= other.get_left() &&
+           get_top() <= other.get_bottom() &&
+           get_bottom() >= other.get_top();
 //    if (get_top_left().x == get_bottom_right().x ||
 //        get_top_left().y == get_bottom_right().y ||
 //        other.get_top_left().x == other.get_bottom_right().x ||
@@ -155,6 +155,14 @@ BoundingBox<T> BoundingBox<T>::grown_by(T value) const {
 }
 
 template<typename T>
+BoundingBox<T> BoundingBox<T>::shrunk_by(T value) const {
+    assert((get_width() >= 2 * value && get_height() >= 2 * value));
+
+    return BoundingBox(get_top_left().shifted_by(value, value),
+                       get_bottom_right().shifted_by(-value, -value));
+}
+
+template<typename T>
 bool BoundingBox<T>::contains(const Point<T>& point) const {
     return point.x >= get_left() && point.x <= get_right() && point.y >= get_top() && point.y <= get_bottom();
 }
@@ -183,6 +191,7 @@ BoundingBox<T> BoundingBox<T>::common_part_with(const BoundingBox& other) const 
 
     return {Point(left, top), Point(right, bottom)};
 }
+
 
 template
 class BoundingBox<float>;

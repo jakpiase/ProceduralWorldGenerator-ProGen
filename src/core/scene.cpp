@@ -25,7 +25,3 @@ void Scene::update() {
         system->update();
     }
 }
-
-LinearNumberGenerator& Scene::get_random_generator() {
-    return random_generator;
-}

@@ -38,8 +38,8 @@ int Game::run() {
 void Game::generate_content() {
     //TOP for SBSP: 2, 10
     LinearNumberGenerator linear_number_generator(51);
-    //AgentGenerator level_generator(std::make_unique<RecurringLookAheadAgent>(), BoundingBox2i::from_zero(100, 100), linear_number_generator);
-    StochasticBSPGenerator level_generator(BoundingBox2i::from_zero(100, 100), linear_number_generator);
+    AgentGenerator level_generator(std::make_unique<RecurringLookAheadAgent>(), BoundingBox2i::from_zero(100, 100), linear_number_generator);
+    //StochasticBSPGenerator level_generator(BoundingBox2i::from_zero(100, 100), linear_number_generator);
     level_generator.run(*main_scene);
 }
 

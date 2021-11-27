@@ -4,8 +4,8 @@
 #include "src/pcg/agent_generators/agents/agent.h"
 
 class LookAheadAgent : public Agent {
-    const int MIN_ROOM_SIZE = 4;
-    const int MAX_ROOM_SIZE = 8;
+    const int MIN_ROOM_SIZE = 7;
+    const int MAX_ROOM_SIZE = 7;
     const int MIN_CORRIDOR_LENGTH = 10;
     const int MAX_CORRIDOR_LENGTH = 17;
     const int MAX_CORRIDOR_SEEK_TIME = 3;

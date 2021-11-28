@@ -64,7 +64,8 @@ void EntityCreatorImpl::handle_room_content_generation(Scene& scene, const Bound
         for(size_t j = 0; j < room[0].size(); ++j) {
             Entity entity = scene.create_entity();
             entity.add_component<TransformationComponent>(room_box.get_top_left().shifted_by(i, j));
-            entity.add_component<GraphicsComponent>(get_color_for_room_tile(room[i][j]), Dimensions2i(1, 1));
+            if(room[i][j] != 0) // to avoid having two entities for same floor tile
+                entity.add_component<GraphicsComponent>(get_color_for_room_tile(room[i][j]), Dimensions2i(1, 1));
         }
     }
 }

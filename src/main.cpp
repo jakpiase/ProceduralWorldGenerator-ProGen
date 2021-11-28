@@ -14,16 +14,14 @@ std::shared_ptr<RoomContentProvider> create_room_content_provider(int argc, cons
     std::string room_content = "none";
     std::string room_content_path = DEFAULT_ROOM_CONTENT_PATH;
 
-    std::regex contains_static_regex("static");
-    std::regex contains_generate_regex("generate");
     std::regex room_content_regex("room_content=(none)|(static)|(generate)");
     std::regex room_content_path_regex("room_content_path=.*.npy");
 
     for(int i = 1; i < argc; ++i) {
         if(std::regex_search(argv[i], room_content_regex)) {
-            if(std::regex_search(argv[i], contains_static_regex)) {
+            if(std::regex_search(argv[i], std::regex("static"))) {
                 room_content = "static";
-            } else if(std::regex_search(argv[i], contains_generate_regex)) {
+            } else if(std::regex_search(argv[i], std::regex("generate"))) {
                 room_content = "generate";
             }
         } else if (std::regex_search(argv[i], room_content_path_regex)) {

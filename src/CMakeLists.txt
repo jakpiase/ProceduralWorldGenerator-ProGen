@@ -8,6 +8,7 @@ set(SOURCES ${SOURCES})
 add_executable(${BINARY} main.cpp)
 
 add_library(${CMAKE_PROJECT_NAME}_lib STATIC ${SOURCES})
+target_link_libraries(${LIBRARY} ${CMAKE_PROJECT_NAME}_deps_lib)
 target_link_libraries(${LIBRARY} ${ZLIB_LIBRARIES})
 target_link_libraries(${LIBRARY} SDL2)
 target_link_libraries(${LIBRARY} glog)

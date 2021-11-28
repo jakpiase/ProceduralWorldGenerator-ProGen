@@ -42,9 +42,11 @@ find_package(ZLIB REQUIRED)
 include_directories(${ZLIB_INCLUDE_DIRS})
 
 set(SOURCE_DIR src)
+set(DEPENDENCIES_DIR deps)
 set(TEST_DIR tests)
 
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}")
 
+add_subdirectory(${DEPENDENCIES_DIR})
 add_subdirectory(${SOURCE_DIR})
 add_subdirectory(${TEST_DIR})

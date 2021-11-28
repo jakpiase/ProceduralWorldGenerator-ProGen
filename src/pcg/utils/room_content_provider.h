@@ -2,7 +2,7 @@
 
 #include "src/core/scene.h"
 #include "src/core/common/bounding_box.h"
-#include "src/cnpy/cnpy.h"
+#include "deps/cnpy/cnpy.h"
 
 class RoomContentProvider {
 public:

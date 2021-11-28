@@ -5,7 +5,7 @@ template<typename T>
 class RandomIterator {
     RandomNumberGenerator& rng;
     std::vector<T> elements;
-    int index = 0;
+    size_t index = 0;
 
 public:
     explicit RandomIterator(std::vector<T>&& elements, RandomNumberGenerator& rng)
@@ -21,7 +21,7 @@ public:
     }
 
     bool has_next() {
-        return index < static_cast<int>(elements.size());
+        return index < elements.size();
     }
 
     void reset() {

@@ -7,7 +7,7 @@ cd ProceduralWorldGenerator-ProGen
 mkdir build && cd build
 cmake .. && make -j
 ```
-**Note:** you may also need to install ZLIB if your system does not have it yet
+**Note:** you may also need to install [ZLIB](https://zlib.net/) if your system does not have it yet
 
 ### How to run
 ./ProGen_run room_content=**<content_type>** room_content_path=**<room_content_path>**
@@ -17,7 +17,7 @@ cmake .. && make -j
 - static
 - generate
 
-**Note:** to use room_content=generate you must have tensorflow 2.5.0 installed
+**Note:** to use "room_content=generate" you must have tensorflow 2.5.0 installed
 
 **<room_content_path>** determines the filepath to pregenerated rooms, default = "valid_images.npy" it is used only if **<content_type>**=static
 

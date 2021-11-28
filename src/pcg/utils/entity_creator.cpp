@@ -11,7 +11,7 @@ void EntityCreatorImpl::create_corridor_floor(Scene& scene, const BoundingBox2i&
 
     Entity entity = scene.create_entity();
     entity.add_component<TransformationComponent>(corridor_box.get_top_left());
-    entity.add_component<GraphicsComponent>(Colors::Blue, corridor_box.get_dimensions());
+    entity.add_component<GraphicsComponent>(Colors::Darkslategrey, corridor_box.get_dimensions());
 
     DLOG(INFO) << "Created corridor floor";
 }
@@ -22,7 +22,7 @@ void EntityCreatorImpl::create_room_floor(Scene& scene, const BoundingBox2i& roo
     handle_room_content_generation(scene, room_box);
     Entity entity = scene.create_entity();
     entity.add_component<TransformationComponent>(room_box.get_top_left());
-    entity.add_component<GraphicsComponent>(Colors::Red, room_box.get_dimensions());
+    entity.add_component<GraphicsComponent>(Colors::Gainsboro, room_box.get_dimensions());
 
     DLOG(INFO) << "Created room floor";
 }
@@ -30,9 +30,9 @@ void EntityCreatorImpl::create_room_floor(Scene& scene, const BoundingBox2i& roo
 Color get_color_for_room_tile(int32_t room_tile) {
     switch(room_tile) {
         case 0:
-            return Colors::Red;
+            return Colors::Gainsboro;
         case 1:
-            return Colors::Purple;
+            return Colors::Red;
         case 2:
             return Colors::Gold;
         case 3:
@@ -42,7 +42,7 @@ Color get_color_for_room_tile(int32_t room_tile) {
         case 5:
             return Colors::SaddleBrown;
         case 6:
-            return Colors::DarkGrey;
+            return Colors::Dimgrey;
         default:
             throw new std::runtime_error("Unrecognized room tile type");
     }

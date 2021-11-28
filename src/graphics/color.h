@@ -14,4 +14,7 @@ namespace Colors{
     inline constexpr Color Brown = {.r = 165, .g = 42, .b = 42, .a = 255};
     inline constexpr Color SaddleBrown = {.r = 139, .g = 69, .b = 19, .a = 255};
     inline constexpr Color DarkGrey = {.r = 169, .g = 169, .b = 169, .a = 255};
+    inline constexpr Color Gainsboro = {.r = 220, .g = 220, .b = 220, .a = 255};
+    inline constexpr Color Darkslategrey = {.r = 47, .g = 79, .b = 79, .a = 255};
+    inline constexpr Color Dimgrey = {.r = 105, .g = 105, .b = 105, .a = 255};
 }

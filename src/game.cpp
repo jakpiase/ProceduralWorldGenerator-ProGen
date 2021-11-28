@@ -8,11 +8,11 @@
 #include "src/pcg/agent_generators/agents/look_ahead/recurring_look_ahead_agent.h"
 #include "src/game.h"
 
-Game::Game()
+Game::Game(std::shared_ptr<RoomContentProvider> room_content_provider)
         : is_running(true) {
     LOG(INFO) << "Starting ProGen";
 
-
+    this->room_content_provider = room_content_provider; 
     window = std::make_shared<Window>("ProGen", WINDOW_WIDTH, WINDOW_HEIGHT);
     renderer = std::make_shared<Renderer>(*window);
     register_singletons();
@@ -37,8 +37,8 @@ int Game::run() {
 void Game::generate_content() {
     //TOP for SBSP: 2, 10
     LinearNumberGenerator linear_number_generator(51);
-    //AgentGenerator level_generator(std::make_unique<RecurringLookAheadAgent>(), BoundingBox2i::from_zero(100, 100), linear_number_generator);
-    StochasticBSPGenerator level_generator(BoundingBox2i::from_zero(100, 100), linear_number_generator);
+    AgentGenerator level_generator(std::make_unique<RecurringLookAheadAgent>(), BoundingBox2i::from_zero(100, 100), linear_number_generator);
+    //StochasticBSPGenerator level_generator(BoundingBox2i::from_zero(100, 100), linear_number_generator);
     level_generator.run(*main_scene);
 }
 
@@ -63,4 +63,5 @@ void Game::register_singletons() {
     entt::service_locator<Renderer>::set(renderer);
     entt::service_locator<Window>::set(window);
     entt::service_locator<EntityCreator>::set<EntityCreatorImpl>();
+    entt::service_locator<RoomContentProvider>::set(room_content_provider);
 }

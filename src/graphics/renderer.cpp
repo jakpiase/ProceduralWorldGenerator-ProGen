@@ -1,4 +1,3 @@
-#pragma once
 #include <glog/logging.h>
 #include "src/graphics/renderer.h"
 

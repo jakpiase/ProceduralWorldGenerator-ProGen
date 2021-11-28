@@ -8,6 +8,10 @@ public:
     virtual void create_corridor_floor(Scene& scene, const BoundingBox2i& corridor_box) const = 0;
 
     virtual void create_room_floor(Scene& scene, const BoundingBox2i& room_box) const = 0;
+
+    virtual void handle_room_content_generation(Scene& scene, const BoundingBox2i& room_box) const = 0;
+
+
 };
 
 class EntityCreatorImpl : public EntityCreator{
@@ -15,6 +19,8 @@ public:
     void create_corridor_floor(Scene& scene, const BoundingBox2i& corridor_box) const override;
 
     void create_room_floor(Scene& scene, const BoundingBox2i& room_box) const override;
+
+    void handle_room_content_generation(Scene& scene, const BoundingBox2i& room_box) const override;
 };
 
 

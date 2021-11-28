@@ -38,10 +38,15 @@ CPMAddPackage(
         URL https://www.libsdl.org/release/SDL2-2.0.16.zip
 )
 
+find_package(ZLIB REQUIRED)
+include_directories(${ZLIB_INCLUDE_DIRS})
+
 set(SOURCE_DIR src)
+set(DEPENDENCIES_DIR deps)
 set(TEST_DIR tests)
 
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}")
 
+add_subdirectory(${DEPENDENCIES_DIR})
 add_subdirectory(${SOURCE_DIR})
 add_subdirectory(${TEST_DIR})

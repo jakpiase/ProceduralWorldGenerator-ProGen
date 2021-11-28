@@ -1,4 +1,3 @@
-#pragma once
 #include <entt/entity/registry.hpp>
 #include <entt/locator/locator.hpp>
 #include "src/core/components/transformation_component.h"

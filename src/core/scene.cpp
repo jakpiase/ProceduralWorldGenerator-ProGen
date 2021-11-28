@@ -1,4 +1,3 @@
-#pragma once
 #include "src/core/scene.h"
 #include "src/core/entity.h"
 #include "src/core/describing_system.h"

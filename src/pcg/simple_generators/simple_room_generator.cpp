@@ -1,4 +1,3 @@
-#pragma once
 #include <sstream>
 #include "src/pcg/simple_generators/simple_room_generator.h"
 

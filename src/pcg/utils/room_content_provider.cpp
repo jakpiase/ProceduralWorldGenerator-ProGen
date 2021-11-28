@@ -13,7 +13,7 @@ void RoomContentProviderImpl::load_data_from_file(const std::string& filepath) {
 
     int32_t* data_ptr = reinterpret_cast<int32_t*>(arr.data_holder->data());
 
-    for(int i = 0; i < arr.shape[0]; ++i) {
+    for(size_t i = 0; i < arr.shape[0]; ++i) {
         std::vector<std::vector<int32_t>> room(ROOM_SIZE, std::vector<int32_t>(ROOM_SIZE));
 
         int32_t* base_ptr = data_ptr + (arr.shape[0] - i - 1)*49;

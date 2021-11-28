@@ -4,11 +4,11 @@
 #include "src/pcg/agent_generators/agents/agent.h"
 
 class LookAheadAgent : public Agent {
-    const int MIN_ROOM_SIZE = 7;
-    const int MAX_ROOM_SIZE = 7;
-    const int MIN_CORRIDOR_LENGTH = 10;
-    const int MAX_CORRIDOR_LENGTH = 17;
-    const int MAX_CORRIDOR_SEEK_TIME = 3;
+    const size_t MIN_ROOM_SIZE = 7;
+    const size_t MAX_ROOM_SIZE = 7;
+    const size_t MIN_CORRIDOR_LENGTH = 10;
+    const size_t MAX_CORRIDOR_LENGTH = 17;
+    const size_t MAX_CORRIDOR_SEEK_TIME = 3;
 
     Point2i position;
     std::vector<BoundingBox2i> rooms_buffer;

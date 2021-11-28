@@ -1,4 +1,3 @@
-#pragma once
 #include <glog/logging.h>
 #include "src/pcg/simple_generators/simple_level_generator.h"
 #include "src/pcg/simple_generators/simple_room_generator.h"

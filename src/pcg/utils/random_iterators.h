@@ -21,7 +21,7 @@ public:
     }
 
     bool has_next() {
-        return index < elements.size();
+        return index < static_cast<int>(elements.size());
     }
 
     void reset() {

@@ -51,9 +51,9 @@ Color get_color_for_room_tile(int32_t room_tile) {
 void EntityCreatorImpl::handle_room_content_generation(Scene& scene, const BoundingBox2i& room_box) const {
     RoomContentProvider& RCP = entt::service_locator<RoomContentProvider>::ref();
 
-    if(RCP.is_used() == false || room_box.get_height() != 7 || room_box.get_width() != 7){
+    if(RCP.is_enabled() == false || room_box.get_height() != 7 || room_box.get_width() != 7){
         DLOG(INFO) << "Skipping generation of room content";
-        //return;
+        return;
     }
 
     DLOG(INFO) << "Generating room content";

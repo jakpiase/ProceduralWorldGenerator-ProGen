@@ -6,14 +6,13 @@
 #include "src/pcg/agent_generators/agents/look_ahead/look_ahead_agent.h"
 #include "src/pcg/agent_generators/agents/look_ahead/cross_corridor_look_ahead_agent.h"
 #include "src/pcg/agent_generators/agents/look_ahead/recurring_look_ahead_agent.h"
-#include "src/pcg/utils/room_content_provider.h"
 #include "src/game.h"
 
-Game::Game()
+Game::Game(std::shared_ptr<RoomContentProvider> room_content_provider)
         : is_running(true) {
     LOG(INFO) << "Starting ProGen";
 
-
+    this->room_content_provider = room_content_provider; 
     window = std::make_shared<Window>("ProGen", WINDOW_WIDTH, WINDOW_HEIGHT);
     renderer = std::make_shared<Renderer>(*window);
     register_singletons();
@@ -64,5 +63,5 @@ void Game::register_singletons() {
     entt::service_locator<Renderer>::set(renderer);
     entt::service_locator<Window>::set(window);
     entt::service_locator<EntityCreator>::set<EntityCreatorImpl>();
-    entt::service_locator<RoomContentProvider>::set<RoomContentProviderImpl>();
+    entt::service_locator<RoomContentProvider>::set(room_content_provider);
 }

@@ -6,8 +6,14 @@
 #include "src/pcg/utils/room_content_provider.h"
 #include <iostream>
 
+RoomContentProviderImpl::RoomContentProviderImpl(bool is_used, bool generate_new, const std::string& data_filepath) {
+    this->generate_new = generate_new;
+    this->is_used = is_used;
+    this->data_filepath = data_filepath;
+}
+
 void RoomContentProviderImpl::load_data_from_file(const std::string& filepath) {
-    DLOG(INFO) << "Loading room contet data from file " + filepath;
+    DLOG(INFO) << "Loading room content from file " + filepath;
 
     auto arr = cnpy::npy_load(filepath);
 
@@ -16,7 +22,7 @@ void RoomContentProviderImpl::load_data_from_file(const std::string& filepath) {
     for(size_t i = 0; i < arr.shape[0]; ++i) {
         std::vector<std::vector<int32_t>> room(ROOM_SIZE, std::vector<int32_t>(ROOM_SIZE));
 
-        int32_t* base_ptr = data_ptr + (arr.shape[0] - i - 1)*49;
+        int32_t* base_ptr = data_ptr + (arr.shape[0] - i - 1) * ROOM_SIZE * ROOM_SIZE;
         for(int j = 0; j < ROOM_SIZE; ++j) {
             memcpy(room[j].data(), base_ptr + j * ROOM_SIZE, sizeof(int32_t) * ROOM_SIZE);
         }
@@ -27,17 +33,15 @@ void RoomContentProviderImpl::load_data_from_file(const std::string& filepath) {
 
 std::vector<std::vector<int32_t>> RoomContentProviderImpl::get_next_room() {
     
-    if(rooms.empty() && generate_new_rooms == true) {
+    if(rooms.empty() && generate_new == true) {
         generate_rooms();
-        load_data_from_file("valid_images.npy");
-    } else if (rooms.empty() && generate_new_rooms == false) {
-        load_data_from_file("valid_images.npy");
+        load_data_from_file("generated_images.npy");
+    } else if (rooms.empty() && generate_new == false) {
+        load_data_from_file(data_filepath);
     }
 
     auto room = rooms[rooms.size() - 1];
     rooms.pop_back();
-
-    std::cout << "rooms size" << rooms.size() << std::endl;
 
     return room;
 }
@@ -46,14 +50,6 @@ void RoomContentProviderImpl::generate_rooms() const {
     system("python.exe infer.py");
 }
 
-bool RoomContentProviderImpl::is_used() const {
-    return used;
-}
-
-void RoomContentProviderImpl::set_is_used(bool is_used) {
-    used = is_used;
-}
-
-void RoomContentProviderImpl::set_generate_new_rooms(bool generate_new_rooms) {
-    this->generate_new_rooms = generate_new_rooms;
+bool RoomContentProviderImpl::is_enabled() const {
+    return is_used;
 }

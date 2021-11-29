@@ -37,3 +37,10 @@ bool Point<T>::is_vertical_distance_bigger(const Point& first, const Point& seco
 
 template class Point<float>;
 template class Point<int>;
+
+template<typename T>
+std::size_t Point<T>::Hash::operator()(const Point& point) const {
+    const T x = point.x;
+    const T y = point.y;
+    return ((x + y)*(x + y + 1)/2) + y;
+}

@@ -29,7 +29,13 @@ struct Point {
     static Point midpoint(const Point& first, const Point& second);
     
     static bool is_vertical_distance_bigger(const Point& first, const Point& second);
+
+    struct Hash {
+        std::size_t operator()(const Point& point) const;
+    };
 };
+
+
 
 typedef Point<float> Point2f;
 typedef Point<int> Point2i;

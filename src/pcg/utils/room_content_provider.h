@@ -4,11 +4,13 @@
 #include "src/core/common/bounding_box.h"
 #include "deps/cnpy/cnpy.h"
 
+typedef std::vector<std::vector<int32_t>> Room;
+
 class RoomContentProvider {
 public:
     virtual void load_data_from_file(const std::string& filepath) = 0;
 
-    virtual std::vector<std::vector<int32_t>> get_next_room() = 0;
+    virtual Room get_next_room() = 0;
 
     virtual void generate_rooms() const = 0;
 
@@ -27,11 +29,11 @@ public:
 
     void load_data_from_file(const std::string& filepath) override;
 
-    std::vector<std::vector<int32_t>> get_next_room() override;
+    Room get_next_room() override;
 
     void generate_rooms() const override;
 
-    bool is_enabled() const override;
+    [[nodiscard]] bool is_enabled() const override;
 };
 
 

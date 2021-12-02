@@ -31,7 +31,7 @@ void RoomContentProviderImpl::load_data_from_file(const std::string& filepath) {
     }
 }
 
-std::vector<std::vector<int32_t>> RoomContentProviderImpl::get_next_room() {
+Room RoomContentProviderImpl::get_next_room() {
     
     if(rooms.empty() && generate_new == true) {
         generate_rooms();

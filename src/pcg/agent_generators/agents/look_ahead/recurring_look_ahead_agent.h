@@ -27,7 +27,7 @@ private:
 
     void mark_current_position_as_visited(bool decrement_counter);
 
-    void go_to_previous_position(const Grid& grid, RandomNumberGenerator& rng);
+    bool go_to_previous_position(const Grid& grid, RandomNumberGenerator& rng);
 
     Point2i pop_previous_position_at_index(unsigned int index);
 };

@@ -11,8 +11,7 @@ void RecurringLookAheadAgent::run(Scene& scene, Grid& grid, RandomNumberGenerato
     do {
         perform_generation(scene, grid, rng);
         get_corridors_buffer().clear();
-        go_to_previous_position(grid, rng);
-    } while (!visited_rooms_positions.empty());
+    } while (go_to_previous_position(grid, rng));
 
     finish(scene, grid);
 }
@@ -48,10 +47,10 @@ void RecurringLookAheadAgent::mark_current_position_as_visited(bool decrement_co
         visited_rooms_positions.emplace_back(get_current_position());
 }
 
-void RecurringLookAheadAgent::go_to_previous_position(const Grid& grid, RandomNumberGenerator& rng) {
+bool RecurringLookAheadAgent::go_to_previous_position(const Grid& grid, RandomNumberGenerator& rng) {
     if(visited_rooms_positions.empty()){
         DLOG(INFO) << "Nowhere to go back. ";
-        return;
+        return false;
     }
     unsigned int previous_position_index = rng.random(visited_rooms_positions.size());
     Point2i new_position = pop_previous_position_at_index(previous_position_index);
@@ -63,6 +62,8 @@ void RecurringLookAheadAgent::go_to_previous_position(const Grid& grid, RandomNu
 
     BoundingBox2i current_room_box = GridUtils::bounding_box_from_position(grid, get_current_position());
     room_excluded_from_corridor_collision = std::make_unique<BoundingBox2i>(current_room_box);
+
+    return true;
 }
 
 Point2i RecurringLookAheadAgent::pop_previous_position_at_index(unsigned int index) {

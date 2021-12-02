@@ -8,7 +8,7 @@ class LookAheadAgent : public Agent {
     const size_t MAX_ROOM_SIZE = 8;
     const size_t MIN_CORRIDOR_LENGTH = 10;
     const size_t MAX_CORRIDOR_LENGTH = 17;
-    const size_t MAX_CORRIDOR_SEEK_TIME = 3;
+    const size_t MAX_CORRIDOR_SEEK_TIME = 2;
 
     Point2i position;
     std::vector<BoundingBox2i> rooms_buffer;

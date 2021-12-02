@@ -4,6 +4,7 @@
 #include "src/core/entity.h"
 #include "src/pcg/utils/entity_creator.h"
 #include "src/pcg/utils/room_content_provider.h"
+#include "src/pcg/room_content/room_content_type.h"
 #include <entt/locator/locator.hpp>
 
 void EntityCreatorImpl::create_corridor_floor(Scene& scene, const BoundingBox2i& corridor_box) const {
@@ -29,22 +30,20 @@ void EntityCreatorImpl::create_room_floor(Scene& scene, const BoundingBox2i& roo
 
 Color get_color_for_room_tile(int32_t room_tile) {
     switch(room_tile) {
-        case 0:
-            return Colors::Gainsboro;
-        case 1:
+        case RoomContentType::ENEMY:
             return Colors::Red;
-        case 2:
+        case RoomContentType::TREASURE:
             return Colors::Gold;
-        case 3:
+        case RoomContentType::WATER:
             return Colors::RoyalBlue;
-        case 4:
+        case RoomContentType::TABLE:
             return Colors::Brown;
-        case 5:
+        case RoomContentType::DRAWER:
             return Colors::SaddleBrown;
-        case 6:
+        case RoomContentType::MONUMENT:
             return Colors::Dimgrey;
         default:
-            throw new std::runtime_error("Unrecognized room tile type");
+            throw std::runtime_error("Unrecognized room tile type");
     }
 }
 
@@ -64,7 +63,7 @@ void EntityCreatorImpl::handle_room_content_generation(Scene& scene, const Bound
 
     for(size_t i = 0; i < room.size(); ++i) {
         for(size_t j = 0; j < room[0].size(); ++j) {
-            if(room[i][j] != 0){ // to avoid having two entities for same floor tile
+            if(room[i][j] != 0) {
                 Entity entity = scene.create_entity();
                 entity.add_component<TransformationComponent>(room_box.get_top_left().shifted_by(i, j));
                 entity.add_component<GraphicsComponent>(get_color_for_room_tile(room[i][j]), Dimensions2i(1, 1));

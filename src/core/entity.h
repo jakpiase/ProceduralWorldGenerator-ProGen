@@ -19,6 +19,8 @@ public:
 
         return scene.get_registry().emplace<T>(handle, std::forward<Args>(args)...);
     }
+
+    entt::entity get_handle();
 };
 
 

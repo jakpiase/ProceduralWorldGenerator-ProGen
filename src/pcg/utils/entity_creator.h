@@ -1,5 +1,6 @@
 #pragma once
 
+#include <entt/entity/entity.hpp>
 #include "src/core/scene.h"
 #include "src/core/common/bounding_box.h"
 #include "room_content_provider.h"
@@ -17,9 +18,9 @@ public:
 
     void create_room_floor(Scene& scene, const BoundingBox2i& room_box) const override;
 
-    void handle_room_content_generation(Scene& scene, const BoundingBox2i& room_box) const;
+    void handle_room_content_generation(Scene& scene, const BoundingBox2i& room_box, entt::entity room_entity) const;
 
-    void parse_room_content_to_entities(Scene& scene, const Room& room, const BoundingBox2i& room_box) const;
+    static void parse_room_content_to_entities(Scene& scene, const Room& room, const BoundingBox2i& room_box, entt::entity room_entity);
 };
 
 

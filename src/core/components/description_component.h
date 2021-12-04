@@ -1,15 +1,20 @@
 #pragma once
 #include <string>
+#include <utility>
 
 struct DescriptionComponent {
-    std::string description;
+    int tag;
+    std::string name;
 
-    DescriptionComponent() = default;
+    DescriptionComponent() = delete;
 
-    DescriptionComponent(const DescriptionComponent &) = default;
+    DescriptionComponent(const DescriptionComponent& other) = default;
 
-    explicit DescriptionComponent(const std::string &description)
-            : description(description) {}
+    explicit DescriptionComponent(int tag)
+        : tag(tag) {}
+
+    DescriptionComponent(int tag, std::string name)
+        : tag(tag), name(std::move(name)) {}
 
 };
 

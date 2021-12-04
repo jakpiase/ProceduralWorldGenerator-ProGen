@@ -7,5 +7,7 @@ enum RoomContentType{
     WATER = 3,
     TABLE = 4,
     DRAWER = 5,
-    MONUMENT = 6
+    MONUMENT = 6,
+
+    FLOOR
 };

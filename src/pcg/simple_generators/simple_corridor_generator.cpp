@@ -12,12 +12,7 @@ void SimpleCorridorGenerator::run(Scene& scene) {
 
     const BoundingBox2i corridor_box = create_corridor_box();
 
-    std::stringstream corridor_description_stream;
-    corridor_description_stream << "Corridor from " << corridor_box.get_top_left() << " to "
-                                << corridor_box.get_top_right();
-
     Entity corridor = scene.create_entity();
-    corridor.add_component<DescriptionComponent>(corridor_description_stream.str());
     corridor.add_component<TransformationComponent>(corridor_box.get_top_left());
     corridor.add_component<GraphicsComponent>(Colors::Blue, corridor_box.get_dimensions().cast<int>());
 

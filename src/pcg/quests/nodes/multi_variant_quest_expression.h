@@ -14,13 +14,17 @@ namespace Quests::NonTerminalExpressions {
     class MultiVariantQuestExpression : public QuestExpression {
     public:
 
-        virtual QuestExpressionVariants generate_variants(RegistryUtils& registry_utils) = 0;
+        virtual QuestExpressionVariants generate_variants(RegistryUtils& registry_utils, RandomNumberGenerator& rng) = 0;
 
-        std::unique_ptr<QuestNode> evaluate_variants(RegistryUtils& registry_utils, MultiChildrenQuestNodeUPtr& node);
+        std::unique_ptr<QuestNode> evaluate_variants(RegistryUtils& registry_utils,
+                                                     RandomNumberGenerator& rng,
+                                                     MultiChildrenQuestNodeUPtr& node);
 
     private:
         static std::unique_ptr<QuestNode>
-        evaluate_variant(RegistryUtils& registry, MultiChildrenQuestNodeUPtr& node,
+        evaluate_variant(RegistryUtils& registry,
+                         RandomNumberGenerator& rng,
+                         MultiChildrenQuestNodeUPtr& node,
                          const QuestExpressionVariant& variant);
     };
 }

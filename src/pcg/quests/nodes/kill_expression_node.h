@@ -13,9 +13,9 @@ namespace Quests::NonTerminalExpressions {
     public:
         explicit Kill(entt::entity enemy);
 
-        std::unique_ptr<QuestNode> create_node(RegistryUtils& scene) override;
+        std::unique_ptr<QuestNode> create_node(RegistryUtils& scene, RandomNumberGenerator& rng) override;
 
-        QuestExpressionVariants generate_variants(RegistryUtils& scene) override;
+        QuestExpressionVariants generate_variants(RegistryUtils& scene, RandomNumberGenerator& rng) override;
     };
 
 }

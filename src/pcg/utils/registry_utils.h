@@ -1,6 +1,7 @@
 #pragma once
 #include <entt/entt.hpp>
 #include <unordered_map>
+#include "src/random/random_number_generator.h"
 
 class RegistryUtils {
 private:
@@ -19,11 +20,16 @@ public:
 
     [[nodiscard]] std::string get_name(entt::entity entity) const;
 
-    const std::vector<entt::entity>& get_by_tag(int tag);
+    entt::entity get_room(entt::entity entity);
+
+    entt::entity get_random_by_tag(int tag, RandomNumberGenerator& rng);
 
     void register_entity(entt::entity entity, entt::entity room);
 
     void register_entity(entt::entity entity);
+
+private:
+    const std::vector<entt::entity>& get_by_tag(int tag);
 };
 
 

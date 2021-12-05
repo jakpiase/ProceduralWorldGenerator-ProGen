@@ -12,7 +12,7 @@ namespace Quests::TerminalExpressions {
 
         explicit GoTo(entt::entity room);
 
-        std::unique_ptr<QuestNode> create_node(RegistryUtils& scene) override;
+        std::unique_ptr<QuestNode> create_node(RegistryUtils& scene, RandomNumberGenerator& rng) override;
     };
 
     class Create : public QuestExpression {
@@ -22,7 +22,7 @@ namespace Quests::TerminalExpressions {
 
         explicit Create(Item item);
 
-        std::unique_ptr<QuestNode> create_node(RegistryUtils& scene) override;
+        std::unique_ptr<QuestNode> create_node(RegistryUtils& scene, RandomNumberGenerator& rng) override;
     };
 
     class Discover : public QuestExpression {
@@ -30,7 +30,7 @@ namespace Quests::TerminalExpressions {
 
         Discover() = default;
 
-        std::unique_ptr<QuestNode> create_node(RegistryUtils& scene) override;
+        std::unique_ptr<QuestNode> create_node(RegistryUtils& scene, RandomNumberGenerator& rng) override;
     };
 
     class Open : public QuestExpression {
@@ -40,7 +40,7 @@ namespace Quests::TerminalExpressions {
 
         explicit Open(entt::entity room);
 
-        std::unique_ptr<QuestNode> create_node(RegistryUtils& scene) override;
+        std::unique_ptr<QuestNode> create_node(RegistryUtils& scene, RandomNumberGenerator& rng) override;
     };
 
     class Kill : public QuestExpression {
@@ -50,7 +50,7 @@ namespace Quests::TerminalExpressions {
 
         explicit Kill(entt::entity enemy);
 
-        std::unique_ptr<QuestNode> create_node(RegistryUtils& scene) override;
+        std::unique_ptr<QuestNode> create_node(RegistryUtils& scene, RandomNumberGenerator& rng) override;
     };
 
     class Get : public QuestExpression {
@@ -60,7 +60,7 @@ namespace Quests::TerminalExpressions {
 
         explicit Get(Item item);
 
-        std::unique_ptr<QuestNode> create_node(RegistryUtils& scene) override;
+        std::unique_ptr<QuestNode> create_node(RegistryUtils& scene, RandomNumberGenerator& rng) override;
     };
 
     class Poison : public QuestExpression {
@@ -70,7 +70,7 @@ namespace Quests::TerminalExpressions {
 
         explicit Poison(entt::entity target);
 
-        std::unique_ptr<QuestNode> create_node(RegistryUtils& scene) override;
+        std::unique_ptr<QuestNode> create_node(RegistryUtils& scene, RandomNumberGenerator& rng) override;
     };
 
     class Clear : public QuestExpression {
@@ -81,7 +81,7 @@ namespace Quests::TerminalExpressions {
 
         explicit Clear(entt::entity target, Item tool);
 
-        std::unique_ptr<QuestNode> create_node(RegistryUtils& scene) override;
+        std::unique_ptr<QuestNode> create_node(RegistryUtils& scene, RandomNumberGenerator& rng) override;
     };
 
     class Find : public QuestExpression {
@@ -91,7 +91,7 @@ namespace Quests::TerminalExpressions {
 
         explicit Find(Item item);
 
-        std::unique_ptr<QuestNode> create_node(RegistryUtils& scene) override;
+        std::unique_ptr<QuestNode> create_node(RegistryUtils& scene, RandomNumberGenerator& rng) override;
     };
 }
 

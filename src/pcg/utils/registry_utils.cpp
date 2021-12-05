@@ -30,3 +30,14 @@ void RegistryUtils::register_entity(entt::entity entity) {
 std::string RegistryUtils::get_name(entt::entity entity) const{
     return registry_ptr->get<DescriptionComponent>(entity).name;
 }
+
+entt::entity RegistryUtils::get_room(entt::entity entity) {
+    return room_by_entity[entity];
+}
+
+entt::entity RegistryUtils::get_random_by_tag(int tag, RandomNumberGenerator& rng) {
+    const auto& elements_with_tag = get_by_tag(tag);
+    const unsigned int index = rng.random(elements_with_tag.size());
+
+    return elements_with_tag[index];
+}

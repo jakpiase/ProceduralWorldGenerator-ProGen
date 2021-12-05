@@ -7,7 +7,7 @@
 
 class QuestExpression {
 public:
-    virtual std::unique_ptr<QuestNode> create_node(RegistryUtils& registry_utils) = 0;
+    virtual std::unique_ptr<QuestNode> create_node(RegistryUtils& registry_utils, RandomNumberGenerator& rng) = 0;
 };
 
 typedef std::unique_ptr<QuestExpression> QuestExpressionUPtr;

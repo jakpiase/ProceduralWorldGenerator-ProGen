@@ -4,16 +4,17 @@
 
 Quests::NonTerminalExpressions::Create::Create(Item item) : item(std::move(item)) {}
 
-std::unique_ptr<QuestNode> Quests::NonTerminalExpressions::Create::create_node(RegistryUtils& scene) {
+std::unique_ptr<QuestNode>
+Quests::NonTerminalExpressions::Create::create_node(RegistryUtils& scene, RandomNumberGenerator& rng) {
 
     std::unique_ptr<MultiChildrenQuestNode> node = std::make_unique<MultiChildrenQuestNode>(
             std::format("Create {}.", item.get_name()));
 
-    return evaluate_variants(scene, node);
+    return evaluate_variants(scene, rng, node);
 }
 
 Quests::NonTerminalExpressions::QuestExpressionVariants
-Quests::NonTerminalExpressions::Create::generate_variants(RegistryUtils& scene) {
+Quests::NonTerminalExpressions::Create::generate_variants(RegistryUtils& scene, RandomNumberGenerator& rng) {
     QuestExpressionVariants variants(3);
 
     variants[0].emplace_back(std::make_unique<Quests::TerminalExpressions::Find>(Item("red flower")));

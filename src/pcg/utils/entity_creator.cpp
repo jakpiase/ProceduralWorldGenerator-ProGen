@@ -30,7 +30,7 @@ void EntityCreatorImpl::create_room_floor(Scene& scene, const BoundingBox2i& roo
     entity.add_component<TransformationComponent>(room_box.get_top_left());
     entity.add_component<GraphicsComponent>(Colors::Gainsboro, room_box.get_dimensions());
     entity.add_component<DescriptionComponent>(RoomContentType::FLOOR);
-    entt::service_locator<RegistryUtils>::ref().register_entity(scene.get_registry(), entity.get_handle());
+    entt::service_locator<RegistryUtils>::ref().register_entity(entity.get_handle());
 
 
     DLOG(INFO) << "Created room floor";
@@ -120,7 +120,7 @@ EntityCreatorImpl::parse_room_content_to_entities(Scene& scene, const Room& room
                         break;
                 }
 
-                registry_utils->register_entity(scene.get_registry(), entity.get_handle(), room_entity);
+                registry_utils->register_entity(entity.get_handle(), room_entity);
                 is_processed[i][j] = true;
             }
         }

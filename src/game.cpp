@@ -18,6 +18,7 @@ Game::Game(std::shared_ptr<RoomContentProvider> room_content_provider)
     renderer = std::make_shared<Renderer>(*window);
     register_singletons();
     main_scene = std::make_unique<Scene>();
+    entt::service_locator<RegistryUtils>::ref().set_registry(&main_scene->get_registry());
 }
 
 Game::~Game() {

@@ -22,6 +22,8 @@ Quests::TerminalExpressions::Create::create_node(RegistryUtils& scene, RandomNum
     return std::make_unique<QuestNode>(description);
 }
 
+Quests::TerminalExpressions::Discover::Discover(entt::entity monument) : monument(monument) {}
+
 std::unique_ptr<QuestNode>
 Quests::TerminalExpressions::Discover::create_node(RegistryUtils& scene, RandomNumberGenerator& rng) {
     const std::string description = "Discover the  mystery of the monument";
@@ -86,5 +88,15 @@ Quests::TerminalExpressions::Find::create_node(RegistryUtils& scene, RandomNumbe
 
 
     //TODO: add postCreateMethod
+    return std::make_unique<QuestNode>(description);
+}
+
+Quests::TerminalExpressions::Bathe::Bathe(Item item, entt::entity where) : item(std::move(item)), where(where){}
+
+std::unique_ptr<QuestNode>
+Quests::TerminalExpressions::Bathe::create_node(RegistryUtils& scene, RandomNumberGenerator& rng) {
+    const std::string& place_name = scene.get_name(where);
+    const std::string description = std::format("Pour the {} into the {} and bade.", item.get_name(), place_name);
+
     return std::make_unique<QuestNode>(description);
 }

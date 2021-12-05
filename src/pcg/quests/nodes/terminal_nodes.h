@@ -26,9 +26,11 @@ namespace Quests::TerminalExpressions {
     };
 
     class Discover : public QuestExpression {
+        entt::entity monument;
+
     public:
 
-        Discover() = default;
+        explicit Discover(entt::entity monument);
 
         std::unique_ptr<QuestNode> create_node(RegistryUtils& scene, RandomNumberGenerator& rng) override;
     };
@@ -90,6 +92,17 @@ namespace Quests::TerminalExpressions {
     public:
 
         explicit Find(Item item);
+
+        std::unique_ptr<QuestNode> create_node(RegistryUtils& scene, RandomNumberGenerator& rng) override;
+    };
+
+    class Bathe : public QuestExpression {
+        Item item;
+        entt::entity where;
+
+    public:
+
+        Bathe(Item item, entt::entity where);
 
         std::unique_ptr<QuestNode> create_node(RegistryUtils& scene, RandomNumberGenerator& rng) override;
     };

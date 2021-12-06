@@ -6,7 +6,8 @@ using namespace Quests;
 
 std::unique_ptr<QuestNode>
 Quests::Templates::DesecratedStatue::create_node(RegistryUtils& scene, RandomNumberGenerator& rng) {
-    std::unique_ptr<MultiChildrenQuestNode> node = std::make_unique<MultiChildrenQuestNode>("Consecrate the desecrated monument");
+    std::unique_ptr<MultiChildrenQuestNode> node = std::make_unique<MultiChildrenQuestNode>(
+            "Consecrate the desecrated monument");
 
     return evaluate_variants(scene, rng, node);
 }
@@ -16,8 +17,11 @@ Quests::Templates::DesecratedStatue::generate_variants(RegistryUtils& scene, Ran
     NonTerminalExpressions::QuestExpressionVariants variants(1);
 
     entt::entity monument_entity = scene.get_random_by_tag(RoomContentType::MONUMENT, rng);
-    entt::entity monument_room = scene.get_room(monument_entity);
+    if (monument_entity == entt::null) {
+        return NonTerminalExpressions::QuestExpressionVariants();
+    }
 
+    entt::entity monument_room = scene.get_room(monument_entity);
     Item holy_water("Sacred cleaners");
 
     variants[0].emplace_back(std::make_unique<Quests::NonTerminalExpressions::Get>(holy_water));

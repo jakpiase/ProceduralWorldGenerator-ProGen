@@ -75,7 +75,7 @@ Quests::TerminalExpressions::Clear::Clear(entt::entity target, Item tool) : targ
 std::unique_ptr<QuestNode>
 Quests::TerminalExpressions::Clear::create_node(RegistryUtils& scene, RandomNumberGenerator& rng) {
     const std::string& target_name = scene.get_name(target);
-    const std::string description = std::format("Clear {}.", target_name);
+    const std::string description = std::format("Clear {} using {}.", target_name, tool.get_name());
 
     return std::make_unique<QuestNode>(description);
 }
@@ -96,7 +96,7 @@ Quests::TerminalExpressions::Bathe::Bathe(Item item, entt::entity where) : item(
 std::unique_ptr<QuestNode>
 Quests::TerminalExpressions::Bathe::create_node(RegistryUtils& scene, RandomNumberGenerator& rng) {
     const std::string& place_name = scene.get_name(where);
-    const std::string description = std::format("Pour the {} into the {} and bade.", item.get_name(), place_name);
+    const std::string description = std::format("Pour the {} into the {} and bathe.", item.get_name(), place_name);
 
     return std::make_unique<QuestNode>(description);
 }

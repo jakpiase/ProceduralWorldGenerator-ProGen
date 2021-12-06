@@ -16,6 +16,9 @@ Quests::Templates::MonumentMystery::generate_variants(RegistryUtils& scene, Rand
     NonTerminalExpressions::QuestExpressionVariants variants(1);
 
     entt::entity monument_entity = scene.get_random_by_tag(RoomContentType::MONUMENT, rng);
+    if(monument_entity == entt::null){
+        return NonTerminalExpressions::QuestExpressionVariants();
+    }
     entt::entity monument_room = scene.get_room(monument_entity);
     Item formless_shining_matter("Formless Shining Matter");
 

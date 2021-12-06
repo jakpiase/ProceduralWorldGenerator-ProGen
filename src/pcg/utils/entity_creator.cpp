@@ -7,8 +7,11 @@
 #include "src/pcg/utils/entity_creator.h"
 #include "src/pcg/room_content/room_content_type.h"
 #include "src/core/components/description_component.h"
+#include "src/pcg/predefined/enemy_names.h"
 
 Color get_color_for_room_tile(int32_t room_tile);
+
+std::string create_name(int32_t room_tile);
 
 DescriptionComponent create_description_component(int32_t room_tile);
 
@@ -29,7 +32,7 @@ void EntityCreatorImpl::create_room_floor(Scene& scene, const BoundingBox2i& roo
     handle_room_content_generation(scene, room_box, entity.get_handle());
     entity.add_component<TransformationComponent>(room_box.get_top_left());
     entity.add_component<GraphicsComponent>(Colors::Gainsboro, room_box.get_dimensions());
-    entity.add_component<DescriptionComponent>(RoomContentType::FLOOR);
+    entity.add_component<DescriptionComponent>(RoomContentType::FLOOR, create_name(RoomContentType::FLOOR));
     entt::service_locator<RegistryUtils>::ref().register_entity(entity.get_handle());
 
 
@@ -151,8 +154,16 @@ std::string create_name(int32_t room_tile) {
     static int name_index = 0;
     std::string index = std::to_string(name_index++);
     switch (room_tile) {
-        case RoomContentType::ENEMY:
-            return "Enemy" + index;
+        case RoomContentType::ENEMY: {
+            static int enemy_index = 0;
+            return predefined::ENEMY_NAMES[enemy_index++ % predefined::ENEMY_NAMES_SIZE];
+        }
+        case RoomContentType::FLOOR:
+            return "Room " + index;
+        case RoomContentType::WATER:
+            return "water";
+        case RoomContentType::MONUMENT:
+            return "monument";
         default:
             return "";
     }

@@ -14,7 +14,7 @@ Quests::NonTerminalExpressions::Kill::create_node(RegistryUtils& scene, RandomNu
 
 Quests::NonTerminalExpressions::QuestExpressionVariants
 Quests::NonTerminalExpressions::Kill::generate_variants(RegistryUtils& scene, RandomNumberGenerator& rng) {
-    QuestExpressionVariants variants(1);
+    QuestExpressionVariants variants(2);
 
     entt::entity room_with_enemy = scene.get_room(enemy);
 

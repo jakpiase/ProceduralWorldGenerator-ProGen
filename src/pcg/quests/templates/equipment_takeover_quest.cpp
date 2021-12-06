@@ -16,6 +16,9 @@ Quests::Templates::EquipmentTakeover::generate_variants(RegistryUtils& scene, Ra
     NonTerminalExpressions::QuestExpressionVariants variants(1);
 
     entt::entity enemy_entity = scene.get_random_by_tag(RoomContentType::ENEMY, rng);
+    if (enemy_entity == entt::null) {
+        return NonTerminalExpressions::QuestExpressionVariants();
+    }
     Item big_sword("The Big Sword");
 
     variants[0].emplace_back(std::make_unique<Quests::NonTerminalExpressions::Kill>(enemy_entity));

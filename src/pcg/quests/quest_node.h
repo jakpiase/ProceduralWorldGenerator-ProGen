@@ -10,6 +10,8 @@ class QuestNode {
 
 public:
     explicit QuestNode(std::string description);
+
+    virtual void print_description(int depth) const;
 };
 
 class MultiChildrenQuestNode : public QuestNode {
@@ -17,6 +19,8 @@ class MultiChildrenQuestNode : public QuestNode {
 
 public:
     explicit MultiChildrenQuestNode(std::string description) : QuestNode(std::move(description)) {}
+
+    void print_description(int depth) const override;
 
     void add_child(std::unique_ptr<QuestNode>& child){
         children.push_back(std::move(child));

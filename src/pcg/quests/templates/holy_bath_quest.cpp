@@ -6,7 +6,7 @@ using namespace Quests;
 
 std::unique_ptr<QuestNode>
 Quests::Templates::HolyBath::create_node(RegistryUtils& scene, RandomNumberGenerator& rng) {
-    std::unique_ptr<MultiChildrenQuestNode> node = std::make_unique<MultiChildrenQuestNode>("Bathe in ");
+    std::unique_ptr<MultiChildrenQuestNode> node = std::make_unique<MultiChildrenQuestNode>("Bathe in holy water");
 
     return evaluate_variants(scene, rng, node);
 }
@@ -16,6 +16,9 @@ Quests::Templates::HolyBath::generate_variants(RegistryUtils& scene, RandomNumbe
     NonTerminalExpressions::QuestExpressionVariants variants(1);
 
     entt::entity water_entity = scene.get_random_by_tag(RoomContentType::WATER, rng);
+    if (water_entity == entt::null) {
+        return NonTerminalExpressions::QuestExpressionVariants();
+    }
     entt::entity water_room = scene.get_room(water_entity);
     Item holy_grease("Holy grease");
 

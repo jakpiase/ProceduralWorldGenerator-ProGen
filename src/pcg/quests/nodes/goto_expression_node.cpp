@@ -17,7 +17,7 @@ Quests::NonTerminalExpressions::QuestExpressionVariants
 Quests::NonTerminalExpressions::GoTo::generate_variants(RegistryUtils& scene, RandomNumberGenerator& rng) {
     QuestExpressionVariants variants(2);
 
-    variants[0].emplace_back(std::make_unique<Quests::NonTerminalExpressions::GoTo>(room));
+    variants[0].emplace_back(std::make_unique<Quests::TerminalExpressions::GoTo>(room));
 
     variants[1].emplace_back(std::make_unique<Quests::NonTerminalExpressions::Open>(room));
     variants[1].emplace_back(std::make_unique<Quests::TerminalExpressions::GoTo>(room));

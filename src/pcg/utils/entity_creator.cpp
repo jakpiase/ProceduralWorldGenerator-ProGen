@@ -151,15 +151,15 @@ Color get_color_for_room_tile(int32_t room_tile) {
 
 
 std::string create_name(int32_t room_tile) {
-    static int name_index = 0;
-    std::string index = std::to_string(name_index++);
     switch (room_tile) {
         case RoomContentType::ENEMY: {
             static int enemy_index = 0;
             return predefined::ENEMY_NAMES[enemy_index++ % predefined::ENEMY_NAMES_SIZE];
         }
-        case RoomContentType::FLOOR:
-            return "Room " + index;
+        case RoomContentType::FLOOR:{
+            static int room_index = 0;
+            return "Room " + std::to_string(room_index++);
+        }
         case RoomContentType::WATER:
             return "water";
         case RoomContentType::MONUMENT:

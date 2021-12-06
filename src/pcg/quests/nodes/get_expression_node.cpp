@@ -9,7 +9,7 @@ std::unique_ptr<QuestNode>
 Quests::NonTerminalExpressions::Get::create_node(RegistryUtils& scene, RandomNumberGenerator& rng) {
 
     std::unique_ptr<MultiChildrenQuestNode> node = std::make_unique<MultiChildrenQuestNode>(
-            std::format("Get {}", item.get_name()));
+            std::format("Get {}.", item.get_name()));
 
     return evaluate_variants(scene, rng, node);
 }

@@ -8,7 +8,7 @@ std::unique_ptr<QuestNode>
 Quests::NonTerminalExpressions::GoTo::create_node(RegistryUtils& scene, RandomNumberGenerator& rng) {
 
     std::unique_ptr<MultiChildrenQuestNode> node = std::make_unique<MultiChildrenQuestNode>(
-            std::format("Go to {}.", scene.get_name(room)));
+            std::format("Enter {}.", scene.get_name(room)));
 
     return evaluate_variants(scene, rng, node);
 }

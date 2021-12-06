@@ -11,7 +11,7 @@ Quests::TerminalExpressions::GoTo::GoTo(entt::entity room) : room(room) {}
 std::unique_ptr<QuestNode>
 Quests::TerminalExpressions::GoTo::create_node(RegistryUtils& scene, RandomNumberGenerator& rng) {
     const std::string& room_name = scene.get_registry().get<DescriptionComponent>(room).name;
-    const std::string description = std::format("Go to room named {}.", room_name);
+    const std::string description = std::format("Enter {}.", room_name);
 
     return std::make_unique<QuestNode>(description);
 }
@@ -29,7 +29,7 @@ Quests::TerminalExpressions::Discover::Discover(entt::entity monument) : monumen
 
 std::unique_ptr<QuestNode>
 Quests::TerminalExpressions::Discover::create_node(RegistryUtils& scene, RandomNumberGenerator& rng) {
-    const std::string description = "Discover the  mystery of the monument";
+    const std::string description = "Discover the  mystery of the monument.";
 
     return std::make_unique<QuestNode>(description);
 }

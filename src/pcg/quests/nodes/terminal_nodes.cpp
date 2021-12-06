@@ -1,7 +1,10 @@
-#include "src/pcg/quests/nodes/terminal_nodes.h"
-#include "src/core/components/description_component.h"
 #include <format>
 #include <utility>
+#include <glog/logging.h>
+#include "src/pcg/quests/nodes/terminal_nodes.h"
+#include "src/core/components/description_component.h"
+#include "src/pcg/room_content/room_content_type.h"
+#include "src/core/components/item_bag_component.h"
 
 Quests::TerminalExpressions::GoTo::GoTo(entt::entity room) : room(room) {}
 
@@ -80,18 +83,29 @@ Quests::TerminalExpressions::Clear::create_node(RegistryUtils& scene, RandomNumb
     return std::make_unique<QuestNode>(description);
 }
 
-Quests::TerminalExpressions::Find::Find(Item item) : item(std::move(item)){}
+Quests::TerminalExpressions::Find::Find(Item item) : item(std::move(item)) {}
 
 std::unique_ptr<QuestNode>
 Quests::TerminalExpressions::Find::create_node(RegistryUtils& scene, RandomNumberGenerator& rng) {
     const std::string description = std::format("Find {}.", item.get_name());
 
+    entt::entity item_holder = scene.get_random_by_tag(RoomContentType::DRAWER, rng);
+    if (item_holder == entt::null) {
+        return std::unique_ptr<QuestNode>();
+    }
 
-    //TODO: add postCreateMethod
-    return std::make_unique<QuestNode>(description);
+    Item item_copy(item);
+    return std::make_unique<QuestNode>(description, [&scene, item_holder, item_copy](){
+        entt::registry& registry = scene.get_registry();
+        if(!registry.all_of<ItemBagComponent>(item_holder)){
+            registry.emplace<ItemBagComponent>(item_holder);
+        }
+        registry.get<ItemBagComponent>(item_holder).items.push_back(item_copy);
+
+    });
 }
 
-Quests::TerminalExpressions::Bathe::Bathe(Item item, entt::entity where) : item(std::move(item)), where(where){}
+Quests::TerminalExpressions::Bathe::Bathe(Item item, entt::entity where) : item(std::move(item)), where(where) {}
 
 std::unique_ptr<QuestNode>
 Quests::TerminalExpressions::Bathe::create_node(RegistryUtils& scene, RandomNumberGenerator& rng) {

@@ -51,29 +51,33 @@ void Game::generate_content() {
     Quests::Templates::EquipmentTakeover equipment_takeover;
     auto equipment_takeover_result = equipment_takeover.create_node(registry_utils, linear_number_generator);
     if (equipment_takeover_result) {
+        equipment_takeover_result->post_construct();
         equipment_takeover_result->print_description(0);
     }
 
     Quests::Templates::HolyBath holy_bath;
     auto holy_bath_result = holy_bath.create_node(registry_utils, linear_number_generator);
     if (holy_bath_result) {
+        holy_bath_result->post_construct();
         holy_bath_result->print_description(0);
     }
 
     Quests::Templates::MonumentMystery monument_mystery;
     auto monument_mystery_result = monument_mystery.create_node(registry_utils, linear_number_generator);
     if (monument_mystery_result) {
+        monument_mystery_result->post_construct();
         monument_mystery_result->print_description(0);
     }
 
     Quests::Templates::DesecratedStatue desecrated_statue;
     auto desecrated_statue_result = desecrated_statue.create_node(registry_utils, linear_number_generator);
     if (desecrated_statue_result) {
+        monument_mystery_result->post_construct();
         desecrated_statue_result->print_description(0);
 
     }
 
-    std::cout << std::endl;
+    std::cout.flush();
 }
 
 void Game::update() {

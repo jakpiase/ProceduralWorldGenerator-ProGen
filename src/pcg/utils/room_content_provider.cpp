@@ -47,7 +47,7 @@ std::vector<std::vector<int32_t>> RoomContentProviderImpl::get_next_room() {
 }
 
 void RoomContentProviderImpl::generate_rooms() const {
-    system("python.exe infer.py");
+    system("python infer.py");
 }
 
 bool RoomContentProviderImpl::is_enabled() const {

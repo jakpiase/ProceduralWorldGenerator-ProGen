@@ -8,7 +8,7 @@ std::unique_ptr<QuestNode>
 Quests::NonTerminalExpressions::Open::create_node(RegistryUtils& scene, RandomNumberGenerator& rng) {
 
     std::unique_ptr<MultiChildrenQuestNode> node = std::make_unique<MultiChildrenQuestNode>(
-            std::format("Open {}.", scene.get_name(room)));
+            "Open " + scene.get_name(room) + ".");
 
     return evaluate_variants(scene, rng, node);
 }
@@ -17,7 +17,7 @@ Quests::NonTerminalExpressions::QuestExpressionVariants
 Quests::NonTerminalExpressions::Open::generate_variants(RegistryUtils& scene, RandomNumberGenerator& rng) {
     QuestExpressionVariants variants(2);
 
-    const Item room_key = Item(std::format("Key to {}", scene.get_name(room)));
+    const Item room_key = Item("Key to " + scene.get_name(room));
 
     entt::entity enemy = scene.get_random_by_tag(RoomContentType::ENEMY, rng);
     variants[0].emplace_back(std::make_unique<Quests::NonTerminalExpressions::Kill>(enemy));

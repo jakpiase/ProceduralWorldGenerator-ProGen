@@ -11,7 +11,7 @@ Quests::TerminalExpressions::GoTo::GoTo(entt::entity room) : room(room) {}
 std::unique_ptr<QuestNode>
 Quests::TerminalExpressions::GoTo::create_node(RegistryUtils& scene, RandomNumberGenerator& rng) {
     const std::string& room_name = scene.get_registry().get<DescriptionComponent>(room).name;
-    const std::string description = std::format("Enter {}.", room_name);
+    const std::string description = "Enter " + room_name + ".";
 
     return std::make_unique<QuestNode>(description);
 }
@@ -20,7 +20,7 @@ Quests::TerminalExpressions::Create::Create(Item item) : item(std::move(item)) {
 
 std::unique_ptr<QuestNode>
 Quests::TerminalExpressions::Create::create_node(RegistryUtils& scene, RandomNumberGenerator& rng) {
-    const std::string description = std::format("Create {}.", item.get_name());
+    const std::string description = "Create " + item.get_name() + ".";
 
     return std::make_unique<QuestNode>(description);
 }
@@ -39,7 +39,7 @@ Quests::TerminalExpressions::Open::Open(entt::entity room) : room(room) {}
 std::unique_ptr<QuestNode>
 Quests::TerminalExpressions::Open::create_node(RegistryUtils& scene, RandomNumberGenerator& rng) {
     const std::string& room_name = scene.get_registry().get<DescriptionComponent>(room).name;
-    const std::string description = std::format("Open room named {}.", room_name);
+    const std::string description = "Open " + room_name + ".";
 
     return std::make_unique<QuestNode>(description);
 }
@@ -49,7 +49,7 @@ Quests::TerminalExpressions::Kill::Kill(entt::entity enemy) : enemy(enemy) {}
 std::unique_ptr<QuestNode>
 Quests::TerminalExpressions::Kill::create_node(RegistryUtils& scene, RandomNumberGenerator& rng) {
     const std::string& enemy_name = scene.get_name(enemy);
-    const std::string description = std::format("Kill {}.", enemy_name);
+    const std::string description = "Kill " + enemy_name + ".";
 
     return std::make_unique<QuestNode>(description);
 }
@@ -58,7 +58,7 @@ Quests::TerminalExpressions::Get::Get(Item item) : item(std::move(item)) {}
 
 std::unique_ptr<QuestNode>
 Quests::TerminalExpressions::Get::create_node(RegistryUtils& scene, RandomNumberGenerator& rng) {
-    const std::string description = std::format("Pickup {}.", item.get_name());
+    const std::string description = "Pickup " + item.get_name() + ".";
 
     return std::make_unique<QuestNode>(description);
 }
@@ -68,7 +68,7 @@ Quests::TerminalExpressions::Poison::Poison(entt::entity target) : target(target
 std::unique_ptr<QuestNode>
 Quests::TerminalExpressions::Poison::create_node(RegistryUtils& scene, RandomNumberGenerator& rng) {
     const std::string& target_name = scene.get_name(target);
-    const std::string description = std::format("Poison {}.", target_name);
+    const std::string description = "Poison " + target_name + ".";
 
     return std::make_unique<QuestNode>(description);
 }
@@ -78,7 +78,7 @@ Quests::TerminalExpressions::Clear::Clear(entt::entity target, Item tool) : targ
 std::unique_ptr<QuestNode>
 Quests::TerminalExpressions::Clear::create_node(RegistryUtils& scene, RandomNumberGenerator& rng) {
     const std::string& target_name = scene.get_name(target);
-    const std::string description = std::format("Clear {} using {}.", target_name, tool.get_name());
+    const std::string description = "Clear " + target_name + " using " + tool.get_name() + ".";
 
     return std::make_unique<QuestNode>(description);
 }
@@ -87,7 +87,7 @@ Quests::TerminalExpressions::Find::Find(Item item) : item(std::move(item)) {}
 
 std::unique_ptr<QuestNode>
 Quests::TerminalExpressions::Find::create_node(RegistryUtils& scene, RandomNumberGenerator& rng) {
-    const std::string description = std::format("Find {}.", item.get_name());
+    const std::string description = "Find " + item.get_name() + ".";
 
     entt::entity item_holder = scene.get_random_by_tag(RoomContentType::DRAWER, rng);
     if (item_holder == entt::null) {
@@ -110,7 +110,7 @@ Quests::TerminalExpressions::Bathe::Bathe(Item item, entt::entity where) : item(
 std::unique_ptr<QuestNode>
 Quests::TerminalExpressions::Bathe::create_node(RegistryUtils& scene, RandomNumberGenerator& rng) {
     const std::string& place_name = scene.get_name(where);
-    const std::string description = std::format("Pour the {} into the {} and bathe.", item.get_name(), place_name);
+    const std::string description = "Pour the " + item.get_name() + " into the " + place_name + " and bathe.";
 
     return std::make_unique<QuestNode>(description);
 }

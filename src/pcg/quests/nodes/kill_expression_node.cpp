@@ -7,7 +7,7 @@ std::unique_ptr<QuestNode>
 Quests::NonTerminalExpressions::Kill::create_node(RegistryUtils& scene, RandomNumberGenerator& rng) {
 
     std::unique_ptr<MultiChildrenQuestNode> node = std::make_unique<MultiChildrenQuestNode>(
-            std::format("Kill {}.", scene.get_name(enemy)));
+            "Kill " + scene.get_name(enemy) + ".");
 
     return evaluate_variants(scene, rng, node);
 }

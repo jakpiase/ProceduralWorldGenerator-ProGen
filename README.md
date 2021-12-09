@@ -21,3 +21,5 @@ cmake .. && make -j
 
 **<room_content_path>** determines the filepath to pregenerated rooms, default = "valid_images.npy" it is used only if **<content_type>**=static
 
+### How to run WGAN-GP training
+`python wgan/train.py`

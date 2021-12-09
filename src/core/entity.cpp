@@ -6,3 +6,7 @@ Entity::Entity(Scene &scene)
 
     DLOG(INFO) << "Created entity with id " << static_cast<int>(handle) << " at scene address: " << &scene;
 }
+
+entt::entity Entity::get_handle() {
+    return handle;
+}

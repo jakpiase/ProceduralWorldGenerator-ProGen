@@ -1,4 +1,3 @@
-#include <format>
 #include <utility>
 #include <glog/logging.h>
 #include "src/pcg/quests/nodes/terminal_nodes.h"

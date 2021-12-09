@@ -1,4 +1,3 @@
-#include <format>
 #include <utility>
 #include "src/pcg/room_content/room_content_type.h"
 #include "src/pcg/quests/nodes/non_terminal_nodes.h"
